@@ -8,6 +8,6 @@ chapters:
 - file: DataUNderstanding
   sections:
     - file: data/eksplorasi_data
-- file: Preporecing
+- file: preporecing
 
 
