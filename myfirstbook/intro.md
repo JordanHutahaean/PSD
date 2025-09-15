@@ -2,7 +2,7 @@
 
 Halo! Saya Jordan, mahasiswa Teknik Informatika yang suka ngulik coding, bikin proyek teknologi, dan terus belajar hal baru.
 
-Nama:Jordan Hutahaean
+Nama : Jordan Hutahaean
 
 Nim  : 230411100071
 
