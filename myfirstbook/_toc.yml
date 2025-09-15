@@ -6,4 +6,7 @@ root: intro
 chapters:
 - file: bisnis
 - file: DataUNderstanding
+  sections:
+    - file: data/eksplorasi_data
+
 
