@@ -186,6 +186,7 @@
 </ul>
 </details></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Preporecing</a></li>
+
 </ul>
 
     </div>
@@ -358,7 +359,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
 </div></div>
       
     </div>
@@ -374,6 +377,16 @@ document.write(`
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Preporecing</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#knn">KNN</a></li>
+</ul>
+
+            </nav>
         </div>
     </div>
 </div>
@@ -451,6 +464,74 @@ document.write(`
 </div>
 <p><img alt="abod" src="_images/abod_.png" /></p>
 </section>
+<section class="tex2jax_ignore mathjax_ignore" id="knn">
+<h1>KNN<a class="headerlink" href="#knn" title="Link to this heading">#</a></h1>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pycaret.anomaly</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span> 
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+
+<span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;IRIS.csv&quot;</span><span class="p">)</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;species&quot;</span><span class="p">])</span>
+
+<span class="n">s</span> <span class="o">=</span> <span class="n">setup</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+
+<span class="n">knn</span> <span class="o">=</span> <span class="n">create_model</span><span class="p">(</span><span class="s1">&#39;knn&#39;</span><span class="p">,</span> <span class="n">fraction</span><span class="o">=</span><span class="mf">0.05</span><span class="p">)</span> 
+<span class="n">results</span> <span class="o">=</span> <span class="n">assign_model</span><span class="p">(</span><span class="n">knn</span><span class="p">)</span>
+
+<span class="n">results_sorted</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="s2">&quot;Anomaly&quot;</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="c1"># Ringkasan hasil outlier detection (tampilkan 10 baris pertama)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Ringkasan Hasil Outlier Detection (10 baris pertama):&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">results_sorted</span><span class="p">[[</span><span class="s1">&#39;sepal_length&#39;</span><span class="p">,</span><span class="s1">&#39;sepal_width&#39;</span><span class="p">,</span><span class="s1">&#39;petal_length&#39;</span><span class="p">,</span><span class="s1">&#39;petal_width&#39;</span><span class="p">,</span><span class="s1">&#39;Anomaly&#39;</span><span class="p">,</span> <span class="s1">&#39;Anomaly_Score&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">10</span><span class="p">))</span>
+
+<span class="c1"># Hitung jumlah outlier dan normal</span>
+<span class="n">outlier_count</span> <span class="o">=</span> <span class="n">results</span><span class="p">[</span><span class="s1">&#39;Anomaly&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+<span class="n">normal_count</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">results</span><span class="p">)</span> <span class="o">-</span> <span class="n">outlier_count</span>
+<span class="n">total_count</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">results</span><span class="p">)</span>
+<span class="n">outlier_percent</span> <span class="o">=</span> <span class="p">(</span><span class="n">outlier_count</span> <span class="o">/</span> <span class="n">total_count</span><span class="p">)</span> <span class="o">*</span> <span class="mi">100</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2"> Statistik Outlier:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Total Data     : </span><span class="si">{</span><span class="n">total_count</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Normal Data    : </span><span class="si">{</span><span class="n">normal_count</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Outlier Data   : </span><span class="si">{</span><span class="n">outlier_count</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Persentase Outlier : </span><span class="si">{</span><span class="n">outlier_percent</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">%&quot;</span><span class="p">)</span>
+
+<span class="c1"># Visualisasi tabel ringkas (opsional, misalnya untuk notebook)</span>
+<span class="n">summary_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+    <span class="s1">&#39;Kategori&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Normal&#39;</span><span class="p">,</span> <span class="s1">&#39;Outlier&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;Jumlah&#39;</span><span class="p">:</span> <span class="p">[</span><span class="n">normal_count</span><span class="p">,</span> <span class="n">outlier_count</span><span class="p">],</span>
+    <span class="s1">&#39;Persentase&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">100</span> <span class="o">-</span> <span class="n">outlier_percent</span><span class="p">,</span> <span class="n">outlier_percent</span><span class="p">]</span>
+<span class="p">})</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2"> Ringkasan Jumlah Data:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">summary_df</span><span class="p">)</span>
+
+
+<span class="c1"># Buat scatter plot dengan dua fitur utama</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span>
+    <span class="n">results</span><span class="p">[</span><span class="s1">&#39;sepal_length&#39;</span><span class="p">],</span> <span class="n">results</span><span class="p">[</span><span class="s1">&#39;sepal_width&#39;</span><span class="p">],</span>
+    <span class="n">c</span><span class="o">=</span><span class="n">results</span><span class="p">[</span><span class="s1">&#39;Anomaly&#39;</span><span class="p">],</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;coolwarm&#39;</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;k&#39;</span>
+<span class="p">)</span>
+
+<span class="c1"># Tambahkan judul dan label</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Visualisasi Deteksi Outlier dengan knn&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Sepal Length&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Sepal Width&quot;</span><span class="p">)</span>
+
+<span class="c1"># Tambahkan legenda</span>
+<span class="n">handles</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">Line2D</span><span class="p">([</span><span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;w&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Normal&#39;</span><span class="p">,</span>
+               <span class="n">markerfacecolor</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">8</span><span class="p">),</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">Line2D</span><span class="p">([</span><span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;w&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Outlier&#39;</span><span class="p">,</span>
+               <span class="n">markerfacecolor</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span>
+<span class="p">]</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">handles</span><span class="o">=</span><span class="n">handles</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<p><img alt="knn" src="_images/KNN_1.png" /></p>
+</section>
 
     <script type="text/x-thebe-config">
     {
@@ -497,6 +578,23 @@ document.write(`
             </div>
             
             
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Preporecing</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#knn">KNN</a></li>
+</ul>
+
+  </nav></div>
+
+</div></div>
               
             
           </div>
