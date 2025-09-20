@@ -1,4 +1,7 @@
-# Preporecing
+# Preporecing 
+
+## Remove Data Outlier
+## Remove Data Outlier Hasil dari Metode ABOD
 
 ```python
 import pandas as pd
@@ -66,6 +69,21 @@ plt.show()
 ```
 
 ![abod](abod_.png)
+
+Hasil Preprocessing dengan ABOD
+
+Setelah dilakukan deteksi outlier menggunakan metode ABOD (Angle-Based Outlier Detection), data dibersihkan dengan cara menghapus baris yang teridentifikasi sebagai outlier
+
+
+Jumlah data asli : 150 baris
+
+Jumlah data setelah hapus outlier : 142 baris
+
+Jumlah data yang terdeteksi sebagai outlier : 8 baris
+
+Jadi, sekitar 5,33% data dianggap sebagai outlier dan dihapus dari dataset.
+
+![abod](ABOD_.png)
 
 # KNN
 ```python
