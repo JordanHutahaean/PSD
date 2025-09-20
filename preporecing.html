@@ -382,7 +382,11 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Preporecing</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Preporecing</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#remove-data-outlier">Remove Data Outlier</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#remove-data-outlier-hasil-dari-metode-abod">Remove Data Outlier Hasil dari Metode ABOD</a></li>
+</ul>
+</li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#knn">KNN</a></li>
 </ul>
 
@@ -398,6 +402,11 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="preporecing">
 <h1>Preporecing<a class="headerlink" href="#preporecing" title="Link to this heading">#</a></h1>
+<section id="remove-data-outlier">
+<h2>Remove Data Outlier<a class="headerlink" href="#remove-data-outlier" title="Link to this heading">#</a></h2>
+</section>
+<section id="remove-data-outlier-hasil-dari-metode-abod">
+<h2>Remove Data Outlier Hasil dari Metode ABOD<a class="headerlink" href="#remove-data-outlier-hasil-dari-metode-abod" title="Link to this heading">#</a></h2>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">pycaret.anomaly</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span> 
 <span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
@@ -463,6 +472,14 @@ document.write(`
 </pre></div>
 </div>
 <p><img alt="abod" src="_images/abod_.png" /></p>
+<p>Hasil Preprocessing dengan ABOD</p>
+<p>Setelah dilakukan deteksi outlier menggunakan metode ABOD (Angle-Based Outlier Detection), data dibersihkan dengan cara menghapus baris yang teridentifikasi sebagai outlier</p>
+<p>Jumlah data asli : 150 baris</p>
+<p>Jumlah data setelah hapus outlier : 142 baris</p>
+<p>Jumlah data yang terdeteksi sebagai outlier : 8 baris</p>
+<p>Jadi, sekitar 5,33% data dianggap sebagai outlier dan dihapus dari dataset.</p>
+<p><img alt="abod" src="ABOD_.png" /></p>
+</section>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="knn">
 <h1>KNN<a class="headerlink" href="#knn" title="Link to this heading">#</a></h1>
@@ -588,7 +605,11 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Preporecing</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Preporecing</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#remove-data-outlier">Remove Data Outlier</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#remove-data-outlier-hasil-dari-metode-abod">Remove Data Outlier Hasil dari Metode ABOD</a></li>
+</ul>
+</li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#knn">KNN</a></li>
 </ul>
 
