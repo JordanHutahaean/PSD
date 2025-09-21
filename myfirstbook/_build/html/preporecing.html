@@ -387,7 +387,10 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#remove-data-outlier-hasil-dari-metode-abod">Remove Data Outlier Hasil dari Metode ABOD</a></li>
 </ul>
 </li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#knn">KNN</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#knn">KNN</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#remove-data-outlier-hasil-dari-metode-knn">Remove Data Outlier Hasil dari Metode KNN</a></li>
+</ul>
+</li>
 </ul>
 
             </nav>
@@ -483,6 +486,8 @@ document.write(`
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="knn">
 <h1>KNN<a class="headerlink" href="#knn" title="Link to this heading">#</a></h1>
+<section id="remove-data-outlier-hasil-dari-metode-knn">
+<h2>Remove Data Outlier Hasil dari Metode KNN<a class="headerlink" href="#remove-data-outlier-hasil-dari-metode-knn" title="Link to this heading">#</a></h2>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">pycaret.anomaly</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span> 
 <span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
@@ -548,6 +553,13 @@ document.write(`
 </pre></div>
 </div>
 <p><img alt="knn" src="_images/KNN_1.png" /></p>
+<p>Melalui tahap preprocessing dengan metode KNN, dilakukan pendeteksian outlier. Baris yang masuk kategori outlier dihilangkan dari dataset.</p>
+<p>Jumlah data sebelum pembersihan: 150 baris</p>
+<p>Jumlah data sesudah pembersihan: 142 baris</p>
+<p>Outlier yang teridentifikasi: 8 baris</p>
+<p>Artinya, kurang lebih 5,33% data dihapus karena dianggap menyimpang.
+<img alt="knn" src="_images/KNN1.png" /></p>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -610,7 +622,10 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#remove-data-outlier-hasil-dari-metode-abod">Remove Data Outlier Hasil dari Metode ABOD</a></li>
 </ul>
 </li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#knn">KNN</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#knn">KNN</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#remove-data-outlier-hasil-dari-metode-knn">Remove Data Outlier Hasil dari Metode KNN</a></li>
+</ul>
+</li>
 </ul>
 
   </nav></div>
