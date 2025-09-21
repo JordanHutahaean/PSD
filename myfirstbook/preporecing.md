@@ -83,7 +83,7 @@ Jumlah data yang terdeteksi sebagai outlier : 8 baris
 
 Jadi, sekitar 5,33% data dianggap sebagai outlier dan dihapus dari dataset.
 
-![abod](ABOD_.png)
+![abod](ABOD.png)
 
 # KNN
 ```python
