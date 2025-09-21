@@ -86,6 +86,8 @@ Jadi, sekitar 5,33% data dianggap sebagai outlier dan dihapus dari dataset.
 ![abod](ABOD.png)
 
 # KNN
+## Remove Data Outlier Hasil dari Metode KNN
+
 ```python
 import pandas as pd
 from pycaret.anomaly import * 
@@ -151,3 +153,16 @@ plt.legend(handles=handles)
 plt.show()
 ```
 ![knn](KNN_1.png)
+
+Melalui tahap preprocessing dengan metode KNN, dilakukan pendeteksian outlier. Baris yang masuk kategori outlier dihilangkan dari dataset.
+
+Jumlah data sebelum pembersihan: 150 baris
+
+Jumlah data sesudah pembersihan: 142 baris
+
+Outlier yang teridentifikasi: 8 baris
+
+Artinya, kurang lebih 5,33% data dihapus karena dianggap menyimpang.
+![knn](KNN1.png)
+
+
