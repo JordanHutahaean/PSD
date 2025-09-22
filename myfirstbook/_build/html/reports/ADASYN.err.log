@@ -1,0 +1,160 @@
+Traceback (most recent call last):
+  File "/home/codespace/.local/lib/python3.12/site-packages/jupyter_core/utils/__init__.py", line 154, in wrapped
+    asyncio.get_running_loop()
+RuntimeError: no running event loop
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/local/python/3.12.1/lib/python3.12/site-packages/jupyter_cache/executors/utils.py", line 58, in single_nb_execution
+    executenb(
+  File "/home/codespace/.local/lib/python3.12/site-packages/nbclient/client.py", line 1319, in execute
+    return NotebookClient(nb=nb, resources=resources, km=km, **kwargs).execute()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/codespace/.local/lib/python3.12/site-packages/jupyter_core/utils/__init__.py", line 158, in wrapped
+    return loop.run_until_complete(inner)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/python/3.12.1/lib/python3.12/asyncio/base_events.py", line 684, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/home/codespace/.local/lib/python3.12/site-packages/nbclient/client.py", line 709, in async_execute
+    await self.async_execute_cell(
+  File "/home/codespace/.local/lib/python3.12/site-packages/nbclient/client.py", line 1062, in async_execute_cell
+    await self._check_raise_for_error(cell, cell_index, exec_reply)
+  File "/home/codespace/.local/lib/python3.12/site-packages/nbclient/client.py", line 918, in _check_raise_for_error
+    raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
+nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
+------------------
+import pandas as pd
+import matplotlib.pyplot as plt
+import numpy as np
+from sklearn.decomposition import PCA
+from sqlalchemy import create_engine
+from collections import Counter
+
+# === 1. Koneksi ke MySQL Aiven ===
+host = "jordan-sql-jordanhutahaean87-d5bc.d.aivencloud.com"
+port = 17562
+user = "avnadmin"
+password = "AVNS_1iBbfJyj8bc9NehEBBk"
+database = "defaultdb"
+
+engine = create_engine(f"mysql+pymysql://{user}:{password}@{host}:{port}/{database}")
+
+# === 2. Ambil data dari tabel ===
+query = "SELECT * FROM ecoli;"   # pastikan tabel 'ecoli' ada
+df = pd.read_sql(query, engine)
+
+print("Jumlah baris:", len(df))
+print(df.head())
+
+# === 3. Pisahkan fitur & label ===
+X = df[[f"feature{i}" for i in range(1, 8)]].values
+y = df["class_label"].values
+
+# === 4. PCA untuk data asli ===
+pca = PCA(n_components=2)
+X_pca = pca.fit_transform(X)
+
+plt.figure(figsize=(8,6))
+for label in np.unique(y):
+    idx = (y == label)
+    plt.scatter(X_pca[idx,0], X_pca[idx,1], label=label, alpha=0.7)
+plt.title("PCA Scatter Plot (Original Data)")
+plt.xlabel("PC1"); plt.ylabel("PC2")
+plt.legend(); plt.show()
+
+# === 5. Custom Oversampling  ADASYN ===
+class_counts = Counter(y)
+print("Distribusi kelas sebelum balancing:", class_counts)
+
+max_class_size = max(class_counts.values())
+X_res, y_res = [], []
+
+for cls in np.unique(y):
+    X_cls = X[y == cls]
+    n_samples = len(X_cls)
+    # berapa tambahan yang perlu dibuat
+    n_to_add = max_class_size - n_samples
+
+    # simpan data asli
+    X_res.append(X_cls)
+    y_res.extend([cls] * n_samples)
+
+    if n_to_add > 0:
+        # sampling dengan replacement
+        idx_choice = np.random.choice(range(n_samples), size=n_to_add, replace=True)
+        X_new = X_cls[idx_choice].copy()
+
+        # tambahkan noise acak kecil
+        noise = np.random.normal(0, 0.01, X_new.shape)  # sd=0.01 → bisa diatur
+        X_new = X_new + noise
+
+        X_res.append(X_new)
+        y_res.extend([cls] * n_to_add)
+
+# gabungkan
+X_res = np.vstack(X_res)
+y_res = np.array(y_res)
+
+print("Distribusi kelas setelah balancing:", Counter(y_res))
+
+# === 6. Tandai data sintetis ===
+X_rounded = np.round(X, 5)
+X_res_rounded = np.round(X_res, 5)
+synthetic_mask = [tuple(x) not in set(map(tuple, X_rounded)) for x in X_res_rounded]
+
+# === 7. PCA untuk hasil balancing ===
+X_res_pca = pca.transform(X_res)
+
+plt.figure(figsize=(8,6))
+for label in np.unique(y_res):
+    idx = (y_res == label)
+    plt.scatter(X_res_pca[idx,0], X_res_pca[idx,1], label=label, alpha=0.5)
+
+# Tandai synthetic data dengan X merah
+plt.scatter(X_res_pca[synthetic_mask,0], X_res_pca[synthetic_mask,1],
+            c="red", marker="x", label="Synthetic Data")
+
+plt.title("PCA Scatter Plot (Balanced with Custom ADASYN-like Oversampling)")
+plt.xlabel("PC1"); plt.ylabel("PC2")
+plt.legend(); plt.show()
+
+------------------
+
+
+[31m---------------------------------------------------------------------------[39m
+[31mModuleNotFoundError[39m                       Traceback (most recent call last)
+[36mCell[39m[36m [39m[32mIn[1][39m[32m, line 15[39m
+[32m     12[39m password = [33m"[39m[33mAVNS_1iBbfJyj8bc9NehEBBk[39m[33m"[39m
+[32m     13[39m database = [33m"[39m[33mdefaultdb[39m[33m"[39m
+[32m---> [39m[32m15[39m engine = [43mcreate_engine[49m[43m([49m[33;43mf[39;49m[33;43m"[39;49m[33;43mmysql+pymysql://[39;49m[38;5;132;43;01m{[39;49;00m[43muser[49m[38;5;132;43;01m}[39;49;00m[33;43m:[39;49m[38;5;132;43;01m{[39;49;00m[43mpassword[49m[38;5;132;43;01m}[39;49;00m[33;43m@[39;49m[38;5;132;43;01m{[39;49;00m[43mhost[49m[38;5;132;43;01m}[39;49;00m[33;43m:[39;49m[38;5;132;43;01m{[39;49;00m[43mport[49m[38;5;132;43;01m}[39;49;00m[33;43m/[39;49m[38;5;132;43;01m{[39;49;00m[43mdatabase[49m[38;5;132;43;01m}[39;49;00m[33;43m"[39;49m[43m)[49m
+[32m     17[39m [38;5;66;03m# === 2. Ambil data dari tabel ===[39;00m
+[32m     18[39m query = [33m"[39m[33mSELECT * FROM ecoli;[39m[33m"[39m   [38;5;66;03m# pastikan tabel 'ecoli' ada[39;00m
+
+[36mFile [39m[32m<string>:2[39m, in [36mcreate_engine[39m[34m(url, **kwargs)[39m
+
+[36mFile [39m[32m/usr/local/python/3.12.1/lib/python3.12/site-packages/sqlalchemy/util/deprecations.py:281[39m, in [36mdeprecated_params.<locals>.decorate.<locals>.warned[39m[34m(fn, *args, **kwargs)[39m
+[32m    274[39m     [38;5;28;01mif[39;00m m [38;5;129;01min[39;00m kwargs:
+[32m    275[39m         _warn_with_version(
+[32m    276[39m             messages[m],
+[32m    277[39m             versions[m],
+[32m    278[39m             version_warnings[m],
+[32m    279[39m             stacklevel=[32m3[39m,
+[32m    280[39m         )
+[32m--> [39m[32m281[39m [38;5;28;01mreturn[39;00m [43mfn[49m[43m([49m[43m*[49m[43margs[49m[43m,[49m[43m [49m[43m*[49m[43m*[49m[43mkwargs[49m[43m)[49m
+
+[36mFile [39m[32m/usr/local/python/3.12.1/lib/python3.12/site-packages/sqlalchemy/engine/create.py:617[39m, in [36mcreate_engine[39m[34m(url, **kwargs)[39m
+[32m    615[39m         [38;5;28;01mif[39;00m k [38;5;129;01min[39;00m kwargs:
+[32m    616[39m             dbapi_args[k] = pop_kwarg(k)
+[32m--> [39m[32m617[39m     dbapi = [43mdbapi_meth[49m[43m([49m[43m*[49m[43m*[49m[43mdbapi_args[49m[43m)[49m
+[32m    619[39m dialect_args[[33m"[39m[33mdbapi[39m[33m"[39m] = dbapi
+[32m    621[39m dialect_args.setdefault([33m"[39m[33mcompiler_linting[39m[33m"[39m, compiler.NO_LINTING)
+
+[36mFile [39m[32m/usr/local/python/3.12.1/lib/python3.12/site-packages/sqlalchemy/dialects/mysql/pymysql.py:89[39m, in [36mMySQLDialect_pymysql.import_dbapi[39m[34m(cls)[39m
+[32m     87[39m [38;5;129m@classmethod[39m
+[32m     88[39m [38;5;28;01mdef[39;00m[38;5;250m [39m[34mimport_dbapi[39m([38;5;28mcls[39m) -> DBAPIModule:
+[32m---> [39m[32m89[39m     [38;5;28;01mreturn[39;00m [38;5;28;43m__import__[39;49m[43m([49m[33;43m"[39;49m[33;43mpymysql[39;49m[33;43m"[39;49m[43m)[49m
+
+[31mModuleNotFoundError[39m: No module named 'pymysql'
+
