@@ -8,7 +8,7 @@ chapters:
 - file: DataUNderstanding
   sections:
     - file: data/eksplorasi_data
+    - file: adasyn
 - file: preporecing
 
-- file: adasyn
 
