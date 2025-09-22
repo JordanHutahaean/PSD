@@ -99,7 +99,7 @@ plt.title("PCA Scatter Plot (Balanced with Custom ADASYN-like Oversampling)")
 plt.xlabel("PC1"); plt.ylabel("PC2")
 plt.legend(); plt.show()
 ```
-![abod](adasin1_.jpeg)
+![adasin2](adasin1.jpeg)
 
 
 * PCA dipakai untuk menurunkan dimensi dari 7 fitur → 2 dimensi (PC1 & PC2).
@@ -112,7 +112,7 @@ plt.legend(); plt.show()
 
     * Memberi gambaran distribusi asli antar kelas.
 
-    ![abod](adasin2_.jpeg)
+    ![adasin2](adasin2.jpeg)
 
     Penjelasan:
 * Identifikasi data sintetis dengan membandingkan data baru dengan data asli.
