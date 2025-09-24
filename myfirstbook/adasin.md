@@ -1,6 +1,52 @@
 ## Penyeimbangan Data Ecoli
 
 
+### Mendownload Dataset Ecoli dari UCI [https://archive.ics.uci.edu/](https://archive.ics.uci.edu/dataset/39/ecoli)
+
+
+### Membuat Service Mysql  pada [aiven.io ](https://aiven.io/)
+
+
+
+*   Kunjungi laman situs aiven.io melalui link https://aiven.io/
+
+
+
+*   Silahkan login terlebih dahulu jika
+belum memiliki akun aiven
+*   Buat Project terlebih dahulu sebelum membuat servicenya.
+
+
+*   Buat Project terlebih dahulu sebelum membuat servicenya.
+*   Klik “Create Service” dan pilih databse Postgre sebagai databasenya.
+
+
+*  Buat Service untuk MySQL
+
+### Koneksikan [aiven.io](https://aiven.io/) ke Dbeaver
+
+Data Ecoli tersebut akan disimpan pada Dbeaver dan akan dikoneksikan kepada [aiven.io](https://aiven.io/)
+
+berikut adalah cara membuat database Mysql dan Postgresql di Dbeaver
+
+
+
+*   Install Dbeaver melalui sites resmi https://dbeaver.io/download/.
+
+*   Buat Database baru dengan source MySQL  pada Dbeaver.
+
+*   Koneksikan Database dengan cloud Database aiven melalui kredensial service MySQL yang disediakan aiven.io.
+*   Buat tabel database terlebih dahulu dengan “SQL Editor -> Open SQL Script”.
+
+
+*   Setelah tabel terbuat. Insert data MySQL dengan data Ecoli,
+### SImpan Dataset Ecoli didalan Mysql
+
+![powerbi](power.png)
+
+
+Kunjungi halaman UCI berikut untuk mendapatkan dataset Ecoli,setelah itu lanjutkan dengan menekan tombol download
+
 Penyeimbangan data Ecoli dilakukan untuk mengatasi masalah ketidakseimbangan kelas, di mana jumlah data pada kelas mayoritas jauh lebih banyak dibandingkan kelas minoritas. Jika dibiarkan, model machine learning cenderung bias dengan hanya mengenali kelas mayoritas, sementara kelas minoritas—yang justru sering memiliki informasi biologis penting—terabaikan. Dengan menyeimbangkan data, distribusi antar kelas menjadi lebih adil sehingga model mampu belajar secara seimbang
 
 ```python

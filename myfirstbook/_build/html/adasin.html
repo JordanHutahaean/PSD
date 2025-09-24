@@ -365,7 +365,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
 </div></div>
       
     </div>
@@ -381,6 +383,17 @@ document.write(`
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mendownload-dataset-ecoli-dari-uci-https-archive-ics-uci-edu">Mendownload Dataset Ecoli dari UCI https://archive.ics.uci.edu/</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#membuat-service-mysql-pada-aiven-io">Membuat Service Mysql  pada aiven.io </a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#koneksikan-aiven-io-ke-dbeaver">Koneksikan aiven.io ke Dbeaver</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#simpan-dataset-ecoli-didalan-mysql">SImpan Dataset Ecoli didalan Mysql</a></li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -392,6 +405,37 @@ document.write(`
                   
   <section id="penyeimbangan-data-ecoli">
 <h1>Penyeimbangan Data Ecoli<a class="headerlink" href="#penyeimbangan-data-ecoli" title="Link to this heading">#</a></h1>
+<section id="mendownload-dataset-ecoli-dari-uci-https-archive-ics-uci-edu">
+<h2>Mendownload Dataset Ecoli dari UCI <a class="reference external" href="https://archive.ics.uci.edu/dataset/39/ecoli">https://archive.ics.uci.edu/</a><a class="headerlink" href="#mendownload-dataset-ecoli-dari-uci-https-archive-ics-uci-edu" title="Link to this heading">#</a></h2>
+</section>
+<section id="membuat-service-mysql-pada-aiven-io">
+<h2>Membuat Service Mysql  pada <a class="reference external" href="https://aiven.io/">aiven.io </a><a class="headerlink" href="#membuat-service-mysql-pada-aiven-io" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Kunjungi laman situs <a class="reference external" href="http://aiven.io">aiven.io</a> melalui link <a class="reference external" href="https://aiven.io/">https://aiven.io/</a></p></li>
+<li><p>Silahkan login terlebih dahulu jika
+belum memiliki akun aiven</p></li>
+<li><p>Buat Project terlebih dahulu sebelum membuat servicenya.</p></li>
+<li><p>Buat Project terlebih dahulu sebelum membuat servicenya.</p></li>
+<li><p>Klik “Create Service” dan pilih databse Postgre sebagai databasenya.</p></li>
+<li><p>Buat Service untuk MySQL</p></li>
+</ul>
+</section>
+<section id="koneksikan-aiven-io-ke-dbeaver">
+<h2>Koneksikan <a class="reference external" href="https://aiven.io/">aiven.io</a> ke Dbeaver<a class="headerlink" href="#koneksikan-aiven-io-ke-dbeaver" title="Link to this heading">#</a></h2>
+<p>Data Ecoli tersebut akan disimpan pada Dbeaver dan akan dikoneksikan kepada <a class="reference external" href="https://aiven.io/">aiven.io</a></p>
+<p>berikut adalah cara membuat database Mysql dan Postgresql di Dbeaver</p>
+<ul class="simple">
+<li><p>Install Dbeaver melalui sites resmi <a class="reference external" href="https://dbeaver.io/download/">https://dbeaver.io/download/</a>.</p></li>
+<li><p>Buat Database baru dengan source MySQL  pada Dbeaver.</p></li>
+<li><p>Koneksikan Database dengan cloud Database aiven melalui kredensial service MySQL yang disediakan <a class="reference external" href="http://aiven.io">aiven.io</a>.</p></li>
+<li><p>Buat tabel database terlebih dahulu dengan “SQL Editor -&gt; Open SQL Script”.</p></li>
+<li><p>Setelah tabel terbuat. Insert data MySQL dengan data Ecoli,</p></li>
+</ul>
+</section>
+<section id="simpan-dataset-ecoli-didalan-mysql">
+<h2>SImpan Dataset Ecoli didalan Mysql<a class="headerlink" href="#simpan-dataset-ecoli-didalan-mysql" title="Link to this heading">#</a></h2>
+<p><img alt="powerbi" src="_images/power.png" /></p>
+<p>Kunjungi halaman UCI berikut untuk mendapatkan dataset Ecoli,setelah itu lanjutkan dengan menekan tombol download</p>
 <p>Penyeimbangan data Ecoli dilakukan untuk mengatasi masalah ketidakseimbangan kelas, di mana jumlah data pada kelas mayoritas jauh lebih banyak dibandingkan kelas minoritas. Jika dibiarkan, model machine learning cenderung bias dengan hanya mengenali kelas mayoritas, sementara kelas minoritas—yang justru sering memiliki informasi biologis penting—terabaikan. Dengan menyeimbangkan data, distribusi antar kelas menjadi lebih adil sehingga model mampu belajar secara seimbang</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
@@ -509,6 +553,7 @@ document.write(`
 <li><p>Hasil ini menunjukkan bahwa distribusi data sudah lebih seimbang.</p></li>
 </ul>
 </section>
+</section>
 
     <script type="text/x-thebe-config">
     {
@@ -555,6 +600,24 @@ document.write(`
             </div>
             
             
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mendownload-dataset-ecoli-dari-uci-https-archive-ics-uci-edu">Mendownload Dataset Ecoli dari UCI https://archive.ics.uci.edu/</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#membuat-service-mysql-pada-aiven-io">Membuat Service Mysql  pada aiven.io </a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#koneksikan-aiven-io-ke-dbeaver">Koneksikan aiven.io ke Dbeaver</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#simpan-dataset-ecoli-didalan-mysql">SImpan Dataset Ecoli didalan Mysql</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>
