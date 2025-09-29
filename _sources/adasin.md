@@ -172,3 +172,59 @@ plt.legend(); plt.show()
 * Data sintetis ditandai dengan simbol X merah → agar jelas mana yang asli dan mana yang hasil generate.
 
 * Hasil ini menunjukkan bahwa distribusi data sudah lebih seimbang.
+
+
+```python
+import matplotlib.pyplot as plt
+import numpy as np
+from collections import Counter
+
+# Hitung distribusi sebelum & sesudah balancing
+class_counts_before = Counter(y)
+class_counts_after = Counter(y_res)
+
+# Ambil label kelas & jumlah data
+labels_before = list(class_counts_before.keys())
+values_before = list(class_counts_before.values())
+
+labels_after = list(class_counts_after.keys())
+values_after = list(class_counts_after.values())
+
+# Warna otomatis
+colors_before = plt.cm.Blues(np.linspace(0.4, 0.9, len(labels_before)))
+colors_after = plt.cm.Greens(np.linspace(0.4, 0.9, len(labels_after)))
+
+# Buat figure dengan 2 subplot
+fig, axes = plt.subplots(1, 2, figsize=(14,6), sharey=True)
+
+# --- Plot sebelum balancing ---
+bars1 = axes[0].bar(labels_before, values_before, color=colors_before, edgecolor="black")
+axes[0].set_title("Distribusi Kelas Sebelum Balancing", fontsize=14, fontweight="bold")
+axes[0].set_xlabel("Kelas", fontsize=12)
+axes[0].set_ylabel("Jumlah Data", fontsize=12)
+axes[0].grid(axis="y", linestyle="--", alpha=0.6)
+
+# Tambahkan label di atas batang
+for bar in bars1:
+    axes[0].text(bar.get_x() + bar.get_width()/2, bar.get_height()+1, 
+                 str(bar.get_height()), ha='center', va='bottom', fontsize=10, fontweight="bold")
+
+# --- Plot sesudah balancing ---
+bars2 = axes[1].bar(labels_after, values_after, color=colors_after, edgecolor="black")
+axes[1].set_title("Distribusi Kelas Sesudah Balancing", fontsize=14, fontweight="bold")
+axes[1].set_xlabel("Kelas", fontsize=12)
+axes[1].grid(axis="y", linestyle="--", alpha=0.6)
+
+# Tambahkan label di atas batang
+for bar in bars2:
+    axes[1].text(bar.get_x() + bar.get_width()/2, bar.get_height()+1, 
+                 str(bar.get_height()), ha='center', va='bottom', fontsize=10, fontweight="bold")
+
+# Judul utama
+fig.suptitle("Perbandingan Distribusi Kelas Sebelum dan Sesudah Balancing", fontsize=16, fontweight="bold")
+
+plt.tight_layout()
+plt.show()
+```
+
+![adasin2](download1.png)
