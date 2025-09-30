@@ -1,14 +1,11 @@
-# Table of contents
-# Learn more at https://jupyterbook.org/customize/toc.html
-
 format: jb-book
 root: intro
+
 chapters:
-- file: bisnis
-- file: DataUNderstanding
-  sections:
-    - file: data/eksplorasi_data
-- file: preporecing
-- file: adasin
-
-
+  - file: bisnis
+  - file: DataUNderstanding
+    sections:
+      - file: data/eksplorasi_data
+  - file: preporecing
+  - file: balance/balance_adasyn
+  - file: balance/balance_smote

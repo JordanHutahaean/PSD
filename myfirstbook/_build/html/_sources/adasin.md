@@ -1,4 +1,4 @@
-## Penyeimbangan Data Ecoli
+# Penyeimbangan Data Ecoli
 
 
 ### Mendownload Dataset Ecoli dari UCI [https://archive.ics.uci.edu/](https://archive.ics.uci.edu/dataset/39/ecoli)
