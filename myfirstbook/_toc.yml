@@ -14,5 +14,4 @@ chapters:
   - file: balance/balance_naivebayes
   - file: balance/Bagging_Cassifier
   - file: balance/decision_tre
-  - file : balance/perbandingan
-
+  - file: balance/perbandingan
