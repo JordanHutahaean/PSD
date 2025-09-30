@@ -22,39 +22,47 @@ Traceback (most recent call last):
     raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
 nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
 ------------------
-%pip install pymysql
 import pymysql
+import psycopg2
+import pandas as pd
+from sqlalchemy import create_engine
 
-# Koneksi ke MySQL
-mysql_conn = pymysql.connect(
-    host="mysql-3c768195-aqbilbaraka.d.aivencloud.com",
-    user="avnadmin",
-    password= ***HIDDEN***,
-    database="defaultdb",
-    port=16932,
-    ssl={"ssl": {}}
+# Buat engine SQLAlchemy untuk MySQL
+mysql_engine = create_engine(
+    "mysql+pymysql://avnadmin:AVNS_WV9i6KvYoQZ3s6FclWP@mysql-3c768195-aqbilbaraka.d.aivencloud.com:16932/defaultdb"
 )
-mysql_cur = mysql_conn.cursor()
 
-# Eksekusi query untuk mengambil data dari MySQL
-query_mysql = "SELECT * FROM irismysql"
-mysql_cur.execute(query_mysql)
-data_mysql = mysql_cur.fetchall()
+# Buat engine SQLAlchemy untuk PostgreSQL
+postgres_engine = create_engine(
+    "postgresql+psycopg2://avnadmin:AVNS_Cq_rz3j4QTiiunKJ08p@pg-17afc059-aqbilbaraka.d.aivencloud.com:16932/defaultdb"
+)
 
-# Menampilkan data dari MySQL
-print("DATA SQL")
-for row in data_mysql:
-    print(row)
+# Query untuk mengambil data
+mysql_query = "SELECT id, class, petallength, petalwidth FROM irismysql"
+postgres_query = "SELECT id, sepallength, sepalwidth FROM irispostgresql"
 
-# Tutup kursor dan koneksi
-mysql_cur.close()
-mysql_conn.close()
+# Ambil data dari MySQL dan PostgreSQL sebagai DataFrame Pandas
+df_mysql = pd.read_sql(mysql_query, mysql_engine, coerce_float=True)
+df_postgresql = pd.read_sql(postgres_query, postgres_engine, coerce_float=True)
+
+# **Gabungkan Data berdasarkan 'id'**
+df_combined = pd.merge(df_mysql, df_postgresql, on="id", how="inner")
+
+# Tampilkan hasil
+print(df_combined.head())
+
+# Jika ingin menyimpan hasil ke CSV
+df_combined.to_csv("data_gabungan_iris.csv", index=False)
 ------------------
 
 
-[1;36m  Cell [1;32mIn[1], line 8[1;36m[0m
-[1;33m    password= ***HIDDEN***,[0m
-[1;37m    ^[0m
-[1;31mSyntaxError[0m[1;31m:[0m expression cannot contain assignment, perhaps you meant "=="?
+[1;31m---------------------------------------------------------------------------[0m
+[1;31mModuleNotFoundError[0m                       Traceback (most recent call last)
+Cell [1;32mIn[1], line 2[0m
+[0;32m      1[0m [38;5;28;01mimport[39;00m[38;5;250m [39m[38;5;21;01mpymysql[39;00m
+[1;32m----> 2[0m [38;5;28;01mimport[39;00m[38;5;250m [39m[38;5;21;01mpsycopg2[39;00m
+[0;32m      3[0m [38;5;28;01mimport[39;00m[38;5;250m [39m[38;5;21;01mpandas[39;00m[38;5;250m [39m[38;5;28;01mas[39;00m[38;5;250m [39m[38;5;21;01mpd[39;00m
+[0;32m      4[0m [38;5;28;01mfrom[39;00m[38;5;250m [39m[38;5;21;01msqlalchemy[39;00m[38;5;250m [39m[38;5;28;01mimport[39;00m create_engine
 
+[1;31mModuleNotFoundError[0m: No module named 'psycopg2'
 

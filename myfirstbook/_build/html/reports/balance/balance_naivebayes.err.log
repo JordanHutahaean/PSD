@@ -1,0 +1,115 @@
+Traceback (most recent call last):
+  File "c:\users\jordan\appdata\local\programs\python\python39\lib\site-packages\jupyter_core\utils\__init__.py", line 154, in wrapped
+    asyncio.get_running_loop()
+RuntimeError: no running event loop
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "c:\users\jordan\appdata\local\programs\python\python39\lib\site-packages\jupyter_cache\executors\utils.py", line 58, in single_nb_execution
+    executenb(
+  File "c:\users\jordan\appdata\local\programs\python\python39\lib\site-packages\nbclient\client.py", line 1319, in execute
+    return NotebookClient(nb=nb, resources=resources, km=km, **kwargs).execute()
+  File "c:\users\jordan\appdata\local\programs\python\python39\lib\site-packages\jupyter_core\utils\__init__.py", line 158, in wrapped
+    return loop.run_until_complete(inner)
+  File "c:\users\jordan\appdata\local\programs\python\python39\lib\asyncio\base_events.py", line 642, in run_until_complete
+    return future.result()
+  File "c:\users\jordan\appdata\local\programs\python\python39\lib\site-packages\nbclient\client.py", line 709, in async_execute
+    await self.async_execute_cell(
+  File "c:\users\jordan\appdata\local\programs\python\python39\lib\site-packages\nbclient\client.py", line 1062, in async_execute_cell
+    await self._check_raise_for_error(cell, cell_index, exec_reply)
+  File "c:\users\jordan\appdata\local\programs\python\python39\lib\site-packages\nbclient\client.py", line 918, in _check_raise_for_error
+    raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
+nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
+------------------
+
+
+# Load dataset hasil oversampling SMOTE
+data_smote = pd.read_csv("../balance/ecoli_balanced_smote.csv")  
+
+# Pastikan nama kolom target sesuai
+x_smote = data_smote.drop(columns=["class_label"])
+y_smote = data_smote["class_label"]
+
+# Split data
+X_train_smote, X_test_smote, y_train_smote, y_test_smote = train_test_split(
+    x_smote, y_smote, test_size=0.2, random_state=42
+)
+
+# Encode kolom kategori ke numerik
+encoder = OrdinalEncoder(handle_unknown="use_encoded_value", unknown_value=-1)
+X_train_smote = encoder.fit_transform(X_train_smote)
+X_test_smote = encoder.transform(X_test_smote)
+
+# Scaling fitur
+scaler = StandardScaler()
+X_train_smote = scaler.fit_transform(X_train_smote)
+X_test_smote = scaler.transform(X_test_smote)
+
+# Train Gaussian Naive Bayes
+nb = GaussianNB()
+nb.fit(X_train_smote, y_train_smote)
+
+# Prediksi
+prediksi_smote = nb.predict(X_test_smote)
+
+print(f"accuracy_score : {accuracy_score(y_test_smote, prediksi_smote):.4f}")
+print("Classification Report:\n", classification_report(y_test_smote, prediksi_smote, zero_division=0))
+
+# Confusion Matrix
+labels = np.unique(np.concatenate([y_train_smote, y_test_smote]))
+cm = confusion_matrix(y_test_smote, prediksi_smote, labels=labels)
+
+plt.figure(figsize=(8,6))
+sns.heatmap(cm, annot=True, fmt="d", cmap="Blues", xticklabels=labels, yticklabels=labels)
+plt.xlabel("Prediksi")
+plt.ylabel("Fakta")
+plt.title("Confusion Matrix (Semua Kelas)")
+plt.show()
+
+# Classification report ke DataFrame
+report = classification_report(
+    y_test_smote, prediksi_smote, labels=labels,
+    output_dict=True, zero_division=0
+)
+df_report = pd.DataFrame(report).transpose()
+
+metrics_df = df_report[['precision','recall','f1-score']].iloc[:-3]
+
+# Plot Metrics
+ax = metrics_df.plot(
+    kind='bar', 
+    figsize=(12,6), 
+    color=["#a01806", "#3c03a7", "#d4008e"], 
+    edgecolor='black'
+)
+plt.title("Classification Report Metrics (Semua kelas)")
+plt.ylabel("Score")
+plt.ylim(0,1.05) 
+plt.xticks(rotation=45)
+
+for p in ax.patches:
+    ax.annotate(f"{p.get_height():.2f}", 
+                (p.get_x() + p.get_width()/2, p.get_height()),
+                ha='center', va='bottom', fontsize=8)
+
+plt.legend(title="Metrics")
+plt.tight_layout()
+plt.show()
+
+------------------
+
+
+[1;31m---------------------------------------------------------------------------[0m
+[1;31mNameError[0m                                 Traceback (most recent call last)
+Cell [1;32mIn[4], line 14[0m
+[0;32m      9[0m X_train_smote, X_test_smote, y_train_smote, y_test_smote [38;5;241m=[39m train_test_split(
+[0;32m     10[0m     x_smote, y_smote, test_size[38;5;241m=[39m[38;5;241m0.2[39m, random_state[38;5;241m=[39m[38;5;241m42[39m
+[0;32m     11[0m )
+[0;32m     13[0m [38;5;66;03m# Encode kolom kategori ke numerik[39;00m
+[1;32m---> 14[0m encoder [38;5;241m=[39m [43mOrdinalEncoder[49m(handle_unknown[38;5;241m=[39m[38;5;124m"[39m[38;5;124muse_encoded_value[39m[38;5;124m"[39m, unknown_value[38;5;241m=[39m[38;5;241m-[39m[38;5;241m1[39m)
+[0;32m     15[0m X_train_smote [38;5;241m=[39m encoder[38;5;241m.[39mfit_transform(X_train_smote)
+[0;32m     16[0m X_test_smote [38;5;241m=[39m encoder[38;5;241m.[39mtransform(X_test_smote)
+
+[1;31mNameError[0m: name 'OrdinalEncoder' is not defined
+
