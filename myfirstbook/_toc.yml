@@ -9,5 +9,5 @@ chapters:
   - file: preporecing
   - file: balance/balance_adasyn
     sections:
-       - file: balance/balance_smote
-  - file: Pemodelan/randomforestS
+      - file: balance/balance_smote
+  - file: balance/balance_randomforest
