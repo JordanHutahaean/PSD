@@ -3,15 +3,15 @@ root: intro
 
 chapters:
   - file: bisnis
-  - file: DataUNderstanding
+  - file: DataUnderstanding
     sections:
       - file: data/eksplorasi_data
-  - file: preporecing
+  - file: preprocessing
   - file: balance/balance_adasyn
     sections:
       - file: balance/balance_smote
   - file: balance/balance_randomforest
   - file: balance/balance_naivebayes
-  - file: balance/Bagging_Cassifier
-  - file: balance/decision_tre
+  - file: balance/Bagging_Classifier
+  - file: balance/decision_tree
   - file: balance/perbandingan
