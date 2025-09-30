@@ -11,3 +11,8 @@ chapters:
     sections:
       - file: balance/balance_smote
   - file: balance/balance_randomforest
+  - file: balance/balance_naivebayes
+  - file: balance/Bagging_Cassifier
+  - file: balance/decision_tre
+  - file : balance/perbandingan
+
