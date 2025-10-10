@@ -26,3 +26,16 @@ Setelah berhasil connect ke database PostgreSQL, langkah berikutnya adalah memil
 
 
 ![connector](cone2.png)
+
+
+
+![connector](cone3.png)
+
+lalu kemudia kita execute
+
+
+# Membaca Data dari data yang kita sediakan 
+
+tambahkan Node DB Reader untuk membaca data di table
+
+![connector](cone4.png)
