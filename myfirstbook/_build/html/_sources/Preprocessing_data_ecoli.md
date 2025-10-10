@@ -17,3 +17,4 @@ Buka aplikasi Knime, kemudian cari node bernama PostgreSQL Connector, kemudian d
 
 setelah itu klik dua kali bagian node nya dan setting hostname, database, username, password dll
 
+![connector](cone1.png)
