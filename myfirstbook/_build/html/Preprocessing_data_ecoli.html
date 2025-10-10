@@ -457,6 +457,12 @@ Setelah berhasil connect ke database PostgreSQL, langkah berikutnya adalah memil
 <h1>Melihat Missing Value<a class="headerlink" href="#melihat-missing-value" title="Link to this heading">#</a></h1>
 <p>Untuk menangani missing value, kita perlu mengetahui terlebih dahulu apakah ada data yang hilang atau tidak dengan menggunakan node Statistics dan memvisualkannya menggunakan node Bar Chart. Node Statistics akan menampilkan informasi ringkas seperti jumlah data kosong, nilai minimum, maksimum, dan rata-rata. Dengan bantuan Bar Chart, kita dapat melihat distribusi data secara visual sehingga lebih mudah dalam mengidentifikasi kolom mana yang memiliki nilai hilang</p>
 <p><img alt="connector" src="_images/cone5.png" /></p>
+<p>Grafik menunjukkan tidak ditemukannya Missing Value, jadi pada tahap selanjutnya tambahkan node Missing Value (Opsional). Node ini bersifat wajib digunakan hanya jika grafik menunjukkan adanya Missing Value pada data. Jika tidak terdapat nilai yang hilang, tahap ini dapat dilewati dan proses dapat dilanjutkan ke tahap berikutnya seperti deteksi outlier.</p>
+<p><img alt="connector" src="_images/cone6.png" /></p>
+<p><img alt="connector" src="_images/cone7.png" /></p>
+<p>Outlier Detection
+Untuk mengecek dan menangani adanya outlier, gunakan node Numeric Outliers dan Bar Chart untuk visualisasi. Node Numeric Outliers akan mendeteksi nilai-nilai ekstrem yang berbeda jauh dari mayoritas data. Setelah itu, hasilnya dapat divisualisasikan menggunakan Bar Chart agar memudahkan dalam melihat sebaran data dan posisi nilai-nilai yang dianggap sebagai outlier.</p>
+<p><img alt="connector" src="_images/cone8.png" /></p>
 </section>
 
     <script type="text/x-thebe-config">
