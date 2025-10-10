@@ -68,3 +68,13 @@ Untuk mengecek dan menangani adanya outlier, gunakan node Numeric Outliers dan B
 
 
 ![connector](cone9.png)
+
+
+![connector](cone10.png)
+
+Berdasarkan grafik hasil visualisasi, terdeteksi adanya outlier pada beberapa fitur, antara lain gvh, lip, aac, dan chg. Untuk menangani hal tersebut, digunakan node Replace Outlier Values. Pada node ini, pengguna dapat melakukan konfigurasi melalui menu pengaturan untuk menentukan bagaimana nilai outlier akan diganti, misalnya dengan median, mean, atau nilai batas terdekat (capping). Langkah ini penting untuk memastikan agar data menjadi lebih stabil dan tidak memengaruhi hasil analisis atau pemodelan berikutnya
+
+# Mengatasi Data tersebut yang tidak seimbang
+![connector](cone11.png)
+
+Berdasarkan grafik distribusi class tersebut, dapat dilihat bahwa data mengalami ketidakseimbangan. Untuk mengecek dan membuat data menjadi seimbang, gunakan node SMOTE. Node ini berfungsi untuk menambah data pada kelas minoritas dengan cara membuat sampel sintetis baru, sehingga distribusi antar kelas menjadi lebih proporsional dan model tidak bias terhadap kelas mayoritas.
