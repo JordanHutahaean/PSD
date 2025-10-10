@@ -78,3 +78,11 @@ Berdasarkan grafik hasil visualisasi, terdeteksi adanya outlier pada beberapa fi
 ![connector](cone11.png)
 
 Berdasarkan grafik distribusi class tersebut, dapat dilihat bahwa data mengalami ketidakseimbangan. Untuk mengecek dan membuat data menjadi seimbang, gunakan node SMOTE. Node ini berfungsi untuk menambah data pada kelas minoritas dengan cara membuat sampel sintetis baru, sehingga distribusi antar kelas menjadi lebih proporsional dan model tidak bias terhadap kelas mayoritas.
+
+![connector](cone12.png)
+
+
+![connector](cone13.png)
+
+
+Berdasarkan grafik terbaru, dapat dilihat bahwa distribusi setiap class sudah berada dalam kondisi seimbang setelah dilakukan proses balancing data. Hal ini menandakan bahwa teknik SMOTE berhasil menambah data sintetis pada kelas minoritas sehingga jumlah data antar kelas menjadi proporsional. Dengan dataset yang seimbang, model yang akan dibangun nantinya diharapkan dapat belajar secara optimal tanpa bias terhadap salah satu kelas.
