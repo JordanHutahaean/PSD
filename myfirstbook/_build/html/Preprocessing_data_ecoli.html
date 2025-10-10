@@ -218,6 +218,7 @@
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Ereprocessing Data Ecoli menggunakan Knime</a></li>
 
 
+
 </ul>
 
     </div>
@@ -416,6 +417,7 @@ document.write(`
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Ereprocessing Data Ecoli menggunakan Knime</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#berikut-data-ecoli-yang-sudah-di-import-ke-database-postgresql">Berikut data ecoli yang sudah di import ke database postgresql</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#membaca-data-dari-data-yang-kita-sediakan">Membaca Data dari data yang kita sediakan</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#melihat-missing-value">Melihat Missing Value</a></li>
 </ul>
 
             </nav>
@@ -450,6 +452,11 @@ Setelah berhasil connect ke database PostgreSQL, langkah berikutnya adalah memil
 <h1>Membaca Data dari data yang kita sediakan<a class="headerlink" href="#membaca-data-dari-data-yang-kita-sediakan" title="Link to this heading">#</a></h1>
 <p>tambahkan Node DB Reader untuk membaca data di table</p>
 <p><img alt="connector" src="_images/cone4.png" /></p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="melihat-missing-value">
+<h1>Melihat Missing Value<a class="headerlink" href="#melihat-missing-value" title="Link to this heading">#</a></h1>
+<p>Untuk menangani missing value, kita perlu mengetahui terlebih dahulu apakah ada data yang hilang atau tidak dengan menggunakan node Statistics dan memvisualkannya menggunakan node Bar Chart. Node Statistics akan menampilkan informasi ringkas seperti jumlah data kosong, nilai minimum, maksimum, dan rata-rata. Dengan bantuan Bar Chart, kita dapat melihat distribusi data secara visual sehingga lebih mudah dalam mengidentifikasi kolom mana yang memiliki nilai hilang</p>
+<p><img alt="connector" src="_images/cone5.png" /></p>
 </section>
 
     <script type="text/x-thebe-config">
@@ -510,6 +517,7 @@ Setelah berhasil connect ke database PostgreSQL, langkah berikutnya adalah memil
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Ereprocessing Data Ecoli menggunakan Knime</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#berikut-data-ecoli-yang-sudah-di-import-ke-database-postgresql">Berikut data ecoli yang sudah di import ke database postgresql</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#membaca-data-dari-data-yang-kita-sediakan">Membaca Data dari data yang kita sediakan</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#melihat-missing-value">Melihat Missing Value</a></li>
 </ul>
 
   </nav></div>
