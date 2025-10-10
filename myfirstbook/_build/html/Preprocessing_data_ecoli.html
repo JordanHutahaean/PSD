@@ -219,6 +219,7 @@
 
 
 
+
 </ul>
 
     </div>
@@ -418,6 +419,7 @@ document.write(`
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#berikut-data-ecoli-yang-sudah-di-import-ke-database-postgresql">Berikut data ecoli yang sudah di import ke database postgresql</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#membaca-data-dari-data-yang-kita-sediakan">Membaca Data dari data yang kita sediakan</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#melihat-missing-value">Melihat Missing Value</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#mengatasi-data-tersebut-yang-tidak-seimbang">Mengatasi Data tersebut yang tidak seimbang</a></li>
 </ul>
 
             </nav>
@@ -464,6 +466,13 @@ Setelah berhasil connect ke database PostgreSQL, langkah berikutnya adalah memil
 Untuk mengecek dan menangani adanya outlier, gunakan node Numeric Outliers dan Bar Chart untuk visualisasi. Node Numeric Outliers akan mendeteksi nilai-nilai ekstrem yang berbeda jauh dari mayoritas data. Setelah itu, hasilnya dapat divisualisasikan menggunakan Bar Chart agar memudahkan dalam melihat sebaran data dan posisi nilai-nilai yang dianggap sebagai outlier.</p>
 <p><img alt="connector" src="_images/cone8.png" /></p>
 <p><img alt="connector" src="_images/cone9.png" /></p>
+<p><img alt="connector" src="_images/cone10.png" /></p>
+<p>Berdasarkan grafik hasil visualisasi, terdeteksi adanya outlier pada beberapa fitur, antara lain gvh, lip, aac, dan chg. Untuk menangani hal tersebut, digunakan node Replace Outlier Values. Pada node ini, pengguna dapat melakukan konfigurasi melalui menu pengaturan untuk menentukan bagaimana nilai outlier akan diganti, misalnya dengan median, mean, atau nilai batas terdekat (capping). Langkah ini penting untuk memastikan agar data menjadi lebih stabil dan tidak memengaruhi hasil analisis atau pemodelan berikutnya</p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="mengatasi-data-tersebut-yang-tidak-seimbang">
+<h1>Mengatasi Data tersebut yang tidak seimbang<a class="headerlink" href="#mengatasi-data-tersebut-yang-tidak-seimbang" title="Link to this heading">#</a></h1>
+<p><img alt="connector" src="_images/cone11.png" /></p>
+<p>Berdasarkan grafik distribusi class tersebut, dapat dilihat bahwa data mengalami ketidakseimbangan. Untuk mengecek dan membuat data menjadi seimbang, gunakan node SMOTE. Node ini berfungsi untuk menambah data pada kelas minoritas dengan cara membuat sampel sintetis baru, sehingga distribusi antar kelas menjadi lebih proporsional dan model tidak bias terhadap kelas mayoritas.</p>
 </section>
 
     <script type="text/x-thebe-config">
@@ -525,6 +534,7 @@ Untuk mengecek dan menangani adanya outlier, gunakan node Numeric Outliers dan B
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#berikut-data-ecoli-yang-sudah-di-import-ke-database-postgresql">Berikut data ecoli yang sudah di import ke database postgresql</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#membaca-data-dari-data-yang-kita-sediakan">Membaca Data dari data yang kita sediakan</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#melihat-missing-value">Melihat Missing Value</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#mengatasi-data-tersebut-yang-tidak-seimbang">Mengatasi Data tersebut yang tidak seimbang</a></li>
 </ul>
 
   </nav></div>
