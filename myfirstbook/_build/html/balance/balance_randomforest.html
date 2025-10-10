@@ -474,175 +474,326 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Info Dataset:
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ConnectionRefusedError</span><span class="g g-Whitespace">                    </span>Traceback (most recent call last)
+<span class="nn">File c:\users\jordan\appdata\local\programs\python\python39\lib\site-packages\pymysql\connections.py:661,</span> in <span class="ni">Connection.connect</span><span class="nt">(self, sock)</span>
+<span class="g g-Whitespace">    </span><span class="mi">660</span> <span class="k">try</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">661</span>     <span class="n">sock</span> <span class="o">=</span> <span class="n">socket</span><span class="o">.</span><span class="n">create_connection</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">662</span>         <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">host</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">port</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">connect_timeout</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span>
+<span class="g g-Whitespace">    </span><span class="mi">663</span>     <span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">664</span>     <span class="k">break</span>
+
+<span class="nn">File c:\users\jordan\appdata\local\programs\python\python39\lib\socket.py:843,</span> in <span class="ni">create_connection</span><span class="nt">(address, timeout, source_address)</span>
+<span class="g g-Whitespace">    </span><span class="mi">842</span> <span class="k">try</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">843</span>     <span class="k">raise</span> <span class="n">err</span>
+<span class="g g-Whitespace">    </span><span class="mi">844</span> <span class="k">finally</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">845</span>     <span class="c1"># Break explicitly a reference cycle</span>
+
+<span class="nn">File c:\users\jordan\appdata\local\programs\python\python39\lib\socket.py:831,</span> in <span class="ni">create_connection</span><span class="nt">(address, timeout, source_address)</span>
+<span class="g g-Whitespace">    </span><span class="mi">830</span>     <span class="n">sock</span><span class="o">.</span><span class="n">bind</span><span class="p">(</span><span class="n">source_address</span><span class="p">)</span>
+<span class="ne">--&gt; </span><span class="mi">831</span> <span class="n">sock</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">sa</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">832</span> <span class="c1"># Break explicitly a reference cycle</span>
+
+<span class="ne">ConnectionRefusedError</span>: [WinError 10061] No connection could be made because the target machine actively refused it
+
+<span class="n">During</span> <span class="n">handling</span> <span class="n">of</span> <span class="n">the</span> <span class="n">above</span> <span class="n">exception</span><span class="p">,</span> <span class="n">another</span> <span class="n">exception</span> <span class="n">occurred</span><span class="p">:</span>
+
+<span class="ne">OperationalError</span><span class="g g-Whitespace">                          </span>Traceback (most recent call last)
+<span class="nn">File c:\users\jordan\appdata\local\programs\python\python39\lib\site-packages\sqlalchemy\engine\base.py:143,</span> in <span class="ni">Connection.__init__</span><span class="nt">(self, engine, connection, _has_events, _allow_revalidate, _allow_autobegin)</span>
+<span class="g g-Whitespace">    </span><span class="mi">142</span> <span class="k">try</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">143</span>     <span class="bp">self</span><span class="o">.</span><span class="n">_dbapi_connection</span> <span class="o">=</span> <span class="n">engine</span><span class="o">.</span><span class="n">raw_connection</span><span class="p">()</span>
+<span class="g g-Whitespace">    </span><span class="mi">144</span> <span class="k">except</span> <span class="n">dialect</span><span class="o">.</span><span class="n">loaded_dbapi</span><span class="o">.</span><span class="n">Error</span> <span class="k">as</span> <span class="n">err</span><span class="p">:</span>
+
+<span class="nn">File c:\users\jordan\appdata\local\programs\python\python39\lib\site-packages\sqlalchemy\engine\base.py:3301,</span> in <span class="ni">Engine.raw_connection</span><span class="nt">(self)</span>
+<span class="g g-Whitespace">   </span><span class="mi">3280</span><span class="w"> </span><span class="sd">&quot;&quot;&quot;Return a &quot;raw&quot; DBAPI connection from the connection pool.</span>
+<span class="g g-Whitespace">   </span><span class="mi">3281</span><span class="sd"> </span>
+<span class="g g-Whitespace">   </span><span class="mi">3282</span><span class="sd"> The returned object is a proxied version of the DBAPI</span>
+<span class="sd">   (...)</span>
+<span class="g g-Whitespace">   </span><span class="mi">3299</span><span class="sd"> </span>
+<span class="g g-Whitespace">   </span><span class="mi">3300</span><span class="sd"> &quot;&quot;&quot;</span>
+<span class="ne">-&gt; </span><span class="mi">3301</span> <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">pool</span><span class="o">.</span><span class="n">connect</span><span class="p">()</span>
+
+<span class="nn">File c:\users\jordan\appdata\local\programs\python\python39\lib\site-packages\sqlalchemy\pool\base.py:447,</span> in <span class="ni">Pool.connect</span><span class="nt">(self)</span>
+<span class="g g-Whitespace">    </span><span class="mi">440</span><span class="w"> </span><span class="sd">&quot;&quot;&quot;Return a DBAPI connection from the pool.</span>
+<span class="g g-Whitespace">    </span><span class="mi">441</span><span class="sd"> </span>
+<span class="g g-Whitespace">    </span><span class="mi">442</span><span class="sd"> The connection is instrumented such that when its</span>
+<span class="sd">   (...)</span>
+<span class="g g-Whitespace">    </span><span class="mi">445</span><span class="sd"> </span>
+<span class="g g-Whitespace">    </span><span class="mi">446</span><span class="sd"> &quot;&quot;&quot;</span>
+<span class="ne">--&gt; </span><span class="mi">447</span> <span class="k">return</span> <span class="n">_ConnectionFairy</span><span class="o">.</span><span class="n">_checkout</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+
+<span class="nn">File c:\users\jordan\appdata\local\programs\python\python39\lib\site-packages\sqlalchemy\pool\base.py:1264,</span> in <span class="ni">_ConnectionFairy._checkout</span><span class="nt">(cls, pool, threadconns, fairy)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1263</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">fairy</span><span class="p">:</span>
+<span class="ne">-&gt; </span><span class="mi">1264</span>     <span class="n">fairy</span> <span class="o">=</span> <span class="n">_ConnectionRecord</span><span class="o">.</span><span class="n">checkout</span><span class="p">(</span><span class="n">pool</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1266</span>     <span class="k">if</span> <span class="n">threadconns</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+
+<span class="nn">File c:\users\jordan\appdata\local\programs\python\python39\lib\site-packages\sqlalchemy\pool\base.py:711,</span> in <span class="ni">_ConnectionRecord.checkout</span><span class="nt">(cls, pool)</span>
+<span class="g g-Whitespace">    </span><span class="mi">710</span> <span class="k">else</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">711</span>     <span class="n">rec</span> <span class="o">=</span> <span class="n">pool</span><span class="o">.</span><span class="n">_do_get</span><span class="p">()</span>
+<span class="g g-Whitespace">    </span><span class="mi">713</span> <span class="k">try</span><span class="p">:</span>
+
+<span class="nn">File c:\users\jordan\appdata\local\programs\python\python39\lib\site-packages\sqlalchemy\pool\impl.py:178,</span> in <span class="ni">QueuePool._do_get</span><span class="nt">(self)</span>
+<span class="g g-Whitespace">    </span><span class="mi">177</span> <span class="k">with</span> <span class="n">util</span><span class="o">.</span><span class="n">safe_reraise</span><span class="p">():</span>
+<span class="ne">--&gt; </span><span class="mi">178</span>     <span class="bp">self</span><span class="o">.</span><span class="n">_dec_overflow</span><span class="p">()</span>
+<span class="g g-Whitespace">    </span><span class="mi">179</span> <span class="k">raise</span>
+
+<span class="nn">File c:\users\jordan\appdata\local\programs\python\python39\lib\site-packages\sqlalchemy\util\langhelpers.py:224,</span> in <span class="ni">safe_reraise.__exit__</span><span class="nt">(self, type_, value, traceback)</span>
+<span class="g g-Whitespace">    </span><span class="mi">223</span>     <span class="bp">self</span><span class="o">.</span><span class="n">_exc_info</span> <span class="o">=</span> <span class="kc">None</span>  <span class="c1"># remove potential circular references</span>
+<span class="ne">--&gt; </span><span class="mi">224</span>     <span class="k">raise</span> <span class="n">exc_value</span><span class="o">.</span><span class="n">with_traceback</span><span class="p">(</span><span class="n">exc_tb</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">225</span> <span class="k">else</span><span class="p">:</span>
+
+<span class="nn">File c:\users\jordan\appdata\local\programs\python\python39\lib\site-packages\sqlalchemy\pool\impl.py:175,</span> in <span class="ni">QueuePool._do_get</span><span class="nt">(self)</span>
+<span class="g g-Whitespace">    </span><span class="mi">174</span> <span class="k">try</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">175</span>     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_create_connection</span><span class="p">()</span>
+<span class="g g-Whitespace">    </span><span class="mi">176</span> <span class="k">except</span><span class="p">:</span>
+
+<span class="nn">File c:\users\jordan\appdata\local\programs\python\python39\lib\site-packages\sqlalchemy\pool\base.py:388,</span> in <span class="ni">Pool._create_connection</span><span class="nt">(self)</span>
+<span class="g g-Whitespace">    </span><span class="mi">386</span><span class="w"> </span><span class="sd">&quot;&quot;&quot;Called by subclasses to create a new ConnectionRecord.&quot;&quot;&quot;</span>
+<span class="ne">--&gt; </span><span class="mi">388</span> <span class="k">return</span> <span class="n">_ConnectionRecord</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+
+<span class="nn">File c:\users\jordan\appdata\local\programs\python\python39\lib\site-packages\sqlalchemy\pool\base.py:673,</span> in <span class="ni">_ConnectionRecord.__init__</span><span class="nt">(self, pool, connect)</span>
+<span class="g g-Whitespace">    </span><span class="mi">672</span> <span class="k">if</span> <span class="n">connect</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">673</span>     <span class="bp">self</span><span class="o">.</span><span class="n">__connect</span><span class="p">()</span>
+<span class="g g-Whitespace">    </span><span class="mi">674</span> <span class="bp">self</span><span class="o">.</span><span class="n">finalize_callback</span> <span class="o">=</span> <span class="n">deque</span><span class="p">()</span>
+
+<span class="nn">File c:\users\jordan\appdata\local\programs\python\python39\lib\site-packages\sqlalchemy\pool\base.py:900,</span> in <span class="ni">_ConnectionRecord.__connect</span><span class="nt">(self)</span>
+<span class="g g-Whitespace">    </span><span class="mi">899</span>     <span class="k">with</span> <span class="n">util</span><span class="o">.</span><span class="n">safe_reraise</span><span class="p">():</span>
+<span class="ne">--&gt; </span><span class="mi">900</span>         <span class="n">pool</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;Error on connect(): </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">901</span> <span class="k">else</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">902</span>     <span class="c1"># in SQLAlchemy 1.4 the first_connect event is not used by</span>
+<span class="g g-Whitespace">    </span><span class="mi">903</span>     <span class="c1"># the engine, so this will usually not be set</span>
+
+<span class="nn">File c:\users\jordan\appdata\local\programs\python\python39\lib\site-packages\sqlalchemy\util\langhelpers.py:224,</span> in <span class="ni">safe_reraise.__exit__</span><span class="nt">(self, type_, value, traceback)</span>
+<span class="g g-Whitespace">    </span><span class="mi">223</span>     <span class="bp">self</span><span class="o">.</span><span class="n">_exc_info</span> <span class="o">=</span> <span class="kc">None</span>  <span class="c1"># remove potential circular references</span>
+<span class="ne">--&gt; </span><span class="mi">224</span>     <span class="k">raise</span> <span class="n">exc_value</span><span class="o">.</span><span class="n">with_traceback</span><span class="p">(</span><span class="n">exc_tb</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">225</span> <span class="k">else</span><span class="p">:</span>
+
+<span class="nn">File c:\users\jordan\appdata\local\programs\python\python39\lib\site-packages\sqlalchemy\pool\base.py:895,</span> in <span class="ni">_ConnectionRecord.__connect</span><span class="nt">(self)</span>
+<span class="g g-Whitespace">    </span><span class="mi">894</span> <span class="bp">self</span><span class="o">.</span><span class="n">starttime</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+<span class="ne">--&gt; </span><span class="mi">895</span> <span class="bp">self</span><span class="o">.</span><span class="n">dbapi_connection</span> <span class="o">=</span> <span class="n">connection</span> <span class="o">=</span> <span class="n">pool</span><span class="o">.</span><span class="n">_invoke_creator</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">896</span> <span class="n">pool</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;Created new connection </span><span class="si">%r</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">connection</span><span class="p">)</span>
+
+<span class="nn">File c:\users\jordan\appdata\local\programs\python\python39\lib\site-packages\sqlalchemy\engine\create.py:661,</span> in <span class="ni">create_engine.&lt;locals&gt;.connect</span><span class="nt">(connection_record)</span>
+<span class="g g-Whitespace">    </span><span class="mi">659</span>             <span class="k">return</span> <span class="n">connection</span>
+<span class="ne">--&gt; </span><span class="mi">661</span> <span class="k">return</span> <span class="n">dialect</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="o">*</span><span class="n">cargs</span><span class="p">,</span> <span class="o">**</span><span class="n">cparams</span><span class="p">)</span>
+
+<span class="nn">File c:\users\jordan\appdata\local\programs\python\python39\lib\site-packages\sqlalchemy\engine\default.py:629,</span> in <span class="ni">DefaultDialect.connect</span><span class="nt">(self, *cargs, **cparams)</span>
+<span class="g g-Whitespace">    </span><span class="mi">627</span> <span class="k">def</span><span class="w"> </span><span class="nf">connect</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">cargs</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="o">**</span><span class="n">cparams</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DBAPIConnection</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">628</span>     <span class="c1"># inherits the docstring from interfaces.Dialect.connect</span>
+<span class="ne">--&gt; </span><span class="mi">629</span>     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">loaded_dbapi</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="o">*</span><span class="n">cargs</span><span class="p">,</span> <span class="o">**</span><span class="n">cparams</span><span class="p">)</span>
+
+<span class="nn">File c:\users\jordan\appdata\local\programs\python\python39\lib\site-packages\pymysql\connections.py:365,</span> in <span class="ni">Connection.__init__</span><span class="nt">(self, user, password, host, database, unix_socket, port, charset, collation, sql_mode, read_default_file, conv, use_unicode, client_flag, cursorclass, init_command, connect_timeout, read_default_group, autocommit, local_infile, max_allowed_packet, defer_connect, auth_plugin_map, read_timeout, write_timeout, bind_address, binary_prefix, program_name, server_public_key, ssl, ssl_ca, ssl_cert, ssl_disabled, ssl_key, ssl_key_password, ssl_verify_cert, ssl_verify_identity, compress, named_pipe, passwd, db)</span>
+<span class="g g-Whitespace">    </span><span class="mi">364</span> <span class="k">else</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">365</span>     <span class="bp">self</span><span class="o">.</span><span class="n">connect</span><span class="p">()</span>
+
+<span class="nn">File c:\users\jordan\appdata\local\programs\python\python39\lib\site-packages\pymysql\connections.py:723,</span> in <span class="ni">Connection.connect</span><span class="nt">(self, sock)</span>
+<span class="g g-Whitespace">    </span><span class="mi">722</span>         <span class="nb">print</span><span class="p">(</span><span class="n">exc</span><span class="o">.</span><span class="n">traceback</span><span class="p">)</span>
+<span class="ne">--&gt; </span><span class="mi">723</span>     <span class="k">raise</span> <span class="n">exc</span>
+<span class="g g-Whitespace">    </span><span class="mi">725</span> <span class="c1"># If e is neither DatabaseError or IOError, It&#39;s a bug.</span>
+<span class="g g-Whitespace">    </span><span class="mi">726</span> <span class="c1"># But raising AssertionError hides original error.</span>
+<span class="g g-Whitespace">    </span><span class="mi">727</span> <span class="c1"># So just reraise it.</span>
+
+<span class="ne">OperationalError</span>: (2003, &quot;Can&#39;t connect to MySQL server on &#39;localhost&#39; ([WinError 10061] No connection could be made because the target machine actively refused it)&quot;)
+
+<span class="n">The</span> <span class="n">above</span> <span class="n">exception</span> <span class="n">was</span> <span class="n">the</span> <span class="n">direct</span> <span class="n">cause</span> <span class="n">of</span> <span class="n">the</span> <span class="n">following</span> <span class="n">exception</span><span class="p">:</span>
+
+<span class="ne">OperationalError</span><span class="g g-Whitespace">                          </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">line</span> <span class="mi">4</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="n">engine</span> <span class="o">=</span> <span class="n">create_engine</span><span class="p">(</span><span class="s2">&quot;mysql+pymysql://root:@localhost:3306/ecoli&quot;</span><span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="c1"># ambil data dari tabel</span>
+<span class="ne">----&gt; </span><span class="mi">4</span> <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_sql</span><span class="p">(</span><span class="s2">&quot;SELECT * FROM ecoli;&quot;</span><span class="p">,</span> <span class="n">engine</span><span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="n">class_counts</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;class_label&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span><span class="o">.</span><span class="n">sort_index</span><span class="p">()</span>
+<span class="g g-Whitespace">      </span><span class="mi">6</span> <span class="n">nt</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;class_label&quot;</span><span class="p">,</span> <span class="s2">&quot;id_protein&quot;</span><span class="p">])</span>
+
+<span class="nn">File c:\users\jordan\appdata\local\programs\python\python39\lib\site-packages\pandas\io\sql.py:652,</span> in <span class="ni">read_sql</span><span class="nt">(sql, con, index_col, coerce_float, params, parse_dates, columns, chunksize, dtype_backend, dtype)</span>
+<span class="g g-Whitespace">    </span><span class="mi">649</span>     <span class="n">dtype_backend</span> <span class="o">=</span> <span class="s2">&quot;numpy&quot;</span>  <span class="c1"># type: ignore[assignment]</span>
+<span class="g g-Whitespace">    </span><span class="mi">650</span> <span class="k">assert</span> <span class="n">dtype_backend</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">lib</span><span class="o">.</span><span class="n">no_default</span>
+<span class="ne">--&gt; </span><span class="mi">652</span> <span class="k">with</span> <span class="n">pandasSQL_builder</span><span class="p">(</span><span class="n">con</span><span class="p">)</span> <span class="k">as</span> <span class="n">pandas_sql</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">653</span>     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">pandas_sql</span><span class="p">,</span> <span class="n">SQLiteDatabase</span><span class="p">):</span>
+<span class="g g-Whitespace">    </span><span class="mi">654</span>         <span class="k">return</span> <span class="n">pandas_sql</span><span class="o">.</span><span class="n">read_query</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">655</span>             <span class="n">sql</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">656</span>             <span class="n">index_col</span><span class="o">=</span><span class="n">index_col</span><span class="p">,</span>
+   <span class="p">(</span><span class="o">...</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">662</span>             <span class="n">dtype</span><span class="o">=</span><span class="n">dtype</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">663</span>         <span class="p">)</span>
+
+<span class="nn">File c:\users\jordan\appdata\local\programs\python\python39\lib\site-packages\pandas\io\sql.py:851,</span> in <span class="ni">pandasSQL_builder</span><span class="nt">(con, schema, need_transaction)</span>
+<span class="g g-Whitespace">    </span><span class="mi">848</span>     <span class="k">raise</span> <span class="ne">ImportError</span><span class="p">(</span><span class="s2">&quot;Using URI string without sqlalchemy installed.&quot;</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">850</span> <span class="k">if</span> <span class="n">sqlalchemy</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">con</span><span class="p">,</span> <span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">sqlalchemy</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">Connectable</span><span class="p">)):</span>
+<span class="ne">--&gt; </span><span class="mi">851</span>     <span class="k">return</span> <span class="n">SQLDatabase</span><span class="p">(</span><span class="n">con</span><span class="p">,</span> <span class="n">schema</span><span class="p">,</span> <span class="n">need_transaction</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">853</span> <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">854</span>     <span class="s2">&quot;pandas only supports SQLAlchemy connectable (engine/connection) or &quot;</span>
+<span class="g g-Whitespace">    </span><span class="mi">855</span>     <span class="s2">&quot;database string URI or sqlite3 DBAPI2 connection. Other DBAPI2 &quot;</span>
+   <span class="p">(</span><span class="o">...</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">858</span>     <span class="n">stacklevel</span><span class="o">=</span><span class="n">find_stack_level</span><span class="p">(),</span>
+<span class="g g-Whitespace">    </span><span class="mi">859</span> <span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">860</span> <span class="k">return</span> <span class="n">SQLiteDatabase</span><span class="p">(</span><span class="n">con</span><span class="p">)</span>
+
+<span class="nn">File c:\users\jordan\appdata\local\programs\python\python39\lib\site-packages\pandas\io\sql.py:1576,</span> in <span class="ni">SQLDatabase.__init__</span><span class="nt">(self, con, schema, need_transaction)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1574</span>     <span class="bp">self</span><span class="o">.</span><span class="n">exit_stack</span><span class="o">.</span><span class="n">callback</span><span class="p">(</span><span class="n">con</span><span class="o">.</span><span class="n">dispose</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1575</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">con</span><span class="p">,</span> <span class="n">Engine</span><span class="p">):</span>
+<span class="ne">-&gt; </span><span class="mi">1576</span>     <span class="n">con</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">exit_stack</span><span class="o">.</span><span class="n">enter_context</span><span class="p">(</span><span class="n">con</span><span class="o">.</span><span class="n">connect</span><span class="p">())</span>
+<span class="g g-Whitespace">   </span><span class="mi">1577</span> <span class="k">if</span> <span class="n">need_transaction</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">con</span><span class="o">.</span><span class="n">in_transaction</span><span class="p">():</span>
+<span class="g g-Whitespace">   </span><span class="mi">1578</span>     <span class="bp">self</span><span class="o">.</span><span class="n">exit_stack</span><span class="o">.</span><span class="n">enter_context</span><span class="p">(</span><span class="n">con</span><span class="o">.</span><span class="n">begin</span><span class="p">())</span>
+
+<span class="nn">File c:\users\jordan\appdata\local\programs\python\python39\lib\site-packages\sqlalchemy\engine\base.py:3277,</span> in <span class="ni">Engine.connect</span><span class="nt">(self)</span>
+<span class="g g-Whitespace">   </span><span class="mi">3254</span> <span class="k">def</span><span class="w"> </span><span class="nf">connect</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Connection</span><span class="p">:</span>
+<span class="g g-Whitespace">   </span><span class="mi">3255</span><span class="w">     </span><span class="sd">&quot;&quot;&quot;Return a new :class:`_engine.Connection` object.</span>
+<span class="g g-Whitespace">   </span><span class="mi">3256</span><span class="sd"> </span>
+<span class="g g-Whitespace">   </span><span class="mi">3257</span><span class="sd">     The :class:`_engine.Connection` acts as a Python context manager, so</span>
+<span class="sd">   (...)</span>
+<span class="g g-Whitespace">   </span><span class="mi">3274</span><span class="sd"> </span>
+<span class="g g-Whitespace">   </span><span class="mi">3275</span><span class="sd">     &quot;&quot;&quot;</span>
+<span class="ne">-&gt; </span><span class="mi">3277</span>     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_connection_cls</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+
+<span class="nn">File c:\users\jordan\appdata\local\programs\python\python39\lib\site-packages\sqlalchemy\engine\base.py:145,</span> in <span class="ni">Connection.__init__</span><span class="nt">(self, engine, connection, _has_events, _allow_revalidate, _allow_autobegin)</span>
+<span class="g g-Whitespace">    </span><span class="mi">143</span>         <span class="bp">self</span><span class="o">.</span><span class="n">_dbapi_connection</span> <span class="o">=</span> <span class="n">engine</span><span class="o">.</span><span class="n">raw_connection</span><span class="p">()</span>
+<span class="g g-Whitespace">    </span><span class="mi">144</span>     <span class="k">except</span> <span class="n">dialect</span><span class="o">.</span><span class="n">loaded_dbapi</span><span class="o">.</span><span class="n">Error</span> <span class="k">as</span> <span class="n">err</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">145</span>         <span class="n">Connection</span><span class="o">.</span><span class="n">_handle_dbapi_exception_noconnection</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">146</span>             <span class="n">err</span><span class="p">,</span> <span class="n">dialect</span><span class="p">,</span> <span class="n">engine</span>
+<span class="g g-Whitespace">    </span><span class="mi">147</span>         <span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">148</span>         <span class="k">raise</span>
+<span class="g g-Whitespace">    </span><span class="mi">149</span> <span class="k">else</span><span class="p">:</span>
+
+<span class="nn">File c:\users\jordan\appdata\local\programs\python\python39\lib\site-packages\sqlalchemy\engine\base.py:2440,</span> in <span class="ni">Connection._handle_dbapi_exception_noconnection</span><span class="nt">(cls, e, dialect, engine, is_disconnect, invalidate_pool_on_disconnect, is_pre_ping)</span>
+<span class="g g-Whitespace">   </span><span class="mi">2438</span> <span class="k">elif</span> <span class="n">should_wrap</span><span class="p">:</span>
+<span class="g g-Whitespace">   </span><span class="mi">2439</span>     <span class="k">assert</span> <span class="n">sqlalchemy_exception</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
+<span class="ne">-&gt; </span><span class="mi">2440</span>     <span class="k">raise</span> <span class="n">sqlalchemy_exception</span><span class="o">.</span><span class="n">with_traceback</span><span class="p">(</span><span class="n">exc_info</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span> <span class="kn">from</span><span class="w"> </span><span class="nn">e</span>
+<span class="g g-Whitespace">   </span><span class="mi">2441</span> <span class="k">else</span><span class="p">:</span>
+<span class="g g-Whitespace">   </span><span class="mi">2442</span>     <span class="k">assert</span> <span class="n">exc_info</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
+
+<span class="nn">File c:\users\jordan\appdata\local\programs\python\python39\lib\site-packages\sqlalchemy\engine\base.py:143,</span> in <span class="ni">Connection.__init__</span><span class="nt">(self, engine, connection, _has_events, _allow_revalidate, _allow_autobegin)</span>
+<span class="g g-Whitespace">    </span><span class="mi">141</span> <span class="k">if</span> <span class="n">connection</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">142</span>     <span class="k">try</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">143</span>         <span class="bp">self</span><span class="o">.</span><span class="n">_dbapi_connection</span> <span class="o">=</span> <span class="n">engine</span><span class="o">.</span><span class="n">raw_connection</span><span class="p">()</span>
+<span class="g g-Whitespace">    </span><span class="mi">144</span>     <span class="k">except</span> <span class="n">dialect</span><span class="o">.</span><span class="n">loaded_dbapi</span><span class="o">.</span><span class="n">Error</span> <span class="k">as</span> <span class="n">err</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">145</span>         <span class="n">Connection</span><span class="o">.</span><span class="n">_handle_dbapi_exception_noconnection</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">146</span>             <span class="n">err</span><span class="p">,</span> <span class="n">dialect</span><span class="p">,</span> <span class="n">engine</span>
+<span class="g g-Whitespace">    </span><span class="mi">147</span>         <span class="p">)</span>
+
+<span class="nn">File c:\users\jordan\appdata\local\programs\python\python39\lib\site-packages\sqlalchemy\engine\base.py:3301,</span> in <span class="ni">Engine.raw_connection</span><span class="nt">(self)</span>
+<span class="g g-Whitespace">   </span><span class="mi">3279</span> <span class="k">def</span><span class="w"> </span><span class="nf">raw_connection</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">PoolProxiedConnection</span><span class="p">:</span>
+<span class="g g-Whitespace">   </span><span class="mi">3280</span><span class="w">     </span><span class="sd">&quot;&quot;&quot;Return a &quot;raw&quot; DBAPI connection from the connection pool.</span>
+<span class="g g-Whitespace">   </span><span class="mi">3281</span><span class="sd"> </span>
+<span class="g g-Whitespace">   </span><span class="mi">3282</span><span class="sd">     The returned object is a proxied version of the DBAPI</span>
+<span class="sd">   (...)</span>
+<span class="g g-Whitespace">   </span><span class="mi">3299</span><span class="sd"> </span>
+<span class="g g-Whitespace">   </span><span class="mi">3300</span><span class="sd">     &quot;&quot;&quot;</span>
+<span class="ne">-&gt; </span><span class="mi">3301</span>     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">pool</span><span class="o">.</span><span class="n">connect</span><span class="p">()</span>
+
+<span class="nn">File c:\users\jordan\appdata\local\programs\python\python39\lib\site-packages\sqlalchemy\pool\base.py:447,</span> in <span class="ni">Pool.connect</span><span class="nt">(self)</span>
+<span class="g g-Whitespace">    </span><span class="mi">439</span> <span class="k">def</span><span class="w"> </span><span class="nf">connect</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">PoolProxiedConnection</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">440</span><span class="w">     </span><span class="sd">&quot;&quot;&quot;Return a DBAPI connection from the pool.</span>
+<span class="g g-Whitespace">    </span><span class="mi">441</span><span class="sd"> </span>
+<span class="g g-Whitespace">    </span><span class="mi">442</span><span class="sd">     The connection is instrumented such that when its</span>
+<span class="sd">   (...)</span>
+<span class="g g-Whitespace">    </span><span class="mi">445</span><span class="sd"> </span>
+<span class="g g-Whitespace">    </span><span class="mi">446</span><span class="sd">     &quot;&quot;&quot;</span>
+<span class="ne">--&gt; </span><span class="mi">447</span>     <span class="k">return</span> <span class="n">_ConnectionFairy</span><span class="o">.</span><span class="n">_checkout</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+
+<span class="nn">File c:\users\jordan\appdata\local\programs\python\python39\lib\site-packages\sqlalchemy\pool\base.py:1264,</span> in <span class="ni">_ConnectionFairy._checkout</span><span class="nt">(cls, pool, threadconns, fairy)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1256</span> <span class="nd">@classmethod</span>
+<span class="g g-Whitespace">   </span><span class="mi">1257</span> <span class="k">def</span><span class="w"> </span><span class="nf">_checkout</span><span class="p">(</span>
+<span class="g g-Whitespace">   </span><span class="mi">1258</span>     <span class="bp">cls</span><span class="p">,</span>
+   <span class="p">(</span><span class="o">...</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1261</span>     <span class="n">fairy</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">_ConnectionFairy</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1262</span> <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">_ConnectionFairy</span><span class="p">:</span>
+<span class="g g-Whitespace">   </span><span class="mi">1263</span>     <span class="k">if</span> <span class="ow">not</span> <span class="n">fairy</span><span class="p">:</span>
+<span class="ne">-&gt; </span><span class="mi">1264</span>         <span class="n">fairy</span> <span class="o">=</span> <span class="n">_ConnectionRecord</span><span class="o">.</span><span class="n">checkout</span><span class="p">(</span><span class="n">pool</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1266</span>         <span class="k">if</span> <span class="n">threadconns</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+<span class="g g-Whitespace">   </span><span class="mi">1267</span>             <span class="n">threadconns</span><span class="o">.</span><span class="n">current</span> <span class="o">=</span> <span class="n">weakref</span><span class="o">.</span><span class="n">ref</span><span class="p">(</span><span class="n">fairy</span><span class="p">)</span>
+
+<span class="nn">File c:\users\jordan\appdata\local\programs\python\python39\lib\site-packages\sqlalchemy\pool\base.py:711,</span> in <span class="ni">_ConnectionRecord.checkout</span><span class="nt">(cls, pool)</span>
+<span class="g g-Whitespace">    </span><span class="mi">709</span>     <span class="n">rec</span> <span class="o">=</span> <span class="n">cast</span><span class="p">(</span><span class="n">_ConnectionRecord</span><span class="p">,</span> <span class="n">pool</span><span class="o">.</span><span class="n">_do_get</span><span class="p">())</span>
+<span class="g g-Whitespace">    </span><span class="mi">710</span> <span class="k">else</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">711</span>     <span class="n">rec</span> <span class="o">=</span> <span class="n">pool</span><span class="o">.</span><span class="n">_do_get</span><span class="p">()</span>
+<span class="g g-Whitespace">    </span><span class="mi">713</span> <span class="k">try</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">714</span>     <span class="n">dbapi_connection</span> <span class="o">=</span> <span class="n">rec</span><span class="o">.</span><span class="n">get_connection</span><span class="p">()</span>
+
+<span class="nn">File c:\users\jordan\appdata\local\programs\python\python39\lib\site-packages\sqlalchemy\pool\impl.py:178,</span> in <span class="ni">QueuePool._do_get</span><span class="nt">(self)</span>
+<span class="g g-Whitespace">    </span><span class="mi">176</span>     <span class="k">except</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">177</span>         <span class="k">with</span> <span class="n">util</span><span class="o">.</span><span class="n">safe_reraise</span><span class="p">():</span>
+<span class="ne">--&gt; </span><span class="mi">178</span>             <span class="bp">self</span><span class="o">.</span><span class="n">_dec_overflow</span><span class="p">()</span>
+<span class="g g-Whitespace">    </span><span class="mi">179</span>         <span class="k">raise</span>
+<span class="g g-Whitespace">    </span><span class="mi">180</span> <span class="k">else</span><span class="p">:</span>
+
+<span class="nn">File c:\users\jordan\appdata\local\programs\python\python39\lib\site-packages\sqlalchemy\util\langhelpers.py:224,</span> in <span class="ni">safe_reraise.__exit__</span><span class="nt">(self, type_, value, traceback)</span>
+<span class="g g-Whitespace">    </span><span class="mi">222</span>     <span class="k">assert</span> <span class="n">exc_value</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
+<span class="g g-Whitespace">    </span><span class="mi">223</span>     <span class="bp">self</span><span class="o">.</span><span class="n">_exc_info</span> <span class="o">=</span> <span class="kc">None</span>  <span class="c1"># remove potential circular references</span>
+<span class="ne">--&gt; </span><span class="mi">224</span>     <span class="k">raise</span> <span class="n">exc_value</span><span class="o">.</span><span class="n">with_traceback</span><span class="p">(</span><span class="n">exc_tb</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">225</span> <span class="k">else</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">226</span>     <span class="bp">self</span><span class="o">.</span><span class="n">_exc_info</span> <span class="o">=</span> <span class="kc">None</span>  <span class="c1"># remove potential circular references</span>
+
+<span class="nn">File c:\users\jordan\appdata\local\programs\python\python39\lib\site-packages\sqlalchemy\pool\impl.py:175,</span> in <span class="ni">QueuePool._do_get</span><span class="nt">(self)</span>
+<span class="g g-Whitespace">    </span><span class="mi">173</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_inc_overflow</span><span class="p">():</span>
+<span class="g g-Whitespace">    </span><span class="mi">174</span>     <span class="k">try</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">175</span>         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_create_connection</span><span class="p">()</span>
+<span class="g g-Whitespace">    </span><span class="mi">176</span>     <span class="k">except</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">177</span>         <span class="k">with</span> <span class="n">util</span><span class="o">.</span><span class="n">safe_reraise</span><span class="p">():</span>
+
+<span class="nn">File c:\users\jordan\appdata\local\programs\python\python39\lib\site-packages\sqlalchemy\pool\base.py:388,</span> in <span class="ni">Pool._create_connection</span><span class="nt">(self)</span>
+<span class="g g-Whitespace">    </span><span class="mi">385</span> <span class="k">def</span><span class="w"> </span><span class="nf">_create_connection</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ConnectionPoolEntry</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">386</span><span class="w">     </span><span class="sd">&quot;&quot;&quot;Called by subclasses to create a new ConnectionRecord.&quot;&quot;&quot;</span>
+<span class="ne">--&gt; </span><span class="mi">388</span>     <span class="k">return</span> <span class="n">_ConnectionRecord</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+
+<span class="nn">File c:\users\jordan\appdata\local\programs\python\python39\lib\site-packages\sqlalchemy\pool\base.py:673,</span> in <span class="ni">_ConnectionRecord.__init__</span><span class="nt">(self, pool, connect)</span>
+<span class="g g-Whitespace">    </span><span class="mi">671</span> <span class="bp">self</span><span class="o">.</span><span class="n">__pool</span> <span class="o">=</span> <span class="n">pool</span>
+<span class="g g-Whitespace">    </span><span class="mi">672</span> <span class="k">if</span> <span class="n">connect</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">673</span>     <span class="bp">self</span><span class="o">.</span><span class="n">__connect</span><span class="p">()</span>
+<span class="g g-Whitespace">    </span><span class="mi">674</span> <span class="bp">self</span><span class="o">.</span><span class="n">finalize_callback</span> <span class="o">=</span> <span class="n">deque</span><span class="p">()</span>
+
+<span class="nn">File c:\users\jordan\appdata\local\programs\python\python39\lib\site-packages\sqlalchemy\pool\base.py:900,</span> in <span class="ni">_ConnectionRecord.__connect</span><span class="nt">(self)</span>
+<span class="g g-Whitespace">    </span><span class="mi">898</span> <span class="k">except</span> <span class="ne">BaseException</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">899</span>     <span class="k">with</span> <span class="n">util</span><span class="o">.</span><span class="n">safe_reraise</span><span class="p">():</span>
+<span class="ne">--&gt; </span><span class="mi">900</span>         <span class="n">pool</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;Error on connect(): </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">901</span> <span class="k">else</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">902</span>     <span class="c1"># in SQLAlchemy 1.4 the first_connect event is not used by</span>
+<span class="g g-Whitespace">    </span><span class="mi">903</span>     <span class="c1"># the engine, so this will usually not be set</span>
+<span class="g g-Whitespace">    </span><span class="mi">904</span>     <span class="k">if</span> <span class="n">pool</span><span class="o">.</span><span class="n">dispatch</span><span class="o">.</span><span class="n">first_connect</span><span class="p">:</span>
+
+<span class="nn">File c:\users\jordan\appdata\local\programs\python\python39\lib\site-packages\sqlalchemy\util\langhelpers.py:224,</span> in <span class="ni">safe_reraise.__exit__</span><span class="nt">(self, type_, value, traceback)</span>
+<span class="g g-Whitespace">    </span><span class="mi">222</span>     <span class="k">assert</span> <span class="n">exc_value</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
+<span class="g g-Whitespace">    </span><span class="mi">223</span>     <span class="bp">self</span><span class="o">.</span><span class="n">_exc_info</span> <span class="o">=</span> <span class="kc">None</span>  <span class="c1"># remove potential circular references</span>
+<span class="ne">--&gt; </span><span class="mi">224</span>     <span class="k">raise</span> <span class="n">exc_value</span><span class="o">.</span><span class="n">with_traceback</span><span class="p">(</span><span class="n">exc_tb</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">225</span> <span class="k">else</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">226</span>     <span class="bp">self</span><span class="o">.</span><span class="n">_exc_info</span> <span class="o">=</span> <span class="kc">None</span>  <span class="c1"># remove potential circular references</span>
+
+<span class="nn">File c:\users\jordan\appdata\local\programs\python\python39\lib\site-packages\sqlalchemy\pool\base.py:895,</span> in <span class="ni">_ConnectionRecord.__connect</span><span class="nt">(self)</span>
+<span class="g g-Whitespace">    </span><span class="mi">893</span> <span class="k">try</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">894</span>     <span class="bp">self</span><span class="o">.</span><span class="n">starttime</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+<span class="ne">--&gt; </span><span class="mi">895</span>     <span class="bp">self</span><span class="o">.</span><span class="n">dbapi_connection</span> <span class="o">=</span> <span class="n">connection</span> <span class="o">=</span> <span class="n">pool</span><span class="o">.</span><span class="n">_invoke_creator</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">896</span>     <span class="n">pool</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;Created new connection </span><span class="si">%r</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">connection</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">897</span>     <span class="bp">self</span><span class="o">.</span><span class="n">fresh</span> <span class="o">=</span> <span class="kc">True</span>
+
+<span class="nn">File c:\users\jordan\appdata\local\programs\python\python39\lib\site-packages\sqlalchemy\engine\create.py:661,</span> in <span class="ni">create_engine.&lt;locals&gt;.connect</span><span class="nt">(connection_record)</span>
+<span class="g g-Whitespace">    </span><span class="mi">658</span>         <span class="k">if</span> <span class="n">connection</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">659</span>             <span class="k">return</span> <span class="n">connection</span>
+<span class="ne">--&gt; </span><span class="mi">661</span> <span class="k">return</span> <span class="n">dialect</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="o">*</span><span class="n">cargs</span><span class="p">,</span> <span class="o">**</span><span class="n">cparams</span><span class="p">)</span>
+
+<span class="nn">File c:\users\jordan\appdata\local\programs\python\python39\lib\site-packages\sqlalchemy\engine\default.py:629,</span> in <span class="ni">DefaultDialect.connect</span><span class="nt">(self, *cargs, **cparams)</span>
+<span class="g g-Whitespace">    </span><span class="mi">627</span> <span class="k">def</span><span class="w"> </span><span class="nf">connect</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">cargs</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="o">**</span><span class="n">cparams</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DBAPIConnection</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">628</span>     <span class="c1"># inherits the docstring from interfaces.Dialect.connect</span>
+<span class="ne">--&gt; </span><span class="mi">629</span>     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">loaded_dbapi</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="o">*</span><span class="n">cargs</span><span class="p">,</span> <span class="o">**</span><span class="n">cparams</span><span class="p">)</span>
+
+<span class="nn">File c:\users\jordan\appdata\local\programs\python\python39\lib\site-packages\pymysql\connections.py:365,</span> in <span class="ni">Connection.__init__</span><span class="nt">(self, user, password, host, database, unix_socket, port, charset, collation, sql_mode, read_default_file, conv, use_unicode, client_flag, cursorclass, init_command, connect_timeout, read_default_group, autocommit, local_infile, max_allowed_packet, defer_connect, auth_plugin_map, read_timeout, write_timeout, bind_address, binary_prefix, program_name, server_public_key, ssl, ssl_ca, ssl_cert, ssl_disabled, ssl_key, ssl_key_password, ssl_verify_cert, ssl_verify_identity, compress, named_pipe, passwd, db)</span>
+<span class="g g-Whitespace">    </span><span class="mi">363</span>     <span class="bp">self</span><span class="o">.</span><span class="n">_sock</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="g g-Whitespace">    </span><span class="mi">364</span> <span class="k">else</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">365</span>     <span class="bp">self</span><span class="o">.</span><span class="n">connect</span><span class="p">()</span>
+
+<span class="nn">File c:\users\jordan\appdata\local\programs\python\python39\lib\site-packages\pymysql\connections.py:723,</span> in <span class="ni">Connection.connect</span><span class="nt">(self, sock)</span>
+<span class="g g-Whitespace">    </span><span class="mi">721</span>     <span class="k">if</span> <span class="n">DEBUG</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">722</span>         <span class="nb">print</span><span class="p">(</span><span class="n">exc</span><span class="o">.</span><span class="n">traceback</span><span class="p">)</span>
+<span class="ne">--&gt; </span><span class="mi">723</span>     <span class="k">raise</span> <span class="n">exc</span>
+<span class="g g-Whitespace">    </span><span class="mi">725</span> <span class="c1"># If e is neither DatabaseError or IOError, It&#39;s a bug.</span>
+<span class="g g-Whitespace">    </span><span class="mi">726</span> <span class="c1"># But raising AssertionError hides original error.</span>
+<span class="g g-Whitespace">    </span><span class="mi">727</span> <span class="c1"># So just reraise it.</span>
+<span class="g g-Whitespace">    </span><span class="mi">728</span> <span class="k">raise</span>
+
+<span class="ne">OperationalError</span>: (pymysql.err.OperationalError) (2003, &quot;Can&#39;t connect to MySQL server on &#39;localhost&#39; ([WinError 10061] No connection could be made because the target machine actively refused it)&quot;)
+<span class="p">(</span><span class="n">Background</span> <span class="n">on</span> <span class="n">this</span> <span class="n">error</span> <span class="n">at</span><span class="p">:</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">sqlalche</span><span class="o">.</span><span class="n">me</span><span class="o">/</span><span class="n">e</span><span class="o">/</span><span class="mi">20</span><span class="o">/</span><span class="n">e3q8</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>id_protein</th>
-      <th>feature1</th>
-      <th>feature2</th>
-      <th>feature3</th>
-      <th>feature4</th>
-      <th>feature5</th>
-      <th>feature6</th>
-      <th>feature7</th>
-      <th>class_label</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>AAS_ECOLI</td>
-      <td>0.44</td>
-      <td>0.52</td>
-      <td>0.48</td>
-      <td>0.5</td>
-      <td>0.43</td>
-      <td>0.47</td>
-      <td>0.54</td>
-      <td>im</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>AAT_ECOLI</td>
-      <td>0.49</td>
-      <td>0.29</td>
-      <td>0.48</td>
-      <td>0.5</td>
-      <td>0.56</td>
-      <td>0.24</td>
-      <td>0.35</td>
-      <td>cp</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>ACEA_ECOLI</td>
-      <td>0.07</td>
-      <td>0.40</td>
-      <td>0.48</td>
-      <td>0.5</td>
-      <td>0.54</td>
-      <td>0.35</td>
-      <td>0.44</td>
-      <td>cp</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>ACEK_ECOLI</td>
-      <td>0.56</td>
-      <td>0.40</td>
-      <td>0.48</td>
-      <td>0.5</td>
-      <td>0.49</td>
-      <td>0.37</td>
-      <td>0.46</td>
-      <td>cp</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>ACKA_ECOLI</td>
-      <td>0.59</td>
-      <td>0.49</td>
-      <td>0.48</td>
-      <td>0.5</td>
-      <td>0.52</td>
-      <td>0.45</td>
-      <td>0.36</td>
-      <td>cp</td>
-    </tr>
-    <tr>
-      <th>...</th>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-    </tr>
-    <tr>
-      <th>332</th>
-      <td>XYLA_ECOLI</td>
-      <td>0.16</td>
-      <td>0.43</td>
-      <td>0.48</td>
-      <td>0.5</td>
-      <td>0.54</td>
-      <td>0.27</td>
-      <td>0.37</td>
-      <td>cp</td>
-    </tr>
-    <tr>
-      <th>333</th>
-      <td>XYLE_ECOLI</td>
-      <td>0.69</td>
-      <td>0.39</td>
-      <td>0.48</td>
-      <td>0.5</td>
-      <td>0.57</td>
-      <td>0.76</td>
-      <td>0.79</td>
-      <td>im</td>
-    </tr>
-    <tr>
-      <th>334</th>
-      <td>XYLF_ECOLI</td>
-      <td>0.59</td>
-      <td>0.61</td>
-      <td>0.48</td>
-      <td>0.5</td>
-      <td>0.42</td>
-      <td>0.42</td>
-      <td>0.37</td>
-      <td>pp</td>
-    </tr>
-    <tr>
-      <th>335</th>
-      <td>YCEE_ECOLI</td>
-      <td>0.52</td>
-      <td>0.54</td>
-      <td>0.48</td>
-      <td>0.5</td>
-      <td>0.62</td>
-      <td>0.76</td>
-      <td>0.79</td>
-      <td>im</td>
-    </tr>
-    <tr>
-      <th>336</th>
-      <td>YTFQ_ECOLI</td>
-      <td>0.74</td>
-      <td>0.74</td>
-      <td>0.48</td>
-      <td>0.5</td>
-      <td>0.31</td>
-      <td>0.53</td>
-      <td>0.52</td>
-      <td>pp</td>
-    </tr>
-  </tbody>
-</table>
-<p>337 rows × 9 columns</p>
-</div></div></div>
+</div>
 </div>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="hasil-data-setelah-dilakukan-oversampling-menggunakan-adasyn">
@@ -754,63 +905,63 @@ document.write(`
       <td>...</td>
     </tr>
     <tr>
-      <th>1143</th>
-      <td>0.506571</td>
-      <td>0.423285</td>
+      <th>1150</th>
+      <td>0.369297</td>
+      <td>0.510000</td>
       <td>0.48</td>
       <td>0.5</td>
-      <td>0.536571</td>
-      <td>0.880072</td>
-      <td>0.866715</td>
+      <td>0.472885</td>
+      <td>0.635531</td>
+      <td>0.420239</td>
       <td>im</td>
     </tr>
     <tr>
-      <th>1144</th>
-      <td>0.559641</td>
-      <td>0.473730</td>
+      <th>1151</th>
+      <td>0.536726</td>
+      <td>0.439469</td>
       <td>0.48</td>
       <td>0.5</td>
-      <td>0.108179</td>
-      <td>0.809326</td>
-      <td>0.409528</td>
+      <td>0.323629</td>
+      <td>0.793894</td>
+      <td>0.619204</td>
       <td>im</td>
     </tr>
     <tr>
-      <th>1145</th>
-      <td>0.610544</td>
-      <td>0.728383</td>
+      <th>1152</th>
+      <td>0.599889</td>
+      <td>0.729675</td>
       <td>0.48</td>
       <td>0.5</td>
-      <td>0.621265</td>
-      <td>0.734323</td>
-      <td>0.624692</td>
+      <td>0.636236</td>
+      <td>0.741292</td>
+      <td>0.677314</td>
       <td>im</td>
     </tr>
     <tr>
-      <th>1146</th>
-      <td>0.548316</td>
-      <td>0.425421</td>
+      <th>1153</th>
+      <td>0.631355</td>
+      <td>0.418808</td>
       <td>0.48</td>
       <td>0.5</td>
-      <td>0.490303</td>
-      <td>0.760000</td>
-      <td>0.790000</td>
+      <td>0.587491</td>
+      <td>0.741480</td>
+      <td>0.773538</td>
       <td>im</td>
     </tr>
     <tr>
-      <th>1147</th>
-      <td>0.559124</td>
-      <td>0.551178</td>
+      <th>1154</th>
+      <td>0.507408</td>
+      <td>0.534004</td>
       <td>0.48</td>
       <td>0.5</td>
-      <td>0.580876</td>
-      <td>0.782357</td>
-      <td>0.806767</td>
+      <td>0.612805</td>
+      <td>0.761799</td>
+      <td>0.791799</td>
       <td>im</td>
     </tr>
   </tbody>
 </table>
-<p>1148 rows × 8 columns</p>
+<p>1155 rows × 8 columns</p>
 </div></div></div>
 </div>
 </section>
@@ -931,61 +1082,61 @@ document.write(`
     <tr>
       <th>1282</th>
       <td>P1283</td>
-      <td>0.738583</td>
-      <td>0.814333</td>
+      <td>0.690914</td>
+      <td>0.646344</td>
       <td>0.48</td>
       <td>0.5</td>
-      <td>0.502751</td>
-      <td>0.492834</td>
-      <td>0.395832</td>
+      <td>0.623602</td>
+      <td>0.483656</td>
+      <td>0.411828</td>
       <td>pp</td>
     </tr>
     <tr>
       <th>1283</th>
       <td>P1284</td>
-      <td>0.652530</td>
-      <td>0.571265</td>
+      <td>0.676160</td>
+      <td>0.622320</td>
       <td>0.48</td>
       <td>0.5</td>
-      <td>0.469367</td>
-      <td>0.468102</td>
-      <td>0.510633</td>
+      <td>0.546959</td>
+      <td>0.403879</td>
+      <td>0.389240</td>
       <td>pp</td>
     </tr>
     <tr>
       <th>1284</th>
       <td>P1285</td>
-      <td>0.650518</td>
-      <td>0.587845</td>
+      <td>0.682753</td>
+      <td>0.672065</td>
       <td>0.48</td>
       <td>0.5</td>
-      <td>0.456207</td>
-      <td>0.373793</td>
-      <td>0.355689</td>
+      <td>0.488279</td>
+      <td>0.399656</td>
+      <td>0.341721</td>
       <td>pp</td>
     </tr>
     <tr>
       <th>1285</th>
       <td>P1286</td>
-      <td>0.643747</td>
-      <td>0.605625</td>
+      <td>0.733148</td>
+      <td>0.792592</td>
       <td>0.48</td>
       <td>0.5</td>
-      <td>0.479372</td>
-      <td>0.378751</td>
-      <td>0.380000</td>
+      <td>0.551669</td>
+      <td>0.503704</td>
+      <td>0.341479</td>
       <td>pp</td>
     </tr>
     <tr>
       <th>1286</th>
       <td>P1287</td>
-      <td>0.740000</td>
-      <td>0.490000</td>
+      <td>0.730000</td>
+      <td>0.780000</td>
       <td>0.48</td>
       <td>0.5</td>
-      <td>0.420000</td>
-      <td>0.540000</td>
-      <td>0.360000</td>
+      <td>0.580000</td>
+      <td>0.510000</td>
+      <td>0.310000</td>
       <td>pp</td>
     </tr>
   </tbody>
@@ -1078,8 +1229,8 @@ Classification Report:
 weighted avg       0.91      0.91      0.90        68
 </pre></div>
 </div>
-<img alt="../_images/3fe23b78749367781f173c3f9d258ce6cdd4ed657dc259dc773386c3645d5ede.png" src="../_images/3fe23b78749367781f173c3f9d258ce6cdd4ed657dc259dc773386c3645d5ede.png" />
-<img alt="../_images/4b0b3f3a746772a28e77d78635d877cc684d0d7835dac4721e1f6c0f7bd815e4.png" src="../_images/4b0b3f3a746772a28e77d78635d877cc684d0d7835dac4721e1f6c0f7bd815e4.png" />
+<img alt="../_images/6cd24cece576136c25c6fcd1aab85691ffe1509b738a5afedfc50b30a9e30f8c.png" src="../_images/6cd24cece576136c25c6fcd1aab85691ffe1509b738a5afedfc50b30a9e30f8c.png" />
+<img alt="../_images/8fde08246e147f784df3d1c831839c08a6a21bc7ed9bcde9032043add1c18e1c.png" src="../_images/8fde08246e147f784df3d1c831839c08a6a21bc7ed9bcde9032043add1c18e1c.png" />
 </div>
 </div>
 </section>
@@ -1152,17 +1303,17 @@ weighted avg       0.91      0.91      0.90        68
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>accuracy_score : 0.9767441860465116
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>accuracy_score : 0.9806201550387597
 Classification Report:
                precision    recall  f1-score   support
 
  class_label       1.00      1.00      1.00        27
           cp       0.97      0.97      0.97        31
-          im       0.94      0.91      0.93        34
+          im       0.94      0.94      0.94        34
          imL       1.00      1.00      1.00        35
          imS       1.00      1.00      1.00        26
          imU       0.96      0.96      0.96        28
-          om       0.95      1.00      0.98        21
+          om       1.00      1.00      1.00        21
          omL       1.00      1.00      1.00        24
           pp       0.97      0.97      0.97        32
 
@@ -1171,8 +1322,8 @@ Classification Report:
 weighted avg       0.98      0.98      0.98       258
 </pre></div>
 </div>
-<img alt="../_images/a75f2caa09734a00b2cb16b69f90bc3fa2d5d4e4b13a260db72e93d12a25cd05.png" src="../_images/a75f2caa09734a00b2cb16b69f90bc3fa2d5d4e4b13a260db72e93d12a25cd05.png" />
-<img alt="../_images/4099db381bfda7dfd8191f81bf2102570c3f93f36ab44580b52d56056b7c1eeb.png" src="../_images/4099db381bfda7dfd8191f81bf2102570c3f93f36ab44580b52d56056b7c1eeb.png" />
+<img alt="../_images/16974876171abf7603b92c877914097ead3fe448a58f52910846549c4fc50dde.png" src="../_images/16974876171abf7603b92c877914097ead3fe448a58f52910846549c4fc50dde.png" />
+<img alt="../_images/5d830ba7135d18001eba90bdba4fc7fcea24ce2390e4b6d1f22181e24ca3adc8.png" src="../_images/5d830ba7135d18001eba90bdba4fc7fcea24ce2390e4b6d1f22181e24ca3adc8.png" />
 </div>
 </div>
 <p>Hasil Akurasi Klasifikasi Data Ecoli yang sudah di Oversampling menggunakan ADASYN</p>
@@ -1242,26 +1393,26 @@ weighted avg       0.98      0.98      0.98       258
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>accuracy_score : 0.9521739130434783
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>accuracy_score : 0.9653679653679653
 Classification Report:
                precision    recall  f1-score   support
 
-          cp       0.94      0.97      0.95        30
-          im       0.90      0.81      0.85        32
-         imL       1.00      1.00      1.00        28
-         imS       0.97      1.00      0.98        30
-         imU       0.88      0.91      0.90        33
-          om       1.00      1.00      1.00        32
-         omL       1.00      1.00      1.00        23
-          pp       0.95      0.95      0.95        22
+          cp       0.93      0.97      0.95        29
+          im       1.00      0.90      0.95        31
+         imL       1.00      1.00      1.00        31
+         imS       1.00      1.00      1.00        32
+         imU       0.92      1.00      0.96        35
+          om       1.00      0.93      0.97        30
+         omL       1.00      1.00      1.00        24
+          pp       0.85      0.89      0.87        19
 
-    accuracy                           0.95       230
-   macro avg       0.95      0.96      0.95       230
-weighted avg       0.95      0.95      0.95       230
+    accuracy                           0.97       231
+   macro avg       0.96      0.96      0.96       231
+weighted avg       0.97      0.97      0.97       231
 </pre></div>
 </div>
-<img alt="../_images/efc656646f0d50d601f5043d22265518369ac1816ec9258cd152bd38cbd38f79.png" src="../_images/efc656646f0d50d601f5043d22265518369ac1816ec9258cd152bd38cbd38f79.png" />
-<img alt="../_images/17a0e4d13bec06a7c1fb6c9c4a89e3311e196ed1645179fd15177a00096de19c.png" src="../_images/17a0e4d13bec06a7c1fb6c9c4a89e3311e196ed1645179fd15177a00096de19c.png" />
+<img alt="../_images/d7f279dc79936aed24810be69a9ee55ba47cbab596ede741474c7fb10b555469.png" src="../_images/d7f279dc79936aed24810be69a9ee55ba47cbab596ede741474c7fb10b555469.png" />
+<img alt="../_images/73bacc27ba16d537bca04d6e2d2b0e5d501e1b02c63d0caaa665700c4ca2a1bf.png" src="../_images/73bacc27ba16d537bca04d6e2d2b0e5d501e1b02c63d0caaa665700c4ca2a1bf.png" />
 </div>
 </div>
 </section>
@@ -1336,8 +1487,8 @@ weighted avg       0.95      0.95      0.95       230
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/7043baaf6038d0eab205909fbb56ce4263cd805748809f739207746083877d64.png" src="../_images/7043baaf6038d0eab205909fbb56ce4263cd805748809f739207746083877d64.png" />
-<img alt="../_images/76c103ee1afa91c80ec2ed76383641acf3f52ca17724c95677dee715fd59652f.png" src="../_images/76c103ee1afa91c80ec2ed76383641acf3f52ca17724c95677dee715fd59652f.png" />
+<img alt="../_images/33ccf30d024e5c45a6e823c49f0318f9cb94414e4eb03599ab5fa911dcdec7d7.png" src="../_images/33ccf30d024e5c45a6e823c49f0318f9cb94414e4eb03599ab5fa911dcdec7d7.png" />
+<img alt="../_images/b3962b3f604c56b240ab941d7513270bc5b3bca9fa414411a458368b9b25fa6e.png" src="../_images/b3962b3f604c56b240ab941d7513270bc5b3bca9fa414411a458368b9b25fa6e.png" />
 </div>
 </div>
 </section>

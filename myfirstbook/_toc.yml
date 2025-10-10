@@ -15,3 +15,4 @@ chapters:
   - file: balance/Bagging_Classifier
   - file: balance/decision_tre
   - file: balance/perbandingan
+  - file: balance/Preprocessing_data_ecoli
