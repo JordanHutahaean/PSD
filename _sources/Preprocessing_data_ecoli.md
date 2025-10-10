@@ -39,3 +39,11 @@ lalu kemudia kita execute
 tambahkan Node DB Reader untuk membaca data di table
 
 ![connector](cone4.png)
+
+
+
+# Melihat Missing Value
+Untuk menangani missing value, kita perlu mengetahui terlebih dahulu apakah ada data yang hilang atau tidak dengan menggunakan node Statistics dan memvisualkannya menggunakan node Bar Chart. Node Statistics akan menampilkan informasi ringkas seperti jumlah data kosong, nilai minimum, maksimum, dan rata-rata. Dengan bantuan Bar Chart, kita dapat melihat distribusi data secara visual sehingga lebih mudah dalam mengidentifikasi kolom mana yang memiliki nilai hilang
+
+
+![connector](cone5.png)
