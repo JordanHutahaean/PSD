@@ -9,3 +9,11 @@ Ini adalah tahapan preprocessing data Missing Value, Outlier Detection, dan Bala
 
 Koneksi Database
 Buka aplikasi Knime, kemudian cari node bernama PostgreSQL Connector, kemudian drag and drop ke bagian field di kanan. Node ini berfungsi untuk menghubungkan Knime dengan database PostgreSQL agar data dapat diakses dan diolah secara langsung. Pastikan koneksi ke server database sudah aktif sebelum melanjutkan ke tahap berikutnya.
+
+
+![connector](connector.png)
+
+
+
+setelah itu klik dua kali bagian node nya dan setting hostname, database, username, password dll
+
