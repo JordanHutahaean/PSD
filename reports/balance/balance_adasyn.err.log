@@ -22,6 +22,15 @@ Traceback (most recent call last):
     raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
 nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
 ------------------
+import pandas as pd
+import matplotlib.pyplot as plt
+import numpy as np
+from sklearn.decomposition import PCA
+from sqlalchemy import create_engine
+from collections import Counter
+from imblearn.over_sampling import ADASYN  # 🔹 ganti ke ADASYN
+
+# === 1. Koneksi ke MySQL XAMPP ===
 engine = create_engine("mysql+pymysql://root:@localhost:3306/ecoli")
 
 # ambil data dari tabel
@@ -29,8 +38,64 @@ df = pd.read_sql("SELECT * FROM ecoli;", engine)
 class_counts = df['class_label'].value_counts().sort_index()
 nt = df.drop(columns=["class_label", "id_protein"])
 ns = df["class_label"]
-print("\nInfo Dataset:")
-df
+
+# ==== PCA data asli ====
+
+pca = PCA(n_components=2)
+X_pca = pca.fit_transform(nt)
+
+plt.figure(figsize=(8,6))
+for label in np.unique(ns):
+    idx = (ns == label)
+    plt.scatter(X_pca[idx,0], X_pca[idx,1], label=label, alpha=0.7)
+plt.title("PCA Scatter Plot (Original Data)")
+plt.xlabel("PC1"); plt.ylabel("PC2")
+plt.legend(); plt.show()
+
+# ==== FIX DATA KOTOR ====
+mask = ns != "class_label"
+nt = nt[mask]
+ns = ns[mask]
+
+temp = sorted(class_counts)
+temp.pop(0)
+
+for i in range(0, 7):
+    n = temp[i] - 1
+
+    nt, ns = ADASYN(n_neighbors=n, sampling_strategy='minority').fit_resample(nt, ns)
+
+df_resampled = pd.DataFrame(nt)  
+df_resampled["class_label"] = ns  
+
+df_resampled.to_csv("hasil_oversampling_ADASYN.csv", index=False)
+
+print(f"{sorted(Counter(ns).items())}")
+
+# === 2. PCA ===
+pca = PCA(n_components=2)     
+principalComponents = pca.fit_transform(nt)
+principalDf = pd.DataFrame(data=principalComponents, columns=['principal component 1', 'principal component 2'])
+finalDf = pd.concat([principalDf, ns.reset_index(drop=True)], axis=1)
+print(finalDf)
+# === 3. Visualisasi ===
+fig, ax = plt.subplots(figsize=(10, 6))
+targets = sorted(finalDf['class_label'].unique())
+colors = plt.cm.get_cmap('tab10', len(targets))
+for i, target in enumerate(targets):
+    indicesToKeep = finalDf['class_label'] == target
+    ax.scatter(finalDf.loc[indicesToKeep, 'principal component 1'], 
+               finalDf.loc[indicesToKeep, 'principal component 2'], 
+               c=[colors(i)], s=50, label=target)
+ax.legend()
+ax.grid()
+plt.title('PCA of Ecoli Dataset after ADASYN Oversampling')
+plt.xlabel('Principal Component 1')
+plt.ylabel('Principal Component 2')
+
+plt.show()
+
+
 ------------------
 
 
@@ -158,12 +223,12 @@ File [1;32mc:\users\jordan\appdata\local\programs\python\python39\lib\site-pack
 The above exception was the direct cause of the following exception:
 
 [1;31mOperationalError[0m                          Traceback (most recent call last)
-Cell [1;32mIn[2], line 4[0m
-[0;32m      1[0m engine [38;5;241m=[39m create_engine([38;5;124m"[39m[38;5;124mmysql+pymysql://root:@localhost:3306/ecoli[39m[38;5;124m"[39m)
-[0;32m      3[0m [38;5;66;03m# ambil data dari tabel[39;00m
-[1;32m----> 4[0m df [38;5;241m=[39m [43mpd[49m[38;5;241;43m.[39;49m[43mread_sql[49m[43m([49m[38;5;124;43m"[39;49m[38;5;124;43mSELECT * FROM ecoli;[39;49m[38;5;124;43m"[39;49m[43m,[49m[43m [49m[43mengine[49m[43m)[49m
-[0;32m      5[0m class_counts [38;5;241m=[39m df[[38;5;124m'[39m[38;5;124mclass_label[39m[38;5;124m'[39m][38;5;241m.[39mvalue_counts()[38;5;241m.[39msort_index()
-[0;32m      6[0m nt [38;5;241m=[39m df[38;5;241m.[39mdrop(columns[38;5;241m=[39m[[38;5;124m"[39m[38;5;124mclass_label[39m[38;5;124m"[39m, [38;5;124m"[39m[38;5;124mid_protein[39m[38;5;124m"[39m])
+Cell [1;32mIn[1], line 13[0m
+[0;32m     10[0m engine [38;5;241m=[39m create_engine([38;5;124m"[39m[38;5;124mmysql+pymysql://root:@localhost:3306/ecoli[39m[38;5;124m"[39m)
+[0;32m     12[0m [38;5;66;03m# ambil data dari tabel[39;00m
+[1;32m---> 13[0m df [38;5;241m=[39m [43mpd[49m[38;5;241;43m.[39;49m[43mread_sql[49m[43m([49m[38;5;124;43m"[39;49m[38;5;124;43mSELECT * FROM ecoli;[39;49m[38;5;124;43m"[39;49m[43m,[49m[43m [49m[43mengine[49m[43m)[49m
+[0;32m     14[0m class_counts [38;5;241m=[39m df[[38;5;124m'[39m[38;5;124mclass_label[39m[38;5;124m'[39m][38;5;241m.[39mvalue_counts()[38;5;241m.[39msort_index()
+[0;32m     15[0m nt [38;5;241m=[39m df[38;5;241m.[39mdrop(columns[38;5;241m=[39m[[38;5;124m"[39m[38;5;124mclass_label[39m[38;5;124m"[39m, [38;5;124m"[39m[38;5;124mid_protein[39m[38;5;124m"[39m])
 
 File [1;32mc:\users\jordan\appdata\local\programs\python\python39\lib\site-packages\pandas\io\sql.py:652[0m, in [0;36mread_sql[1;34m(sql, con, index_col, coerce_float, params, parse_dates, columns, chunksize, dtype_backend, dtype)[0m
 [0;32m    649[0m     dtype_backend [38;5;241m=[39m [38;5;124m"[39m[38;5;124mnumpy[39m[38;5;124m"[39m  [38;5;66;03m# type: ignore[assignment][39;00m

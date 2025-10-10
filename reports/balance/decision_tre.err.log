@@ -22,15 +22,95 @@ Traceback (most recent call last):
     raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
 nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
 ------------------
+
+
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+from sqlalchemy import create_engine
+from sklearn.model_selection import train_test_split
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.ensemble import BaggingClassifier
+from sklearn.metrics import accuracy_score, classification_report, confusion_matrix
+
+# Koneksi ke MySQL
 engine = create_engine("mysql+pymysql://root:@localhost:3306/ecoli")
 
-# ambil data dari tabel
-df = pd.read_sql("SELECT * FROM ecoli;", engine)
-class_counts = df['class_label'].value_counts().sort_index()
-nt = df.drop(columns=["class_label", "id_protein"])
-ns = df["class_label"]
-print("\nInfo Dataset:")
-df
+# Query data
+query = """
+SELECT feature1, feature2, feature3, feature4, feature5, feature6, feature7, class_label
+FROM ecoli
+"""
+df = pd.read_sql(query, engine)
+
+# Pisahkan fitur dan target
+X = df.drop(columns=["class_label"])  # hapus kolom target
+y = df["class_label"]                 # target yang benar
+
+# Split dataset
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=0.2, random_state=42
+)
+
+# Model Decision Tree + Bagging
+model = DecisionTreeClassifier(random_state=42)
+bagging = BaggingClassifier(estimator=model, n_estimators=100, random_state=42)
+bagging.fit(X_train, y_train)
+
+# Prediksi
+prediksi = bagging.predict(X_test)
+
+# Akurasi
+akurasi = accuracy_score(y_test, prediksi)
+print("Akurasi:", akurasi)
+print("Classification Report:\n", classification_report(y_test, prediksi, zero_division=0))
+
+# Confusion Matrix
+labels = np.unique(np.concatenate([y_train, y_test]))
+cm = confusion_matrix(y_test, prediksi, labels=labels)
+
+plt.figure(figsize=(8,6))
+sns.heatmap(cm, annot=True, fmt="d", cmap="Blues", 
+            xticklabels=labels, yticklabels=labels)
+plt.xlabel("Prediksi")
+plt.ylabel("Fakta")
+plt.title("Confusion Matrix (Semua Kelas)")
+plt.show()
+
+# Classification Report ke DataFrame
+all_labels = np.unique(np.concatenate([y_train, y_test]))
+report = classification_report(
+    y_test, prediksi, labels=all_labels,
+    output_dict=True, zero_division=0
+)
+df_report = pd.DataFrame(report).transpose()
+
+metrics_df = df_report[['precision','recall','f1-score']].iloc[:-3]
+
+# Diagram batang metrics
+ax = metrics_df.plot(
+    kind='bar', 
+    figsize=(12,6), 
+    color=["#a01806", "#3c03a7", "#d4008e"], 
+    edgecolor='black'
+)
+
+plt.title("Classification Report Metrics (Semua kelas)")
+plt.ylabel("Score")
+plt.ylim(0,1.05) 
+plt.xticks(rotation=45)
+
+# Annotasi nilai di batang
+for p in ax.patches:
+    value = f"{p.get_height():.2f}"
+    x = p.get_x() + p.get_width()/2
+    y = p.get_height()
+    ax.annotate(value, (x, y), ha='center', va='bottom', fontsize=8, rotation=0)
+
+plt.legend(title="Metrics")
+plt.tight_layout()
+plt.show()
 ------------------
 
 
@@ -158,12 +238,15 @@ File [1;32mc:\users\jordan\appdata\local\programs\python\python39\lib\site-pack
 The above exception was the direct cause of the following exception:
 
 [1;31mOperationalError[0m                          Traceback (most recent call last)
-Cell [1;32mIn[2], line 4[0m
-[0;32m      1[0m engine [38;5;241m=[39m create_engine([38;5;124m"[39m[38;5;124mmysql+pymysql://root:@localhost:3306/ecoli[39m[38;5;124m"[39m)
-[0;32m      3[0m [38;5;66;03m# ambil data dari tabel[39;00m
-[1;32m----> 4[0m df [38;5;241m=[39m [43mpd[49m[38;5;241;43m.[39;49m[43mread_sql[49m[43m([49m[38;5;124;43m"[39;49m[38;5;124;43mSELECT * FROM ecoli;[39;49m[38;5;124;43m"[39;49m[43m,[49m[43m [49m[43mengine[49m[43m)[49m
-[0;32m      5[0m class_counts [38;5;241m=[39m df[[38;5;124m'[39m[38;5;124mclass_label[39m[38;5;124m'[39m][38;5;241m.[39mvalue_counts()[38;5;241m.[39msort_index()
-[0;32m      6[0m nt [38;5;241m=[39m df[38;5;241m.[39mdrop(columns[38;5;241m=[39m[[38;5;124m"[39m[38;5;124mclass_label[39m[38;5;124m"[39m, [38;5;124m"[39m[38;5;124mid_protein[39m[38;5;124m"[39m])
+Cell [1;32mIn[2], line 19[0m
+[0;32m     14[0m [38;5;66;03m# Query data[39;00m
+[0;32m     15[0m query [38;5;241m=[39m [38;5;124m"""[39m
+[0;32m     16[0m [38;5;124mSELECT feature1, feature2, feature3, feature4, feature5, feature6, feature7, class_label[39m
+[0;32m     17[0m [38;5;124mFROM ecoli[39m
+[0;32m     18[0m [38;5;124m"""[39m
+[1;32m---> 19[0m df [38;5;241m=[39m [43mpd[49m[38;5;241;43m.[39;49m[43mread_sql[49m[43m([49m[43mquery[49m[43m,[49m[43m [49m[43mengine[49m[43m)[49m
+[0;32m     21[0m [38;5;66;03m# Pisahkan fitur dan target[39;00m
+[0;32m     22[0m X [38;5;241m=[39m df[38;5;241m.[39mdrop(columns[38;5;241m=[39m[[38;5;124m"[39m[38;5;124mclass_label[39m[38;5;124m"[39m])  [38;5;66;03m# hapus kolom target[39;00m
 
 File [1;32mc:\users\jordan\appdata\local\programs\python\python39\lib\site-packages\pandas\io\sql.py:652[0m, in [0;36mread_sql[1;34m(sql, con, index_col, coerce_float, params, parse_dates, columns, chunksize, dtype_backend, dtype)[0m
 [0;32m    649[0m     dtype_backend [38;5;241m=[39m [38;5;124m"[39m[38;5;124mnumpy[39m[38;5;124m"[39m  [38;5;66;03m# type: ignore[assignment][39;00m

@@ -22,15 +22,113 @@ Traceback (most recent call last):
     raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
 nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
 ------------------
+import pandas as pd
+import matplotlib.pyplot as plt
+import numpy as np
+from sklearn.decomposition import PCA
+from sklearn.neighbors import NearestNeighbors
+from sqlalchemy import create_engine
+from collections import Counter
+
+# === 1. Koneksi ke MySQL XAMPP ===
 engine = create_engine("mysql+pymysql://root:@localhost:3306/ecoli")
 
 # ambil data dari tabel
 df = pd.read_sql("SELECT * FROM ecoli;", engine)
-class_counts = df['class_label'].value_counts().sort_index()
-nt = df.drop(columns=["class_label", "id_protein"])
-ns = df["class_label"]
-print("\nInfo Dataset:")
-df
+
+print("Jumlah baris:", len(df))
+print(df.head())
+
+# === 3. Pisahkan fitur & label ===
+X = df[[f"feature{i}" for i in range(1, 8)]].values
+y = df["class_label"].values
+
+# === 4. PCA untuk data asli ===
+pca = PCA(n_components=2)
+X_pca = pca.fit_transform(X)
+
+plt.figure(figsize=(8,6))
+for label in np.unique(y):
+    idx = (y == label)
+    plt.scatter(X_pca[idx,0], X_pca[idx,1], label=label, alpha=0.7)
+plt.title("PCA Scatter Plot (Original Data)")
+plt.xlabel("PC1"); plt.ylabel("PC2")
+plt.legend(); plt.show()
+
+# === 5. Custom SMOTE Oversampling ===
+class_counts = Counter(y)
+print("Distribusi kelas sebelum balancing:", class_counts)
+
+max_class_size = max(class_counts.values())
+X_res, y_res = [], []
+
+k_neighbors = 5  # jumlah tetangga untuk interpolasi
+
+for cls in np.unique(y):
+    X_cls = X[y == cls]
+    n_samples = len(X_cls)
+    n_to_add = max_class_size - n_samples
+
+    X_res.append(X_cls)
+    y_res.extend([cls] * n_samples)
+
+    if n_to_add > 0:
+        # Cari k tetangga terdekat
+        nn = NearestNeighbors(n_neighbors=min(k_neighbors, len(X_cls)))
+        nn.fit(X_cls)
+
+        synthetic_samples = []
+        for _ in range(n_to_add):
+            i = np.random.randint(0, len(X_cls))
+            x_i = X_cls[i].reshape(1, -1)
+
+            neighbors = nn.kneighbors(x_i, return_distance=False)
+            neighbor_idx = np.random.choice(neighbors[0])
+            x_neighbor = X_cls[neighbor_idx]
+
+            # Interpolasi linear (SMOTE)
+            lam = np.random.rand()
+            x_new = x_i + lam * (x_neighbor - x_i)
+            synthetic_samples.append(x_new.flatten())
+
+        X_res.append(np.array(synthetic_samples))
+        y_res.extend([cls] * n_to_add)
+
+X_res = np.vstack(X_res)
+y_res = np.array(y_res)
+
+print("Distribusi kelas setelah balancing:", Counter(y_res))
+
+# === 6. Tandai data sintetis ===
+X_rounded = np.round(X, 5)
+X_res_rounded = np.round(X_res, 5)
+synthetic_mask = [tuple(x) not in set(map(tuple, X_rounded)) for x in X_res_rounded]
+
+# === 7. PCA untuk hasil balancing ===
+X_res_pca = pca.transform(X_res)
+
+plt.figure(figsize=(8,6))
+for label in np.unique(y_res):
+    idx = (y_res == label)
+    plt.scatter(X_res_pca[idx,0], X_res_pca[idx,1], label=label, alpha=0.5)
+
+plt.scatter(X_res_pca[synthetic_mask,0], X_res_pca[synthetic_mask,1],
+            c="red", marker="x", label="Synthetic Data")
+
+plt.title("PCA Scatter Plot (Balanced with SMOTE Oversampling)")
+plt.xlabel("PC1"); plt.ylabel("PC2")
+plt.legend(); plt.show()
+
+# === 8. Simpan hasil balancing ke CSV ===
+df_balanced = pd.DataFrame(X_res, columns=[f"feature{i}" for i in range(1, 8)])
+df_balanced["class_label"] = y_res
+
+# tambahkan kolom id_protein (auto-generate)
+df_balanced.insert(0, "id_protein", [f"P{str(i+1).zfill(4)}" for i in range(len(df_balanced))])
+
+df_balanced.to_csv("ecoli_balanced_smote.csv", index=False)
+print("✅ Hasil balancing SMOTE berhasil disimpan ke 'ecoli_balanced_smote.csv'")
+
 ------------------
 
 
@@ -158,12 +256,12 @@ File [1;32mc:\users\jordan\appdata\local\programs\python\python39\lib\site-pack
 The above exception was the direct cause of the following exception:
 
 [1;31mOperationalError[0m                          Traceback (most recent call last)
-Cell [1;32mIn[2], line 4[0m
-[0;32m      1[0m engine [38;5;241m=[39m create_engine([38;5;124m"[39m[38;5;124mmysql+pymysql://root:@localhost:3306/ecoli[39m[38;5;124m"[39m)
-[0;32m      3[0m [38;5;66;03m# ambil data dari tabel[39;00m
-[1;32m----> 4[0m df [38;5;241m=[39m [43mpd[49m[38;5;241;43m.[39;49m[43mread_sql[49m[43m([49m[38;5;124;43m"[39;49m[38;5;124;43mSELECT * FROM ecoli;[39;49m[38;5;124;43m"[39;49m[43m,[49m[43m [49m[43mengine[49m[43m)[49m
-[0;32m      5[0m class_counts [38;5;241m=[39m df[[38;5;124m'[39m[38;5;124mclass_label[39m[38;5;124m'[39m][38;5;241m.[39mvalue_counts()[38;5;241m.[39msort_index()
-[0;32m      6[0m nt [38;5;241m=[39m df[38;5;241m.[39mdrop(columns[38;5;241m=[39m[[38;5;124m"[39m[38;5;124mclass_label[39m[38;5;124m"[39m, [38;5;124m"[39m[38;5;124mid_protein[39m[38;5;124m"[39m])
+Cell [1;32mIn[1], line 13[0m
+[0;32m     10[0m engine [38;5;241m=[39m create_engine([38;5;124m"[39m[38;5;124mmysql+pymysql://root:@localhost:3306/ecoli[39m[38;5;124m"[39m)
+[0;32m     12[0m [38;5;66;03m# ambil data dari tabel[39;00m
+[1;32m---> 13[0m df [38;5;241m=[39m [43mpd[49m[38;5;241;43m.[39;49m[43mread_sql[49m[43m([49m[38;5;124;43m"[39;49m[38;5;124;43mSELECT * FROM ecoli;[39;49m[38;5;124;43m"[39;49m[43m,[49m[43m [49m[43mengine[49m[43m)[49m
+[0;32m     15[0m [38;5;28mprint[39m([38;5;124m"[39m[38;5;124mJumlah baris:[39m[38;5;124m"[39m, [38;5;28mlen[39m(df))
+[0;32m     16[0m [38;5;28mprint[39m(df[38;5;241m.[39mhead())
 
 File [1;32mc:\users\jordan\appdata\local\programs\python\python39\lib\site-packages\pandas\io\sql.py:652[0m, in [0;36mread_sql[1;34m(sql, con, index_col, coerce_float, params, parse_dates, columns, chunksize, dtype_backend, dtype)[0m
 [0;32m    649[0m     dtype_backend [38;5;241m=[39m [38;5;124m"[39m[38;5;124mnumpy[39m[38;5;124m"[39m  [38;5;66;03m# type: ignore[assignment][39;00m
