@@ -18,3 +18,11 @@ Buka aplikasi Knime, kemudian cari node bernama PostgreSQL Connector, kemudian d
 setelah itu klik dua kali bagian node nya dan setting hostname, database, username, password dll
 
 ![connector](cone1.png)
+
+
+Memilih Table
+Setelah berhasil connect ke database PostgreSQL, langkah berikutnya adalah memilih table yang akan digunakan untuk analisis. Dalam contoh kasus ini digunakan table ecoli. Tambahkan node DB Selector ke dalam workflow, kemudian sambungkan node PostgreSQL Connector ke DB Selector menggunakan kabel koneksi. Selanjutnya, pada konfigurasi DB Selector, pilih nama tabel yang diinginkan dari daftar tabel yang tersedia di database PostgreSQL. Proses ini memastikan bahwa data yang akan diproses berasal dari sumber yang tepat.
+
+
+
+![connector](cone2.png)
