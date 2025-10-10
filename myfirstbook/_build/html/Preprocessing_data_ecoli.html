@@ -216,6 +216,7 @@
 
 <li class="toctree-l1"><a class="reference internal" href="balance/perbandingan.html">Kesimpulan</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Ereprocessing Data Ecoli menggunakan Knime</a></li>
+
 </ul>
 
     </div>
@@ -388,7 +389,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
 </div></div>
       
     </div>
@@ -404,6 +407,16 @@ document.write(`
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Ereprocessing Data Ecoli menggunakan Knime</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#berikut-data-ecoli-yang-sudah-di-import-ke-database-postgresql">Berikut data ecoli yang sudah di import ke database postgresql</a></li>
+</ul>
+
+            </nav>
         </div>
     </div>
 </div>
@@ -416,6 +429,12 @@ document.write(`
   <section class="tex2jax_ignore mathjax_ignore" id="ereprocessing-data-ecoli-menggunakan-knime">
 <h1>Ereprocessing Data Ecoli menggunakan Knime<a class="headerlink" href="#ereprocessing-data-ecoli-menggunakan-knime" title="Link to this heading">#</a></h1>
 <p>Ini adalah tahapan preprocessing data Missing Value, Outlier Detection, dan Balancing Data menggunakan aplikasi Knime Analytics. Tahapan ini dilakukan untuk mempersiapkan data sebelum masuk ke proses pemodelan. Dengan melakukan pembersihan data dari nilai yang hilang, mendeteksi outlier, serta menyeimbangkan jumlah data antar kelas, analisis yang dihasilkan akan menjadi lebih optimal dan dapat diandalkan</p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="berikut-data-ecoli-yang-sudah-di-import-ke-database-postgresql">
+<h1>Berikut data ecoli yang sudah di import ke database postgresql<a class="headerlink" href="#berikut-data-ecoli-yang-sudah-di-import-ke-database-postgresql" title="Link to this heading">#</a></h1>
+<p><img alt="data" src="data.png" /></p>
+<p>Koneksi Database
+Buka aplikasi Knime, kemudian cari node bernama PostgreSQL Connector, kemudian drag and drop ke bagian field di kanan. Node ini berfungsi untuk menghubungkan Knime dengan database PostgreSQL agar data dapat diakses dan diolah secara langsung. Pastikan koneksi ke server database sudah aktif sebelum melanjutkan ke tahap berikutnya.</p>
 </section>
 
     <script type="text/x-thebe-config">
@@ -463,6 +482,23 @@ document.write(`
             </div>
             
             
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Ereprocessing Data Ecoli menggunakan Knime</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#berikut-data-ecoli-yang-sudah-di-import-ke-database-postgresql">Berikut data ecoli yang sudah di import ke database postgresql</a></li>
+</ul>
+
+  </nav></div>
+
+</div></div>
               
             
           </div>
