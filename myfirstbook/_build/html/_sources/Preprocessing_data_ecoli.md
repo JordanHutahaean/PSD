@@ -64,3 +64,7 @@ Outlier Detection
 Untuk mengecek dan menangani adanya outlier, gunakan node Numeric Outliers dan Bar Chart untuk visualisasi. Node Numeric Outliers akan mendeteksi nilai-nilai ekstrem yang berbeda jauh dari mayoritas data. Setelah itu, hasilnya dapat divisualisasikan menggunakan Bar Chart agar memudahkan dalam melihat sebaran data dan posisi nilai-nilai yang dianggap sebagai outlier.
 
 ![connector](cone8.png)
+
+
+
+![connector](cone9.png)
