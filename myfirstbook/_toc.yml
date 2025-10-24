@@ -18,3 +18,4 @@ chapters:
   - file: Preprocessing_data_ecoli
   - file: PSD
   - file: Preprocessing_Data_(NO2_surabaya)
+  - file: KNN_Regression Data_(NO2_surabaya)
