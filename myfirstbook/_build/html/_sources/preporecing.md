@@ -1,4 +1,4 @@
-# Preporecing 
+# Preprocessing
 
 ## Remove Data Outlier
 ## Remove Data Outlier Hasil dari Metode ABOD

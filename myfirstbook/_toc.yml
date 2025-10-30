@@ -15,7 +15,7 @@ chapters:
   - file: balance/Bagging_Classifier
   - file: balance/decision_tre
   - file: balance/perbandingan
-  - file: Preprocessing_data_ecoli
+  - file: gambar_01/Preprocessing_data_ecoli
   - file: PSD
   - file: Preprocessing_Data_(NO2_surabaya)
   - file: KNN_Regression Data_(NO2_surabaya)
