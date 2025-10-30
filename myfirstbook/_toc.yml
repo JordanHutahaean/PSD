@@ -5,6 +5,7 @@ chapters:
   - file: bisnis
     sections:
       - file: data/eksplorasi_data
+      - file: Preprocessing_Data_(NO2_surabaya)
   - file: DataUNderstanding
   - file: Preprocessing/preporecing
   - file: balance/balance_adasyn
@@ -17,5 +18,4 @@ chapters:
   - file: balance/perbandingan
   - file: gambar_01/Preprocessing_data_ecoli
   - file: PSD
-  - file: Preprocessing_Data_(NO2_surabaya)
   - file: KNN_Regression Data_(NO2_surabaya)
