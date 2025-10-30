@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>eksplorasi Data &#8212; PSD</title>
+    <title>Preprocessing Data E. coli menggunakan KNIME &#8212; PSD</title>
   
   
   
@@ -57,11 +57,9 @@
     <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'data/eksplorasi_data';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'gambar_01/Preprocessing_data_ecoli';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Data Understanding" href="../DataUNderstanding.html" />
-    <link rel="prev" title="Business Understanding" href="../bisnis.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -124,6 +122,8 @@
       
       
       
+        
+      
       <div class="bd-sidebar-primary bd-sidebar">
         
 
@@ -179,9 +179,9 @@
                 </a>
             </li>
         </ul>
-        <ul class="current nav bd-sidenav">
-<li class="toctree-l1 current active has-children"><a class="reference internal" href="../bisnis.html">Business Understanding</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
-<li class="toctree-l2 current active"><a class="current reference internal" href="#">eksplorasi Data</a></li>
+        <ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../bisnis.html">Business Understanding</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../data/eksplorasi_data.html">eksplorasi Data</a></li>
 
 
 
@@ -309,7 +309,7 @@
       
       
       
-      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Fdata/eksplorasi_data.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Fgambar_01/Preprocessing_data_ecoli.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -339,7 +339,7 @@
       
       
       
-      <li><a href="../_sources/data/eksplorasi_data.md" target="_blank"
+      <li><a href="../_sources/gambar_01/Preprocessing_data_ecoli.md" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -423,7 +423,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>eksplorasi Data</h1>
+    <h1>Preprocessing Data E. coli menggunakan KNIME</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -433,16 +433,11 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">eksplorasi Data</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#statistik-dasar">Statistik Dasar</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#jumlah-kelas">jumlah kelas</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#min-max-dan-average">Min, Max dan Average</a></li>
-</ul>
-</li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#sepal-length">Sepal Length</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#sepal-width">Sepal Width</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#petal-length">Petal Length</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#petal-width">Petal Width</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Preprocessing Data E. coli menggunakan KNIME</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#berikut-data-ecoli-yang-sudah-di-import-ke-database-postgresql">Berikut data ecoli yang sudah di import ke database postgresql</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#membaca-data-dari-data-yang-kita-sediakan">Membaca Data dari data yang kita sediakan</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#melihat-missing-value">Melihat Missing Value</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#mengatasi-data-tersebut-yang-tidak-seimbang">Mengatasi Data tersebut yang tidak seimbang</a></li>
 </ul>
 
             </nav>
@@ -455,45 +450,50 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="eksplorasi-data">
-<h1>eksplorasi Data<a class="headerlink" href="#eksplorasi-data" title="Link to this heading">#</a></h1>
-<p>Pada tahap eksplorasi data, kita meninjau isi dataset untuk memahami pola dan karakter dari setiap atribut. Dataset bunga iris ini terdiri atas 150 baris data dengan 3 kelas yang seimbang, yaitu:</p>
-<p>Setosa = 50</p>
-<p>Versicolor = 50</p>
-<p>Virginica = 50</p>
+  <section class="tex2jax_ignore mathjax_ignore" id="preprocessing-data-e-coli-menggunakan-knime">
+<h1>Preprocessing Data E. coli menggunakan KNIME<a class="headerlink" href="#preprocessing-data-e-coli-menggunakan-knime" title="Link to this heading">#</a></h1>
+<p>Ini adalah tahapan preprocessing data Missing Value, Outlier Detection, dan Balancing Data menggunakan aplikasi Knime Analytics. Tahapan ini dilakukan untuk mempersiapkan data sebelum masuk ke proses pemodelan. Dengan melakukan pembersihan data dari nilai yang hilang, mendeteksi outlier, serta menyeimbangkan jumlah data antar kelas, analisis yang dihasilkan akan menjadi lebih optimal dan dapat diandalkan</p>
 </section>
-<section class="tex2jax_ignore mathjax_ignore" id="statistik-dasar">
-<h1>Statistik Dasar<a class="headerlink" href="#statistik-dasar" title="Link to this heading">#</a></h1>
-<section id="jumlah-kelas">
-<h2>jumlah kelas<a class="headerlink" href="#jumlah-kelas" title="Link to this heading">#</a></h2>
-<p><img alt="jumlah kelas" src="../_images/jumlah_kelas.png" /></p>
-<hr class="docutils" />
-<p>3 kelas bunga iris : Setosa, Versicolor, Virginica</p>
-<p>Masing-masing berjumlah 50 data → total 150 baris data</p>
+<section class="tex2jax_ignore mathjax_ignore" id="berikut-data-ecoli-yang-sudah-di-import-ke-database-postgresql">
+<h1>Berikut data ecoli yang sudah di import ke database postgresql<a class="headerlink" href="#berikut-data-ecoli-yang-sudah-di-import-ke-database-postgresql" title="Link to this heading">#</a></h1>
+<p><img alt="data" src="../_images/data.png" /></p>
+<p>Koneksi Database
+Buka aplikasi Knime, kemudian cari node bernama PostgreSQL Connector, kemudian drag and drop ke bagian field di kanan. Node ini berfungsi untuk menghubungkan Knime dengan database PostgreSQL agar data dapat diakses dan diolah secara langsung. Pastikan koneksi ke server database sudah aktif sebelum melanjutkan ke tahap berikutnya.</p>
+<p><img alt="connector" src="../_images/connector.png" /></p>
+<p>setelah itu klik dua kali bagian node nya dan setting hostname, database, username, password dll</p>
+<p><img alt="connector" src="../_images/cone1.png" /></p>
+<p>Memilih Table
+Setelah berhasil connect ke database PostgreSQL, langkah berikutnya adalah memilih table yang akan digunakan untuk analisis. Dalam contoh kasus ini digunakan table ecoli. Tambahkan node DB Selector ke dalam workflow, kemudian sambungkan node PostgreSQL Connector ke DB Selector menggunakan kabel koneksi. Selanjutnya, pada konfigurasi DB Selector, pilih nama tabel yang diinginkan dari daftar tabel yang tersedia di database PostgreSQL. Proses ini memastikan bahwa data yang akan diproses berasal dari sumber yang tepat.</p>
+<p><img alt="connector" src="../_images/cone2.png" /></p>
+<p><img alt="connector" src="../_images/cone3.png" /></p>
+<p>lalu kemudia kita execute</p>
 </section>
-<section id="min-max-dan-average">
-<h2>Min, Max dan Average<a class="headerlink" href="#min-max-dan-average" title="Link to this heading">#</a></h2>
-<p>hitung nilai minimum, maksimum, dan rata-rata dari nilai setiap atribut numerik</p>
+<section class="tex2jax_ignore mathjax_ignore" id="membaca-data-dari-data-yang-kita-sediakan">
+<h1>Membaca Data dari data yang kita sediakan<a class="headerlink" href="#membaca-data-dari-data-yang-kita-sediakan" title="Link to this heading">#</a></h1>
+<p>tambahkan Node DB Reader untuk membaca data di table</p>
+<p><img alt="connector" src="../_images/cone4.png" /></p>
 </section>
+<section class="tex2jax_ignore mathjax_ignore" id="melihat-missing-value">
+<h1>Melihat Missing Value<a class="headerlink" href="#melihat-missing-value" title="Link to this heading">#</a></h1>
+<p>Untuk menangani missing value, kita perlu mengetahui terlebih dahulu apakah ada data yang hilang atau tidak dengan menggunakan node Statistics dan memvisualkannya menggunakan node Bar Chart. Node Statistics akan menampilkan informasi ringkas seperti jumlah data kosong, nilai minimum, maksimum, dan rata-rata. Dengan bantuan Bar Chart, kita dapat melihat distribusi data secara visual sehingga lebih mudah dalam mengidentifikasi kolom mana yang memiliki nilai hilang</p>
+<p><img alt="connector" src="../_images/cone5.png" /></p>
+<p>Grafik menunjukkan tidak ditemukannya Missing Value, jadi pada tahap selanjutnya tambahkan node Missing Value (Opsional). Node ini bersifat wajib digunakan hanya jika grafik menunjukkan adanya Missing Value pada data. Jika tidak terdapat nilai yang hilang, tahap ini dapat dilewati dan proses dapat dilanjutkan ke tahap berikutnya seperti deteksi outlier.</p>
+<p><img alt="connector" src="../_images/cone6.png" /></p>
+<p><img alt="connector" src="../_images/cone7.png" /></p>
+<p>Outlier Detection
+Untuk mengecek dan menangani adanya outlier, gunakan node Numeric Outliers dan Bar Chart untuk visualisasi. Node Numeric Outliers akan mendeteksi nilai-nilai ekstrem yang berbeda jauh dari mayoritas data. Setelah itu, hasilnya dapat divisualisasikan menggunakan Bar Chart agar memudahkan dalam melihat sebaran data dan posisi nilai-nilai yang dianggap sebagai outlier.</p>
+<p><img alt="connector" src="../_images/cone8.png" /></p>
+<p><img alt="connector" src="../_images/cone9.png" /></p>
+<p><img alt="connector" src="../_images/cone10.png" /></p>
+<p>Berdasarkan grafik hasil visualisasi, terdeteksi adanya outlier pada beberapa fitur, antara lain gvh, lip, aac, dan chg. Untuk menangani hal tersebut, digunakan node Replace Outlier Values. Pada node ini, pengguna dapat melakukan konfigurasi melalui menu pengaturan untuk menentukan bagaimana nilai outlier akan diganti, misalnya dengan median, mean, atau nilai batas terdekat (capping). Langkah ini penting untuk memastikan agar data menjadi lebih stabil dan tidak memengaruhi hasil analisis atau pemodelan berikutnya</p>
 </section>
-<section class="tex2jax_ignore mathjax_ignore" id="sepal-length">
-<h1>Sepal Length<a class="headerlink" href="#sepal-length" title="Link to this heading">#</a></h1>
-<p><img alt="SepalLength" src="../_images/Sepal_Length.png" /></p>
-</section>
-<section class="tex2jax_ignore mathjax_ignore" id="sepal-width">
-<h1>Sepal Width<a class="headerlink" href="#sepal-width" title="Link to this heading">#</a></h1>
-<p><img alt="SepalWidth" src="../_images/image.png" /></p>
-</section>
-<section class="tex2jax_ignore mathjax_ignore" id="petal-length">
-<h1>Petal Length<a class="headerlink" href="#petal-length" title="Link to this heading">#</a></h1>
-<p><img alt="PetalLength" src="../_images/petal.png" /></p>
-</section>
-<section class="tex2jax_ignore mathjax_ignore" id="petal-width">
-<h1>Petal Width<a class="headerlink" href="#petal-width" title="Link to this heading">#</a></h1>
-<p><img alt="PetalWidth" src="../_images/petalw.png" /></p>
-<p>Dari pengolahan data statistik, kita dapat memahami dengan lebih mendalam mengenai pola perbedaan morfologi dari tiga spesies bunga Iris. Spesies Setosa memperlihatkan kecenderungan yang khas, yakni memiliki petal dengan ukuran yang relatif kecil baik dalam hal panjang maupun lebar. Karakteristik ini membuat Setosa sangat mudah dibedakan, bahkan hanya dengan mengandalkan ukuran petalnya saja.</p>
-<p>Berbeda dengan Setosa, spesies Virginica justru menampilkan kondisi sebaliknya. Virginica cenderung memiliki petal dengan ukuran paling besar, baik dari segi panjang maupun lebar, sehingga dapat dikatakan bahwa spesies ini mendominasi dalam hal dimensi petal. Ukuran petal Virginica yang menonjol menjadikannya spesies yang cukup mudah diidentifikasi dalam dataset.</p>
-<p>Sementara itu, aspek sepal tidak memperlihatkan variasi yang terlalu kuat untuk dijadikan acuan pembeda antarspesies. Meskipun terdapat sedikit variasi ukuran sepal, perbedaannya tidak sejelas petal. Oleh karena itu, atribut petal lebih dapat diandalkan dalam proses klasifikasi spesies Iris.</p>
+<section class="tex2jax_ignore mathjax_ignore" id="mengatasi-data-tersebut-yang-tidak-seimbang">
+<h1>Mengatasi Data tersebut yang tidak seimbang<a class="headerlink" href="#mengatasi-data-tersebut-yang-tidak-seimbang" title="Link to this heading">#</a></h1>
+<p><img alt="connector" src="../_images/cone11.png" /></p>
+<p>Berdasarkan grafik distribusi class tersebut, dapat dilihat bahwa data mengalami ketidakseimbangan. Untuk mengecek dan membuat data menjadi seimbang, gunakan node SMOTE. Node ini berfungsi untuk menambah data pada kelas minoritas dengan cara membuat sampel sintetis baru, sehingga distribusi antar kelas menjadi lebih proporsional dan model tidak bias terhadap kelas mayoritas.</p>
+<p><img alt="connector" src="../_images/cone12.png" /></p>
+<p><img alt="connector" src="../_images/cone13.png" /></p>
+<p>Berdasarkan grafik terbaru, dapat dilihat bahwa distribusi setiap class sudah berada dalam kondisi seimbang setelah dilakukan proses balancing data. Hal ini menandakan bahwa teknik SMOTE berhasil menambah data sintetis pada kelas minoritas sehingga jumlah data antar kelas menjadi proporsional. Dengan dataset yang seimbang, model yang akan dibangun nantinya diharapkan dapat belajar secara optimal tanpa bias terhadap salah satu kelas.</p>
 </section>
 
     <script type="text/x-thebe-config">
@@ -509,7 +509,7 @@ document.write(`
         },
         kernelOptions: {
             name: "python3",
-            path: "./data"
+            path: "./gambar_01"
         },
         predefinedOutput: true
     }
@@ -526,24 +526,6 @@ document.write(`
                 <footer class="prev-next-footer d-print-none">
                   
 <div class="prev-next-area">
-    <a class="left-prev"
-       href="../bisnis.html"
-       title="previous page">
-      <i class="fa-solid fa-angle-left"></i>
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Business Understanding</p>
-      </div>
-    </a>
-    <a class="right-next"
-       href="../DataUNderstanding.html"
-       title="next page">
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Data Understanding</p>
-      </div>
-      <i class="fa-solid fa-angle-right"></i>
-    </a>
 </div>
                 </footer>
               
@@ -560,16 +542,11 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">eksplorasi Data</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#statistik-dasar">Statistik Dasar</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#jumlah-kelas">jumlah kelas</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#min-max-dan-average">Min, Max dan Average</a></li>
-</ul>
-</li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#sepal-length">Sepal Length</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#sepal-width">Sepal Width</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#petal-length">Petal Length</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#petal-width">Petal Width</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Preprocessing Data E. coli menggunakan KNIME</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#berikut-data-ecoli-yang-sudah-di-import-ke-database-postgresql">Berikut data ecoli yang sudah di import ke database postgresql</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#membaca-data-dari-data-yang-kita-sediakan">Membaca Data dari data yang kita sediakan</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#melihat-missing-value">Melihat Missing Value</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#mengatasi-data-tersebut-yang-tidak-seimbang">Mengatasi Data tersebut yang tidak seimbang</a></li>
 </ul>
 
   </nav></div>
