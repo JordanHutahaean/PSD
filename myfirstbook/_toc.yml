@@ -8,6 +8,7 @@ chapters:
       - file: Preprocessing_Data_(NO2_surabaya)
   - file: DataUNderstanding
   - file: Preprocessing/preporecing
+chapters:
   - file: balance/balance_adasyn
     sections:
       - file: balance/balance_smote
