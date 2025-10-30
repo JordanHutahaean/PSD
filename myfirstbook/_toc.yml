@@ -6,7 +6,7 @@ chapters:
     sections:
       - file: data/eksplorasi_data
   - file: DataUNderstanding
-  - file: preporecing
+  - file: Preprocessing/preporecing
   - file: balance/balance_adasyn
     sections:
       - file: balance/balance_smote
