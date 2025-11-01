@@ -11,9 +11,7 @@ chapters:
       - file: KNN_Regression Data_(NO2_surabaya)   
   - file: Preprocessing/preporecing
   - file: balance/balance_adasyn
-    sections:
-      - file: balance_smote
-
+  - file : balance_smote
   - file: balance/balance_randomforest
   - file: balance/balance_naivebayes
   - file: balance/Bagging_Classifier
