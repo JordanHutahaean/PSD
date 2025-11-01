@@ -10,8 +10,6 @@ chapters:
     sections: 
       - file: KNN_Regression Data_(NO2_surabaya)   
   - file: Preprocessing/preporecing
-    sections:
-      - file: PSD
 
   - file: balance/balance_adasyn
     sections:
