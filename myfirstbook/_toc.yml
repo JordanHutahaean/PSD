@@ -12,7 +12,7 @@ chapters:
       
   - file: Preprocessing/preporecing
     sections:
-      -file: PSD
+      - file: PSD
 
   - file: balance/balance_adasyn
     sections:
