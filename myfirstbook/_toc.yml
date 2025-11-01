@@ -11,6 +11,8 @@ chapters:
       - file: KNN_Regression Data_(NO2_surabaya)
       
   - file: Preprocessing/preporecing
+    sections:
+      -file: PSD
 
   - file: balance/balance_adasyn
     sections:
@@ -22,4 +24,4 @@ chapters:
   - file: balance/decision_tre
   - file: balance/perbandingan
   - file: gambar_01/Preprocessing_data_ecoli
-  - file: PSD
+ 
