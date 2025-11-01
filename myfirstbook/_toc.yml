@@ -9,7 +9,7 @@ chapters:
   - file: DataUNderstanding
     sections: 
       - file: KNN_Regression Data_(NO2_surabaya)
-      - file: Preprocessing_Data_(NO2_surabaya)
+      
   - file: Preprocessing/preporecing
 
   - file: balance/balance_adasyn
