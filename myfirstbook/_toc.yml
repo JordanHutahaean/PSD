@@ -8,8 +8,7 @@ chapters:
       - file: Preprocessing_Data_(NO2_surabaya)
   - file: DataUNderstanding
     sections: 
-      - file: KNN_Regression Data_(NO2_surabaya)
-      
+      - file: KNN_Regression Data_(NO2_surabaya)   
   - file: Preprocessing/preporecing
     sections:
       - file: PSD
