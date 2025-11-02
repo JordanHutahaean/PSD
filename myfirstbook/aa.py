@@ -1,52 +1,82 @@
+# app.py
+import os
 import pandas as pd
-import numpy as np
 import streamlit as st
-import streamlit as st
-from sklearn.model_selection import train_test_split
-from sklearn.linear_model import LinearRegression
-from sklearn.metrics import r2_score, mean_absolute_percentage_error
 import matplotlib.pyplot as plt
+from sklearn.metrics import mean_absolute_percentage_error
 
-st.header("📊 Prediksi NO₂ Surabaya")
+# -----------------------------
+# Judul Aplikasi
+# -----------------------------
+st.set_page_config(page_title="Forecasting NO2 Surabaya", layout="wide")
+st.title("🌆 Forecasting NO2 - Surabaya (Demo Interaktif)")
 
-uploaded_file = st.file_uploader("Unggah CSV data NO₂ Surabaya", type=["csv"], key="no2")
-if uploaded_file is not None:
-    data = pd.read_csv(uploaded_file)
-    st.write("Preview data NO₂:")
-    st.dataframe(data.head())
+# -----------------------------
+# Path CSV lokal
+# -----------------------------
+DATA_FOLDER = "no2_results_surabaya"
+DATA_FILE = "hasil_prediksi_knn.csv"
+DATA_PATH = os.path.join(DATA_FOLDER, DATA_FILE)
 
-    if "NO2" not in data.columns:
-        st.error("CSV harus memiliki kolom 'NO2'")
-    else:
-        # Buat fitur lag 1
-        data["NO2_lag1"] = data["NO2"].shift(1)
-        data = data.dropna()
+# Baca CSV
+if not os.path.exists(DATA_PATH):
+    st.warning(f"File '{DATA_FILE}' tidak ditemukan di folder '{DATA_FOLDER}'.")
+    st.stop()
 
-        X = data[["NO2_lag1"]]
-        y = data["NO2"]
+data = pd.read_csv(DATA_PATH)
 
-        X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+# -----------------------------
+# Input interaktif
+# -----------------------------
+st.subheader("Pengaturan Interaktif")
 
-        model = LinearRegression()
-        model.fit(X_train, y_train)
-        y_pred = model.predict(X_test)
+# Slider untuk memilih range index (contoh: prediksi 0-3)
+max_index = len(data) - 1
+range_slider = st.slider("Pilih range index data untuk visualisasi:", 0, max_index, (0, max_index))
 
-        r2 = r2_score(y_test, y_pred)
-        mape = mean_absolute_percentage_error(y_test, y_pred)
+# Filter data sesuai range
+data_filtered = data.iloc[range_slider[0]:range_slider[1]+1]
 
-        st.write(f"R² Score: {r2:.3f}")
-        st.write(f"MAPE: {mape*100:.2f}%")
+# Pilihan kolom actual/predicted (jika ada beberapa)
+columns = data_filtered.columns.tolist()
+actual_col = st.selectbox("Pilih kolom Actual:", columns, index=columns.index("NO2_Actual"))
+predicted_col = st.selectbox("Pilih kolom Predicted:", columns, index=columns.index("NO2_Predicted"))
 
-        # Plot hasil
-        fig, ax = plt.subplots()
-        ax.plot(y_test.values, label="Actual")
-        ax.plot(y_pred, label="Predicted")
-        ax.set_title("Prediksi NO₂ Surabaya")
-        ax.set_ylabel("NO₂")
-        ax.legend()
-        st.pyplot(fig)
+# -----------------------------
+# Preview data filtered
+# -----------------------------
+st.subheader("Preview Data (Filtered)")
+st.dataframe(data_filtered)
 
-        # Prediksi hari berikutnya
-        last_value = data["NO2"].iloc[-1]
-        next_pred = model.predict(np.array([[last_value]]))[0]
-        st.success(f"Prediksi NO₂ berikutnya: {next_pred:.2f}")
+# -----------------------------
+# Statistik deskriptif
+# -----------------------------
+st.subheader("Statistik Data (Filtered)")
+st.write(data_filtered.describe())
+
+# -----------------------------
+# Visualisasi Actual vs Predicted
+# -----------------------------
+st.subheader("Visualisasi NO2 (Filtered)")
+fig, ax = plt.subplots(figsize=(8,5))
+ax.plot(data_filtered.index, data_filtered[actual_col], label="Actual", marker='o')
+ax.plot(data_filtered.index, data_filtered[predicted_col], label="Predicted", marker='x')
+ax.set_xlabel("Index")
+ax.set_ylabel("Konsentrasi NO2")
+ax.set_title(f"{actual_col} vs {predicted_col}")
+ax.legend()
+ax.grid(True)
+st.pyplot(fig)
+
+# -----------------------------
+# Evaluasi MAPE
+# -----------------------------
+st.subheader("Evaluasi MAPE (Filtered)")
+mape = mean_absolute_percentage_error(data_filtered[actual_col], data_filtered[predicted_col])
+st.metric("MAPE", f"{mape*100:.2f}%")
+
+# -----------------------------
+# Footer
+# -----------------------------
+st.markdown("---")
+st.markdown("💡 Demo interaktif menggunakan dataset Surabaya (NO2)")
