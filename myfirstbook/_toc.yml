@@ -18,4 +18,6 @@ chapters:
   - file: balance/Bagging_Classifier
   - file: balance/decision_tre
   - file: gambar_01/Preprocessing_data_ecoli
+  - file: Preprocessing Data Buka Tutup Suara
+  - file: Modeling Identifikasi Suara Buka Tutup
 

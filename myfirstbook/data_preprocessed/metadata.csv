@@ -1,0 +1,9 @@
+split,label,file_path
+train,buka,data_preprocessed\train\buka\buka_1.wav
+train,buka,data_preprocessed\train\buka\buka_2.wav
+train,tutup,data_preprocessed\train\tutup\tutup_1.wav
+train,tutup,data_preprocessed\train\tutup\tutup_2.wav
+val,buka,data_preprocessed\val\buka\buka_1.wav
+val,buka,data_preprocessed\val\buka\buka_2.wav
+val,tutup,data_preprocessed\val\tutup\tutup_1.wav
+val,tutup,data_preprocessed\val\tutup\tutup_2.wav
