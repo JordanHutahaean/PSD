@@ -200,11 +200,12 @@
 
 
 
-
 </ul>
 </details></li>
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="DataUNderstanding.html">Data Understanding (iris)</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">Data Understanding KNN Regression Data (NO₂ Surabaya)</a></li>
+
+
 
 
 
@@ -452,6 +453,8 @@ document.write(`
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Data Understanding KNN Regression Data (NO₂ Surabaya)</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#mengapa-r-squared-dan-mse-rendah-pada-eksperimen">Mengapa R-Squared dan MSE Rendah pada Eksperimen?</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#modeling-data-no2-surabaya">Modeling Data NO₂ Surabaya</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#aplikasi-deployment-multi-prediksi-kadar-no2-di-surabaya">aplikasi Deployment Multi Prediksi Kadar NO₂ di SURABAYA</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#https-dluhxtxcbrbe8rqlxquymh-streamlit-app">https://dluhxtxcbrbe8rqlxquymh.streamlit.app/</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#import-library">Import Library</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#membaca-dokumen">Membaca Dokumen</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modeling-data-t1-t2">Modeling Data t1, t2</a></li>
@@ -485,6 +488,12 @@ document.write(`
 <section id="modeling-data-no2-surabaya">
 <h1>Modeling Data NO₂ Surabaya<a class="headerlink" href="#modeling-data-no2-surabaya" title="Link to this heading">#</a></h1>
 <p>Proses pemodelan ini dilakukan sesuai dengan eksperimen supervised learning, menggunakan data lag antara dua hingga lima hari sebelumnya sebagai fitur untuk memprediksi kadar NO₂ pada hari berikutnya.</p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="aplikasi-deployment-multi-prediksi-kadar-no2-di-surabaya">
+<h1>aplikasi Deployment Multi Prediksi Kadar NO₂ di SURABAYA<a class="headerlink" href="#aplikasi-deployment-multi-prediksi-kadar-no2-di-surabaya" title="Link to this heading">#</a></h1>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="https-dluhxtxcbrbe8rqlxquymh-streamlit-app">
+<h1><a class="reference external" href="https://dluhxtxcbrbe8rqlxquymh.streamlit.app/">https://dluhxtxcbrbe8rqlxquymh.streamlit.app/</a><a class="headerlink" href="#https-dluhxtxcbrbe8rqlxquymh-streamlit-app" title="Link to this heading">#</a></h1>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="import-library">
 <h1>Import Library<a class="headerlink" href="#import-library" title="Link to this heading">#</a></h1>
@@ -836,7 +845,7 @@ MAPE : 29.088079301599667 %
 5 Hari  : 0.2915
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C:\Users\Jordan\AppData\Local\Temp\ipykernel_7408\4280672890.py:33: UserWarning: Glyph 128202 (\N{BAR CHART}) missing from current font.
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C:\Users\Jordan\AppData\Local\Temp\ipykernel_14552\4280672890.py:33: UserWarning: Glyph 128202 (\N{BAR CHART}) missing from current font.
   plt.tight_layout()
 c:\users\jordan\appdata\local\programs\python\python39\lib\site-packages\IPython\core\pylabtools.py:152: UserWarning: Glyph 128202 (\N{BAR CHART}) missing from current font.
   fig.canvas.print_figure(bytes_io, **kw)
@@ -889,15 +898,15 @@ untuk mendapatkan nilai sesungguh nya</p>
 </div>
 </div>
 <div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C:\Users\Jordan\AppData\Local\Temp\ipykernel_14552\3287171075.py:33: UserWarning: Glyph 128202 (\N{BAR CHART}) missing from current font.
+  plt.tight_layout()
+</pre></div>
+</div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>📊 Perbandingan Nilai MAPE Berdasarkan Jumlah Hari Sebelumnya
 2 Hari  : 24.45%
 3 Hari  : 24.45%
 4 Hari  : 36.76%
 5 Hari  : 29.09%
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C:\Users\Jordan\AppData\Local\Temp\ipykernel_7408\3287171075.py:33: UserWarning: Glyph 128202 (\N{BAR CHART}) missing from current font.
-  plt.tight_layout()
 </pre></div>
 </div>
 <img alt="_images/ffb65c2a02b8be978abdd9291828171726f748e00eb61005fda88edc823c4626.png" src="_images/ffb65c2a02b8be978abdd9291828171726f748e00eb61005fda88edc823c4626.png" />
@@ -972,6 +981,8 @@ untuk mendapatkan nilai sesungguh nya</p>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Data Understanding KNN Regression Data (NO₂ Surabaya)</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#mengapa-r-squared-dan-mse-rendah-pada-eksperimen">Mengapa R-Squared dan MSE Rendah pada Eksperimen?</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#modeling-data-no2-surabaya">Modeling Data NO₂ Surabaya</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#aplikasi-deployment-multi-prediksi-kadar-no2-di-surabaya">aplikasi Deployment Multi Prediksi Kadar NO₂ di SURABAYA</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#https-dluhxtxcbrbe8rqlxquymh-streamlit-app">https://dluhxtxcbrbe8rqlxquymh.streamlit.app/</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#import-library">Import Library</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#membaca-dokumen">Membaca Dokumen</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modeling-data-t1-t2">Modeling Data t1, t2</a></li>

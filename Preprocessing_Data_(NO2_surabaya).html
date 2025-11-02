@@ -200,11 +200,12 @@
 
 
 
-
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="DataUNderstanding.html">Data Understanding (iris)</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="KNN_Regression%20Data_%28NO2_surabaya%29.html">Data Understanding KNN Regression Data (NO₂ Surabaya)</a></li>
+
+
 
 
 
@@ -449,8 +450,10 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Preprocessing Data (NO2 Surabaya)</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#konversi-ke-supervised-learning">1.2 Konversi ke Supervised Learning**</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Preprocessing Data (NO2 Surabaya)</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#konversi-ke-supervised-learning">1.2 Konversi ke Supervised Learning**</a></li>
+</ul>
+</li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#langkah-langkah">Langkah - Langkah</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#menginisialisasi-day-2-5">Menginisialisasi day 2 - 5</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#membuat-data-supervised-menggunakan-t1-t2">Membuat data supervised menggunakan t1, t2</a></li>
@@ -469,17 +472,8 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section id="preprocessing-data-no2-surabaya">
+  <section class="tex2jax_ignore mathjax_ignore" id="preprocessing-data-no2-surabaya">
 <h1>Preprocessing Data (NO2 Surabaya)<a class="headerlink" href="#preprocessing-data-no2-surabaya" title="Link to this heading">#</a></h1>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
-</pre></div>
-</div>
-</div>
-</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
@@ -636,7 +630,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C:\Users\Jordan\AppData\Local\Temp\ipykernel_28576\1537943278.py:23: FutureWarning: Series.__getitem__ treating keys as positions is deprecated. In a future version, integer keys will always be treated as labels (consistent with DataFrame behavior). To access a value by position, use `ser.iloc[pos]`
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C:\Users\Jordan\AppData\Local\Temp\ipykernel_23852\1537943278.py:23: FutureWarning: Series.__getitem__ treating keys as positions is deprecated. In a future version, integer keys will always be treated as labels (consistent with DataFrame behavior). To access a value by position, use `ser.iloc[pos]`
   ax.text(i, v + 0.5, f&quot;{v} ({missing_percent[i]:.1f}%)&quot;,
 </pre></div>
 </div>
@@ -747,12 +741,12 @@ Disimpan ke: no2_results_surabaya/timeseries_cleaned.csv
 </div>
 <p>Setelah dilakukan proses interpolasi linier pada kolom NO₂, hasil pemeriksaan ulang memperlihatkan bahwa seluruh nilai yang sebelumnya hilang telah berhasil terisi sepenuhnya.</p>
 <p>Dengan demikian, dataset kini telah bebas dari missing value dan siap digunakan pada tahap berikutnya, yaitu pemodelan prediksi konsentrasi NO₂ menggunakan metode K-Nearest Neighbors (KNN) Regression.</p>
-</section>
 <section id="konversi-ke-supervised-learning">
-<h1>1.2 Konversi ke Supervised Learning**<a class="headerlink" href="#konversi-ke-supervised-learning" title="Link to this heading">#</a></h1>
+<h2>1.2 Konversi ke Supervised Learning**<a class="headerlink" href="#konversi-ke-supervised-learning" title="Link to this heading">#</a></h2>
 <p>Pada proyek ini, dilakukan proses konversi data time series menjadi format supervised learning menggunakan Python. Tujuan dari konversi ini adalah agar data time series dapat dimanfaatkan untuk model prediksi berbasis machine learning seperti regresi maupun neural network.</p>
 <p>Secara umum, data time series hanya memuat nilai berdasarkan urutan waktu, sedangkan supervised learning membutuhkan pasangan input (X) dan output (y). Oleh karena itu, konversi dilakukan dengan menggeser data pada waktu sebelumnya untuk dijadikan sebagai fitur (lag features).</p>
 <p>Dalam penerapan kali ini, saya melakukan eksperimen dengan menggunakan data dari 2 hingga 5 hari sebelumnya sebagai fitur input.</p>
+</section>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="langkah-langkah">
 <h1>Langkah - Langkah<a class="headerlink" href="#langkah-langkah" title="Link to this heading">#</a></h1>
@@ -1360,8 +1354,10 @@ Disimpan ke: no2_results_surabaya/timeseries_cleaned.csv
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Preprocessing Data (NO2 Surabaya)</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#konversi-ke-supervised-learning">1.2 Konversi ke Supervised Learning**</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Preprocessing Data (NO2 Surabaya)</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#konversi-ke-supervised-learning">1.2 Konversi ke Supervised Learning**</a></li>
+</ul>
+</li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#langkah-langkah">Langkah - Langkah</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#menginisialisasi-day-2-5">Menginisialisasi day 2 - 5</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#membuat-data-supervised-menggunakan-t1-t2">Membuat data supervised menggunakan t1, t2</a></li>
