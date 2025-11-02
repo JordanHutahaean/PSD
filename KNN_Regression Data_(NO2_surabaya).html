@@ -783,31 +783,36 @@ MAPE : 29.088079301599667 %
 <h1>Perbandingan R² Berdasarkan Banyak Hari yang digunakan<a class="headerlink" href="#perbandingan-r2-berdasarkan-banyak-hari-yang-digunakan" title="Link to this heading">#</a></h1>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">r2_day2</span> <span class="o">=</span> <span class="mf">0.72</span>   
-<span class="n">r2_day3</span> <span class="o">=</span> <span class="mf">0.79</span>
-<span class="n">r2_day4</span> <span class="o">=</span> <span class="mf">0.83</span>
-<span class="n">r2_day5</span> <span class="o">=</span> <span class="mf">0.81</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
 
-<span class="c1"># Menyiapkan data untuk visualisasi</span>
+<span class="c1"># Data perbandingan R²</span>
 <span class="n">x</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;2 Hari&#39;</span><span class="p">,</span> <span class="s1">&#39;3 Hari&#39;</span><span class="p">,</span> <span class="s1">&#39;4 Hari&#39;</span><span class="p">,</span> <span class="s1">&#39;5 Hari&#39;</span><span class="p">]</span>
-<span class="n">y</span> <span class="o">=</span> <span class="p">[</span><span class="n">r2_day2</span><span class="p">,</span> <span class="n">r2_day3</span><span class="p">,</span> <span class="n">r2_day4</span><span class="p">,</span> <span class="n">r2_day5</span><span class="p">]</span>
+<span class="n">y</span> <span class="o">=</span> <span class="p">[</span><span class="n">r2</span><span class="p">,</span> <span class="n">r2</span><span class="p">,</span> <span class="n">r2_day4</span><span class="p">,</span> <span class="n">r2_day5</span><span class="p">]</span>
 
-<span class="c1"># Membuat plot batang</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
-<span class="n">bars</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;#66b3ff&#39;</span><span class="p">,</span> <span class="s1">&#39;#99ff99&#39;</span><span class="p">,</span> <span class="s1">&#39;#ffcc99&#39;</span><span class="p">,</span> <span class="s1">&#39;#ff9999&#39;</span><span class="p">])</span>
+<span class="c1"># --- 1️⃣ Output teks evaluasi seperti format pertama ---</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;📊 Perbandingan Nilai R² Berdasarkan Jumlah Hari Sebelumnya&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">day</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">day</span><span class="si">:</span><span class="s2">&lt;7</span><span class="si">}</span><span class="s2"> : </span><span class="si">{</span><span class="n">value</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
-<span class="c1"># Memberi judul dan label sumbu</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Perbandingan Nilai R² berdasarkan Jumlah Hari Sebelumnya&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">13</span><span class="p">)</span>
+<span class="c1"># --- 2️⃣ Grafik batang ---</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">7</span><span class="p">))</span>
+<span class="n">bars</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;steelblue&#39;</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;📊 Perbandingan Nilai R² Berdasarkan Jumlah Hari Sebelumnya&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">13</span><span class="p">,</span> <span class="n">weight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Jumlah Hari Sebelumnya&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">11</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Nilai R²&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">11</span><span class="p">)</span>
 
-<span class="c1"># Menampilkan label nilai di atas batang</span>
+<span class="c1"># Tambahkan label nilai R² di atas setiap batang</span>
 <span class="k">for</span> <span class="n">bar</span> <span class="ow">in</span> <span class="n">bars</span><span class="p">:</span>
+    <span class="n">height</span> <span class="o">=</span> <span class="n">bar</span><span class="o">.</span><span class="n">get_height</span><span class="p">()</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">text</span><span class="p">(</span>
-        <span class="n">bar</span><span class="o">.</span><span class="n">get_x</span><span class="p">()</span> <span class="o">+</span> <span class="n">bar</span><span class="o">.</span><span class="n">get_width</span><span class="p">()</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span>
-        <span class="n">bar</span><span class="o">.</span><span class="n">get_height</span><span class="p">(),</span>
-        <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">bar</span><span class="o">.</span><span class="n">get_height</span><span class="p">()</span><span class="si">:</span><span class="s1">.3f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span>
-        <span class="n">ha</span><span class="o">=</span><span class="s1">&#39;center&#39;</span><span class="p">,</span> <span class="n">va</span><span class="o">=</span><span class="s1">&#39;bottom&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span>
+        <span class="n">bar</span><span class="o">.</span><span class="n">get_x</span><span class="p">()</span> <span class="o">+</span> <span class="n">bar</span><span class="o">.</span><span class="n">get_width</span><span class="p">()</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span>
+        <span class="n">height</span> <span class="o">+</span> <span class="mf">0.01</span><span class="p">,</span>
+        <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">height</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+        <span class="n">ha</span><span class="o">=</span><span class="s1">&#39;center&#39;</span><span class="p">,</span>
+        <span class="n">va</span><span class="o">=</span><span class="s1">&#39;bottom&#39;</span><span class="p">,</span>
+        <span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+        <span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span>
     <span class="p">)</span>
 
 <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
@@ -816,13 +821,80 @@ MAPE : 29.088079301599667 %
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/3250f8b58b020cbc4487b154e010f205abf06364fcb7718ea007a2e102a3c849.png" src="_images/3250f8b58b020cbc4487b154e010f205abf06364fcb7718ea007a2e102a3c849.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>📊 Perbandingan Nilai R² Berdasarkan Jumlah Hari Sebelumnya
+2 Hari  : 0.3546
+3 Hari  : 0.3546
+4 Hari  : 0.4213
+5 Hari  : 0.2915
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C:\Users\Jordan\AppData\Local\Temp\ipykernel_13560\4280672890.py:33: UserWarning: Glyph 128202 (\N{BAR CHART}) missing from current font.
+  plt.tight_layout()
+c:\users\jordan\appdata\local\programs\python\python39\lib\site-packages\IPython\core\pylabtools.py:152: UserWarning: Glyph 128202 (\N{BAR CHART}) missing from current font.
+  fig.canvas.print_figure(bytes_io, **kw)
+</pre></div>
+</div>
+<img alt="_images/d3ded8add87e59392b4b3bb9bde4c703d93245276f3eae7786eec61dd301792d.png" src="_images/d3ded8add87e59392b4b3bb9bde4c703d93245276f3eae7786eec61dd301792d.png" />
 </div>
 </div>
 <p>meyimpandata prediksi
 menyimpandata model normalisasi
 untuk menghitung data baru
 untuk mendapatkan nilai sesungguh nya</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+
+<span class="c1"># --- 1️⃣ Output teks evaluasi seperti format pertama ---</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;📊 Perbandingan Nilai MAPE Berdasarkan Jumlah Hari Sebelumnya&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">day</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">([</span><span class="s1">&#39;2 Hari&#39;</span><span class="p">,</span> <span class="s1">&#39;3 Hari&#39;</span><span class="p">,</span> <span class="s1">&#39;4 Hari&#39;</span><span class="p">,</span> <span class="s1">&#39;5 Hari&#39;</span><span class="p">],</span>
+                      <span class="p">[</span><span class="n">mape</span><span class="p">,</span> <span class="n">mape</span><span class="p">,</span> <span class="n">mape_day4</span><span class="p">,</span> <span class="n">mape_day5</span><span class="p">]):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">day</span><span class="si">:</span><span class="s2">&lt;7</span><span class="si">}</span><span class="s2"> : </span><span class="si">{</span><span class="n">value</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">%&quot;</span><span class="p">)</span>
+
+<span class="c1"># --- 2️⃣ Grafik batang ---</span>
+<span class="n">x</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;2 Hari&#39;</span><span class="p">,</span> <span class="s1">&#39;3 Hari&#39;</span><span class="p">,</span> <span class="s1">&#39;4 Hari&#39;</span><span class="p">,</span> <span class="s1">&#39;5 Hari&#39;</span><span class="p">]</span>
+<span class="n">y</span> <span class="o">=</span> <span class="p">[</span><span class="n">mape</span><span class="p">,</span> <span class="n">mape</span><span class="p">,</span> <span class="n">mape_day4</span><span class="p">,</span> <span class="n">mape_day5</span><span class="p">]</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">7</span><span class="p">))</span>
+<span class="n">bars</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;salmon&#39;</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;📊 Perbandingan Nilai MAPE Berdasarkan Jumlah Hari Sebelumnya&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">13</span><span class="p">,</span> <span class="n">weight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Jumlah Hari Sebelumnya&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">11</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Nilai MAPE (%)&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">11</span><span class="p">)</span>
+
+<span class="c1"># Tambahkan label nilai MAPE di atas setiap batang</span>
+<span class="k">for</span> <span class="n">bar</span> <span class="ow">in</span> <span class="n">bars</span><span class="p">:</span>
+    <span class="n">height</span> <span class="o">=</span> <span class="n">bar</span><span class="o">.</span><span class="n">get_height</span><span class="p">()</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">text</span><span class="p">(</span>
+        <span class="n">bar</span><span class="o">.</span><span class="n">get_x</span><span class="p">()</span> <span class="o">+</span> <span class="n">bar</span><span class="o">.</span><span class="n">get_width</span><span class="p">()</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span>
+        <span class="n">height</span> <span class="o">+</span> <span class="mf">0.5</span><span class="p">,</span>
+        <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">height</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">%&quot;</span><span class="p">,</span>
+        <span class="n">ha</span><span class="o">=</span><span class="s1">&#39;center&#39;</span><span class="p">,</span>
+        <span class="n">va</span><span class="o">=</span><span class="s1">&#39;bottom&#39;</span><span class="p">,</span>
+        <span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+        <span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span>
+    <span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>📊 Perbandingan Nilai MAPE Berdasarkan Jumlah Hari Sebelumnya
+2 Hari  : 24.45%
+3 Hari  : 24.45%
+4 Hari  : 36.76%
+5 Hari  : 29.09%
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C:\Users\Jordan\AppData\Local\Temp\ipykernel_13560\3287171075.py:33: UserWarning: Glyph 128202 (\N{BAR CHART}) missing from current font.
+  plt.tight_layout()
+</pre></div>
+</div>
+<img alt="_images/ffb65c2a02b8be978abdd9291828171726f748e00eb61005fda88edc823c4626.png" src="_images/ffb65c2a02b8be978abdd9291828171726f748e00eb61005fda88edc823c4626.png" />
+</div>
+</div>
 </section>
 
     <script type="text/x-thebe-config">
