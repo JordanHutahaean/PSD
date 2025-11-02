@@ -1,4 +1,4 @@
-# eksplorasi Data 
+# eksplorasi Data (iris)
 
 Pada tahap eksplorasi data, kita meninjau isi dataset untuk memahami pola dan karakter dari setiap atribut. Dataset bunga iris ini terdiri atas 150 baris data dengan 3 kelas yang seimbang, yaitu:
 
