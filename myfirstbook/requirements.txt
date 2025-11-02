@@ -5,3 +5,5 @@ streamlit
 librosa
 numpy
 pandas
+seaborn
+scikit-learn
