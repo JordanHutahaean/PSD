@@ -1,0 +1,64 @@
+Traceback (most recent call last):
+  File "c:\users\jordan\appdata\local\programs\python\python39\lib\site-packages\jupyter_core\utils\__init__.py", line 154, in wrapped
+    asyncio.get_running_loop()
+RuntimeError: no running event loop
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "c:\users\jordan\appdata\local\programs\python\python39\lib\site-packages\jupyter_cache\executors\utils.py", line 58, in single_nb_execution
+    executenb(
+  File "c:\users\jordan\appdata\local\programs\python\python39\lib\site-packages\nbclient\client.py", line 1319, in execute
+    return NotebookClient(nb=nb, resources=resources, km=km, **kwargs).execute()
+  File "c:\users\jordan\appdata\local\programs\python\python39\lib\site-packages\jupyter_core\utils\__init__.py", line 158, in wrapped
+    return loop.run_until_complete(inner)
+  File "c:\users\jordan\appdata\local\programs\python\python39\lib\asyncio\base_events.py", line 642, in run_until_complete
+    return future.result()
+  File "c:\users\jordan\appdata\local\programs\python\python39\lib\site-packages\nbclient\client.py", line 709, in async_execute
+    await self.async_execute_cell(
+  File "c:\users\jordan\appdata\local\programs\python\python39\lib\site-packages\nbclient\client.py", line 1062, in async_execute_cell
+    await self._check_raise_for_error(cell, cell_index, exec_reply)
+  File "c:\users\jordan\appdata\local\programs\python\python39\lib\site-packages\nbclient\client.py", line 918, in _check_raise_for_error
+    raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
+nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
+------------------
+rows = []
+
+for split_path, split_name in [(train, "train"), (val, "val")]:
+    for label in ["buka", "tutup"]:
+        input_folder = os.path.join(split_path, label)
+        output_folder = os.path.join(output_base, split_name, label)
+        os.makedirs(output_folder, exist_ok=True)
+        
+        for filename in os.listdir(input_folder):
+            if filename.endswith(".wav"):
+                in_path = os.path.join(input_folder, filename)
+                out_path = os.path.join(output_folder, filename)
+                
+                try:
+                    preprocess_audio(in_path, out_path)
+                    rows.append({
+                        "split": split_name,
+                        "label": label,
+                        "file_path": out_path
+                    })
+                except Exception as e:
+                    print(f"Error {filename}: {e}")
+
+metadata = pd.DataFrame(rows)
+metadata.to_csv(os.path.join(output_base, "metadata.csv"), index=False)
+print("Preprocessing selesai! Metadata disimpan di dataset_preprocessed/metadata.csv")
+------------------
+
+
+[1;31m---------------------------------------------------------------------------[0m
+[1;31mFileNotFoundError[0m                         Traceback (most recent call last)
+Cell [1;32mIn[4], line 9[0m
+[0;32m      6[0m output_folder [38;5;241m=[39m os[38;5;241m.[39mpath[38;5;241m.[39mjoin(output_base, split_name, label)
+[0;32m      7[0m os[38;5;241m.[39mmakedirs(output_folder, exist_ok[38;5;241m=[39m[38;5;28;01mTrue[39;00m)
+[1;32m----> 9[0m [38;5;28;01mfor[39;00m filename [38;5;129;01min[39;00m [43mos[49m[38;5;241;43m.[39;49m[43mlistdir[49m[43m([49m[43minput_folder[49m[43m)[49m:
+[0;32m     10[0m     [38;5;28;01mif[39;00m filename[38;5;241m.[39mendswith([38;5;124m"[39m[38;5;124m.wav[39m[38;5;124m"[39m):
+[0;32m     11[0m         in_path [38;5;241m=[39m os[38;5;241m.[39mpath[38;5;241m.[39mjoin(input_folder, filename)
+
+[1;31mFileNotFoundError[0m: [WinError 3] The system cannot find the path specified: '../dataset/dataset48k/train/buka'
+
