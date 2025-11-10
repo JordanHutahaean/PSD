@@ -17,7 +17,7 @@ if not os.path.exists(MODEL_PATH):
     X_dummy = np.random.rand(20, 13)  # 20 sample, 13 fitur MFCC
     y_dummy = np.random.choice(["buka", "tutup"], size=20)
 
-    clf = RandomForestClassifier()
+    clf = RandomForestClassifier(probability=True) if hasattr(RandomForestClassifier, "probability") else RandomForestClassifier()
     clf.fit(X_dummy, y_dummy)
     joblib.dump(clf, MODEL_PATH)
     st.success("Model dummy berhasil dibuat!")
@@ -38,3 +38,12 @@ if audio_bytes is not None:
     
     pred = model.predict(mfccs_mean)[0]
     st.success(f"🔊 Terdeteksi: **{pred.upper()}**")
+
+    # 🔹 Tambahan: Tampilkan probabilitas sebagai bar visual
+    if hasattr(model, "predict_proba"):
+        probs = model.predict_proba(mfccs_mean)[0]
+        labels = model.classes_
+        st.subheader("📊 Probabilitas:")
+        for label, prob in zip(labels, probs):
+            st.write(f"**{label}: {prob*100:.2f}%**")
+            st.progress(float(prob))
