@@ -7,4 +7,4 @@ numpy
 pandas
 seaborn
 scikit-learn
-tensorflow
+tensorflow  
