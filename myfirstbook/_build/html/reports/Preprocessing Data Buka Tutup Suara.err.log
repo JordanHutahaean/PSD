@@ -22,155 +22,43 @@ Traceback (most recent call last):
     raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
 nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
 ------------------
-import librosa
-import librosa.display
-import matplotlib.pyplot as plt
-import numpy as np
-import soundfile as sf
-import os
-import pandas as pd
-from IPython.display import Audio, display
+rows = []
+
+for split_path, split_name in [(train, "train"), (val, "val")]:
+    for label in ["buka", "tutup"]:
+        input_folder = os.path.join(split_path, label)
+        output_folder = os.path.join(output_base, split_name, label)
+        os.makedirs(output_folder, exist_ok=True)
+        
+        for filename in os.listdir(input_folder):
+            if filename.endswith(".wav"):
+                in_path = os.path.join(input_folder, filename)
+                out_path = os.path.join(output_folder, filename)
+                
+                try:
+                    preprocess_audio(in_path, out_path)
+                    rows.append({
+                        "split": split_name,
+                        "label": label,
+                        "file_path": out_path
+                    })
+                except Exception as e:
+                    print(f"Error {filename}: {e}")
+
+metadata = pd.DataFrame(rows)
+metadata.to_csv(os.path.join(output_base, "metadata.csv"), index=False)
+print("Preprocessing selesai! Metadata disimpan di dataset_preprocessed/metadata.csv")
 ------------------
 
------ stderr -----
-
-A module that was compiled using NumPy 1.x cannot be run in
-NumPy 2.0.2 as it may crash. To support both 1.x and 2.x
-versions of NumPy, modules must be compiled with NumPy 2.0.
-Some module may need to rebuild instead e.g. with 'pybind11>=2.12'.
-
-If you are a user of the module, the easiest solution will be to
-downgrade to 'numpy<2' or try to upgrade the affected module.
-We expect that some modules will need time to support NumPy 2.
-
-Traceback (most recent call last):  File "c:\users\jordan\appdata\local\programs\python\python39\lib\runpy.py", line 197, in _run_module_as_main
-    return _run_code(code, main_globals, None,
-  File "c:\users\jordan\appdata\local\programs\python\python39\lib\runpy.py", line 87, in _run_code
-    exec(code, run_globals)
-  File "C:\Users\Jordan\AppData\Roaming\Python\Python39\site-packages\ipykernel_launcher.py", line 18, in <module>
-    app.launch_new_instance()
-  File "c:\users\jordan\appdata\local\programs\python\python39\lib\site-packages\traitlets\config\application.py", line 1075, in launch_instance
-    app.start()
-  File "C:\Users\Jordan\AppData\Roaming\Python\Python39\site-packages\ipykernel\kernelapp.py", line 739, in start
-    self.io_loop.start()
-  File "C:\Users\Jordan\AppData\Roaming\Python\Python39\site-packages\tornado\platform\asyncio.py", line 211, in start
-    self.asyncio_loop.run_forever()
-  File "c:\users\jordan\appdata\local\programs\python\python39\lib\asyncio\base_events.py", line 596, in run_forever
-    self._run_once()
-  File "c:\users\jordan\appdata\local\programs\python\python39\lib\asyncio\base_events.py", line 1890, in _run_once
-    handle._run()
-  File "c:\users\jordan\appdata\local\programs\python\python39\lib\asyncio\events.py", line 80, in _run
-    self._context.run(self._callback, *self._args)
-  File "C:\Users\Jordan\AppData\Roaming\Python\Python39\site-packages\ipykernel\kernelbase.py", line 519, in dispatch_queue
-    await self.process_one()
-  File "C:\Users\Jordan\AppData\Roaming\Python\Python39\site-packages\ipykernel\kernelbase.py", line 508, in process_one
-    await dispatch(*args)
-  File "C:\Users\Jordan\AppData\Roaming\Python\Python39\site-packages\ipykernel\kernelbase.py", line 400, in dispatch_shell
-    await result
-  File "C:\Users\Jordan\AppData\Roaming\Python\Python39\site-packages\ipykernel\ipkernel.py", line 368, in execute_request
-    await super().execute_request(stream, ident, parent)
-  File "C:\Users\Jordan\AppData\Roaming\Python\Python39\site-packages\ipykernel\kernelbase.py", line 767, in execute_request
-    reply_content = await reply_content
-  File "C:\Users\Jordan\AppData\Roaming\Python\Python39\site-packages\ipykernel\ipkernel.py", line 455, in do_execute
-    res = shell.run_cell(
-  File "C:\Users\Jordan\AppData\Roaming\Python\Python39\site-packages\ipykernel\zmqshell.py", line 577, in run_cell
-    return super().run_cell(*args, **kwargs)
-  File "c:\users\jordan\appdata\local\programs\python\python39\lib\site-packages\IPython\core\interactiveshell.py", line 3048, in run_cell
-    result = self._run_cell(
-  File "c:\users\jordan\appdata\local\programs\python\python39\lib\site-packages\IPython\core\interactiveshell.py", line 3103, in _run_cell
-    result = runner(coro)
-  File "c:\users\jordan\appdata\local\programs\python\python39\lib\site-packages\IPython\core\async_helpers.py", line 129, in _pseudo_sync_runner
-    coro.send(None)
-  File "c:\users\jordan\appdata\local\programs\python\python39\lib\site-packages\IPython\core\interactiveshell.py", line 3308, in run_cell_async
-    has_raised = await self.run_ast_nodes(code_ast.body, cell_name,
-  File "c:\users\jordan\appdata\local\programs\python\python39\lib\site-packages\IPython\core\interactiveshell.py", line 3490, in run_ast_nodes
-    if await self.run_code(code, result, async_=asy):
-  File "c:\users\jordan\appdata\local\programs\python\python39\lib\site-packages\IPython\core\interactiveshell.py", line 3550, in run_code
-    exec(code_obj, self.user_global_ns, self.user_ns)
-  File "C:\Users\Jordan\AppData\Local\Temp\ipykernel_15584\2308826984.py", line 2, in <module>
-    import librosa.display
-  File "c:\users\jordan\appdata\local\programs\python\python39\lib\site-packages\librosa\display.py", line 44, in <module>
-    from matplotlib import colormaps as mcm
-  File "c:\users\jordan\appdata\local\programs\python\python39\lib\site-packages\matplotlib\__init__.py", line 157, in <module>
-    from . import _api, _version, cbook, _docstring, rcsetup
-  File "c:\users\jordan\appdata\local\programs\python\python39\lib\site-packages\matplotlib\rcsetup.py", line 27, in <module>
-    from matplotlib.colors import Colormap, is_color_like
-  File "c:\users\jordan\appdata\local\programs\python\python39\lib\site-packages\matplotlib\colors.py", line 56, in <module>
-    from matplotlib import _api, _cm, cbook, scale
-  File "c:\users\jordan\appdata\local\programs\python\python39\lib\site-packages\matplotlib\scale.py", line 22, in <module>
-    from matplotlib.ticker import (
-  File "c:\users\jordan\appdata\local\programs\python\python39\lib\site-packages\matplotlib\ticker.py", line 138, in <module>
-    from matplotlib import transforms as mtransforms
-  File "c:\users\jordan\appdata\local\programs\python\python39\lib\site-packages\matplotlib\transforms.py", line 49, in <module>
-    from matplotlib._path import (
-------------------
 
 [1;31m---------------------------------------------------------------------------[0m
-[1;31mImportError[0m                               Traceback (most recent call last)
-Cell [1;32mIn[1], line 2[0m
-[0;32m      1[0m [38;5;28;01mimport[39;00m[38;5;250m [39m[38;5;21;01mlibrosa[39;00m
-[1;32m----> 2[0m [38;5;28;01mimport[39;00m[38;5;250m [39m[38;5;21;01mlibrosa[39;00m[38;5;21;01m.[39;00m[38;5;21;01mdisplay[39;00m
-[0;32m      3[0m [38;5;28;01mimport[39;00m[38;5;250m [39m[38;5;21;01mmatplotlib[39;00m[38;5;21;01m.[39;00m[38;5;21;01mpyplot[39;00m[38;5;250m [39m[38;5;28;01mas[39;00m[38;5;250m [39m[38;5;21;01mplt[39;00m
-[0;32m      4[0m [38;5;28;01mimport[39;00m[38;5;250m [39m[38;5;21;01mnumpy[39;00m[38;5;250m [39m[38;5;28;01mas[39;00m[38;5;250m [39m[38;5;21;01mnp[39;00m
+[1;31mFileNotFoundError[0m                         Traceback (most recent call last)
+Cell [1;32mIn[4], line 9[0m
+[0;32m      6[0m output_folder [38;5;241m=[39m os[38;5;241m.[39mpath[38;5;241m.[39mjoin(output_base, split_name, label)
+[0;32m      7[0m os[38;5;241m.[39mmakedirs(output_folder, exist_ok[38;5;241m=[39m[38;5;28;01mTrue[39;00m)
+[1;32m----> 9[0m [38;5;28;01mfor[39;00m filename [38;5;129;01min[39;00m [43mos[49m[38;5;241;43m.[39;49m[43mlistdir[49m[43m([49m[43minput_folder[49m[43m)[49m:
+[0;32m     10[0m     [38;5;28;01mif[39;00m filename[38;5;241m.[39mendswith([38;5;124m"[39m[38;5;124m.wav[39m[38;5;124m"[39m):
+[0;32m     11[0m         in_path [38;5;241m=[39m os[38;5;241m.[39mpath[38;5;241m.[39mjoin(input_folder, filename)
 
-File [1;32mc:\users\jordan\appdata\local\programs\python\python39\lib\site-packages\librosa\display.py:44[0m
-[0;32m     41[0m [38;5;28;01mimport[39;00m[38;5;250m [39m[38;5;21;01mwarnings[39;00m
-[0;32m     43[0m [38;5;28;01mimport[39;00m[38;5;250m [39m[38;5;21;01mnumpy[39;00m[38;5;250m [39m[38;5;28;01mas[39;00m[38;5;250m [39m[38;5;21;01mnp[39;00m
-[1;32m---> 44[0m [38;5;28;01mfrom[39;00m[38;5;250m [39m[38;5;21;01mmatplotlib[39;00m[38;5;250m [39m[38;5;28;01mimport[39;00m colormaps [38;5;28;01mas[39;00m mcm
-[0;32m     45[0m [38;5;28;01mimport[39;00m[38;5;250m [39m[38;5;21;01mmatplotlib[39;00m[38;5;21;01m.[39;00m[38;5;21;01maxes[39;00m[38;5;250m [39m[38;5;28;01mas[39;00m[38;5;250m [39m[38;5;21;01mmplaxes[39;00m
-[0;32m     46[0m [38;5;28;01mimport[39;00m[38;5;250m [39m[38;5;21;01mmatplotlib[39;00m[38;5;21;01m.[39;00m[38;5;21;01mticker[39;00m[38;5;250m [39m[38;5;28;01mas[39;00m[38;5;250m [39m[38;5;21;01mmplticker[39;00m
-
-File [1;32mc:\users\jordan\appdata\local\programs\python\python39\lib\site-packages\matplotlib\__init__.py:157[0m
-[0;32m    153[0m [38;5;28;01mfrom[39;00m[38;5;250m [39m[38;5;21;01mpackaging[39;00m[38;5;21;01m.[39;00m[38;5;21;01mversion[39;00m[38;5;250m [39m[38;5;28;01mimport[39;00m parse [38;5;28;01mas[39;00m parse_version
-[0;32m    155[0m [38;5;66;03m# cbook must import matplotlib only within function[39;00m
-[0;32m    156[0m [38;5;66;03m# definitions, so it is safe to import from it here.[39;00m
-[1;32m--> 157[0m [38;5;28;01mfrom[39;00m[38;5;250m [39m[38;5;21;01m.[39;00m[38;5;250m [39m[38;5;28;01mimport[39;00m _api, _version, cbook, _docstring, rcsetup
-[0;32m    158[0m [38;5;28;01mfrom[39;00m[38;5;250m [39m[38;5;21;01mmatplotlib[39;00m[38;5;21;01m.[39;00m[38;5;21;01mcbook[39;00m[38;5;250m [39m[38;5;28;01mimport[39;00m sanitize_sequence
-[0;32m    159[0m [38;5;28;01mfrom[39;00m[38;5;250m [39m[38;5;21;01mmatplotlib[39;00m[38;5;21;01m.[39;00m[38;5;21;01m_api[39;00m[38;5;250m [39m[38;5;28;01mimport[39;00m MatplotlibDeprecationWarning
-
-File [1;32mc:\users\jordan\appdata\local\programs\python\python39\lib\site-packages\matplotlib\rcsetup.py:27[0m
-[0;32m     25[0m [38;5;28;01mfrom[39;00m[38;5;250m [39m[38;5;21;01mmatplotlib[39;00m[38;5;250m [39m[38;5;28;01mimport[39;00m _api, cbook
-[0;32m     26[0m [38;5;28;01mfrom[39;00m[38;5;250m [39m[38;5;21;01mmatplotlib[39;00m[38;5;21;01m.[39;00m[38;5;21;01mcbook[39;00m[38;5;250m [39m[38;5;28;01mimport[39;00m ls_mapper
-[1;32m---> 27[0m [38;5;28;01mfrom[39;00m[38;5;250m [39m[38;5;21;01mmatplotlib[39;00m[38;5;21;01m.[39;00m[38;5;21;01mcolors[39;00m[38;5;250m [39m[38;5;28;01mimport[39;00m Colormap, is_color_like
-[0;32m     28[0m [38;5;28;01mfrom[39;00m[38;5;250m [39m[38;5;21;01mmatplotlib[39;00m[38;5;21;01m.[39;00m[38;5;21;01m_fontconfig_pattern[39;00m[38;5;250m [39m[38;5;28;01mimport[39;00m parse_fontconfig_pattern
-[0;32m     29[0m [38;5;28;01mfrom[39;00m[38;5;250m [39m[38;5;21;01mmatplotlib[39;00m[38;5;21;01m.[39;00m[38;5;21;01m_enums[39;00m[38;5;250m [39m[38;5;28;01mimport[39;00m JoinStyle, CapStyle
-
-File [1;32mc:\users\jordan\appdata\local\programs\python\python39\lib\site-packages\matplotlib\colors.py:56[0m
-[0;32m     54[0m [38;5;28;01mimport[39;00m[38;5;250m [39m[38;5;21;01mmatplotlib[39;00m[38;5;250m [39m[38;5;28;01mas[39;00m[38;5;250m [39m[38;5;21;01mmpl[39;00m
-[0;32m     55[0m [38;5;28;01mimport[39;00m[38;5;250m [39m[38;5;21;01mnumpy[39;00m[38;5;250m [39m[38;5;28;01mas[39;00m[38;5;250m [39m[38;5;21;01mnp[39;00m
-[1;32m---> 56[0m [38;5;28;01mfrom[39;00m[38;5;250m [39m[38;5;21;01mmatplotlib[39;00m[38;5;250m [39m[38;5;28;01mimport[39;00m _api, _cm, cbook, scale
-[0;32m     57[0m [38;5;28;01mfrom[39;00m[38;5;250m [39m[38;5;21;01m.[39;00m[38;5;21;01m_color_data[39;00m[38;5;250m [39m[38;5;28;01mimport[39;00m BASE_COLORS, TABLEAU_COLORS, CSS4_COLORS, XKCD_COLORS
-[0;32m     60[0m [38;5;28;01mclass[39;00m[38;5;250m [39m[38;5;21;01m_ColorMapping[39;00m([38;5;28mdict[39m):
-
-File [1;32mc:\users\jordan\appdata\local\programs\python\python39\lib\site-packages\matplotlib\scale.py:22[0m
-[0;32m     20[0m [38;5;28;01mimport[39;00m[38;5;250m [39m[38;5;21;01mmatplotlib[39;00m[38;5;250m [39m[38;5;28;01mas[39;00m[38;5;250m [39m[38;5;21;01mmpl[39;00m
-[0;32m     21[0m [38;5;28;01mfrom[39;00m[38;5;250m [39m[38;5;21;01mmatplotlib[39;00m[38;5;250m [39m[38;5;28;01mimport[39;00m _api, _docstring
-[1;32m---> 22[0m [38;5;28;01mfrom[39;00m[38;5;250m [39m[38;5;21;01mmatplotlib[39;00m[38;5;21;01m.[39;00m[38;5;21;01mticker[39;00m[38;5;250m [39m[38;5;28;01mimport[39;00m (
-[0;32m     23[0m     NullFormatter, ScalarFormatter, LogFormatterSciNotation, LogitFormatter,
-[0;32m     24[0m     NullLocator, LogLocator, AutoLocator, AutoMinorLocator,
-[0;32m     25[0m     SymmetricalLogLocator, AsinhLocator, LogitLocator)
-[0;32m     26[0m [38;5;28;01mfrom[39;00m[38;5;250m [39m[38;5;21;01mmatplotlib[39;00m[38;5;21;01m.[39;00m[38;5;21;01mtransforms[39;00m[38;5;250m [39m[38;5;28;01mimport[39;00m Transform, IdentityTransform
-[0;32m     29[0m [38;5;28;01mclass[39;00m[38;5;250m [39m[38;5;21;01mScaleBase[39;00m:
-
-File [1;32mc:\users\jordan\appdata\local\programs\python\python39\lib\site-packages\matplotlib\ticker.py:138[0m
-[0;32m    136[0m [38;5;28;01mimport[39;00m[38;5;250m [39m[38;5;21;01mmatplotlib[39;00m[38;5;250m [39m[38;5;28;01mas[39;00m[38;5;250m [39m[38;5;21;01mmpl[39;00m
-[0;32m    137[0m [38;5;28;01mfrom[39;00m[38;5;250m [39m[38;5;21;01mmatplotlib[39;00m[38;5;250m [39m[38;5;28;01mimport[39;00m _api, cbook
-[1;32m--> 138[0m [38;5;28;01mfrom[39;00m[38;5;250m [39m[38;5;21;01mmatplotlib[39;00m[38;5;250m [39m[38;5;28;01mimport[39;00m transforms [38;5;28;01mas[39;00m mtransforms
-[0;32m    140[0m _log [38;5;241m=[39m logging[38;5;241m.[39mgetLogger([38;5;18m__name__[39m)
-[0;32m    142[0m __all__ [38;5;241m=[39m ([38;5;124m'[39m[38;5;124mTickHelper[39m[38;5;124m'[39m, [38;5;124m'[39m[38;5;124mFormatter[39m[38;5;124m'[39m, [38;5;124m'[39m[38;5;124mFixedFormatter[39m[38;5;124m'[39m,
-[0;32m    143[0m            [38;5;124m'[39m[38;5;124mNullFormatter[39m[38;5;124m'[39m, [38;5;124m'[39m[38;5;124mFuncFormatter[39m[38;5;124m'[39m, [38;5;124m'[39m[38;5;124mFormatStrFormatter[39m[38;5;124m'[39m,
-[0;32m    144[0m            [38;5;124m'[39m[38;5;124mStrMethodFormatter[39m[38;5;124m'[39m, [38;5;124m'[39m[38;5;124mScalarFormatter[39m[38;5;124m'[39m, [38;5;124m'[39m[38;5;124mLogFormatter[39m[38;5;124m'[39m,
-[1;32m   (...)[0m
-[0;32m    150[0m            [38;5;124m'[39m[38;5;124mMultipleLocator[39m[38;5;124m'[39m, [38;5;124m'[39m[38;5;124mMaxNLocator[39m[38;5;124m'[39m, [38;5;124m'[39m[38;5;124mAutoMinorLocator[39m[38;5;124m'[39m,
-[0;32m    151[0m            [38;5;124m'[39m[38;5;124mSymmetricalLogLocator[39m[38;5;124m'[39m, [38;5;124m'[39m[38;5;124mAsinhLocator[39m[38;5;124m'[39m, [38;5;124m'[39m[38;5;124mLogitLocator[39m[38;5;124m'[39m)
-
-File [1;32mc:\users\jordan\appdata\local\programs\python\python39\lib\site-packages\matplotlib\transforms.py:49[0m
-[0;32m     46[0m [38;5;28;01mfrom[39;00m[38;5;250m [39m[38;5;21;01mnumpy[39;00m[38;5;21;01m.[39;00m[38;5;21;01mlinalg[39;00m[38;5;250m [39m[38;5;28;01mimport[39;00m inv
-[0;32m     48[0m [38;5;28;01mfrom[39;00m[38;5;250m [39m[38;5;21;01mmatplotlib[39;00m[38;5;250m [39m[38;5;28;01mimport[39;00m _api
-[1;32m---> 49[0m [38;5;28;01mfrom[39;00m[38;5;250m [39m[38;5;21;01mmatplotlib[39;00m[38;5;21;01m.[39;00m[38;5;21;01m_path[39;00m[38;5;250m [39m[38;5;28;01mimport[39;00m (
-[0;32m     50[0m     affine_transform, count_bboxes_overlapping_bbox, update_path_extents)
-[0;32m     51[0m [38;5;28;01mfrom[39;00m[38;5;250m [39m[38;5;21;01m.[39;00m[38;5;21;01mpath[39;00m[38;5;250m [39m[38;5;28;01mimport[39;00m Path
-[0;32m     53[0m DEBUG [38;5;241m=[39m [38;5;28;01mFalse[39;00m
-
-[1;31mImportError[0m: numpy.core.multiarray failed to import
+[1;31mFileNotFoundError[0m: [WinError 3] The system cannot find the path specified: '../dataset/dataset48k/train/buka'
 

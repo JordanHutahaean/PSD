@@ -495,116 +495,6 @@ document.write(`
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">ValueError</span><span class="g g-Whitespace">                                </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
-<span class="ne">----&gt; </span><span class="mi">1</span> <span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
-<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.model_selection</span><span class="w"> </span><span class="kn">import</span> <span class="n">train_test_split</span>
-<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.naive_bayes</span><span class="w"> </span><span class="kn">import</span> <span class="n">GaussianNB</span>
-
-<span class="n">File</span> <span class="n">c</span><span class="p">:</span>\<span class="n">users</span>\<span class="n">jordan</span>\<span class="n">appdata</span>\<span class="n">local</span>\<span class="n">programs</span>\<span class="n">python</span>\<span class="n">python39</span>\<span class="n">lib</span>\<span class="n">site</span><span class="o">-</span><span class="n">packages</span>\<span class="n">pandas</span>\<span class="fm">__init__</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">73</span>
-<span class="g g-Whitespace">     </span><span class="mi">70</span> <span class="c1"># let init-time option registration happen</span>
-<span class="g g-Whitespace">     </span><span class="mi">71</span> <span class="kn">import</span><span class="w"> </span><span class="nn">pandas.core.config_init</span>  <span class="c1"># pyright: ignore[reportUnusedImport] # noqa: F401</span>
-<span class="ne">---&gt; </span><span class="mi">73</span> <span class="kn">from</span><span class="w"> </span><span class="nn">pandas.core.api</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
-<span class="g g-Whitespace">     </span><span class="mi">74</span>     <span class="c1"># dtype</span>
-<span class="g g-Whitespace">     </span><span class="mi">75</span>     <span class="n">ArrowDtype</span><span class="p">,</span>
-<span class="g g-Whitespace">     </span><span class="mi">76</span>     <span class="n">Int8Dtype</span><span class="p">,</span>
-<span class="g g-Whitespace">     </span><span class="mi">77</span>     <span class="n">Int16Dtype</span><span class="p">,</span>
-<span class="g g-Whitespace">     </span><span class="mi">78</span>     <span class="n">Int32Dtype</span><span class="p">,</span>
-<span class="g g-Whitespace">     </span><span class="mi">79</span>     <span class="n">Int64Dtype</span><span class="p">,</span>
-<span class="g g-Whitespace">     </span><span class="mi">80</span>     <span class="n">UInt8Dtype</span><span class="p">,</span>
-<span class="g g-Whitespace">     </span><span class="mi">81</span>     <span class="n">UInt16Dtype</span><span class="p">,</span>
-<span class="g g-Whitespace">     </span><span class="mi">82</span>     <span class="n">UInt32Dtype</span><span class="p">,</span>
-<span class="g g-Whitespace">     </span><span class="mi">83</span>     <span class="n">UInt64Dtype</span><span class="p">,</span>
-<span class="g g-Whitespace">     </span><span class="mi">84</span>     <span class="n">Float32Dtype</span><span class="p">,</span>
-<span class="g g-Whitespace">     </span><span class="mi">85</span>     <span class="n">Float64Dtype</span><span class="p">,</span>
-<span class="g g-Whitespace">     </span><span class="mi">86</span>     <span class="n">CategoricalDtype</span><span class="p">,</span>
-<span class="g g-Whitespace">     </span><span class="mi">87</span>     <span class="n">PeriodDtype</span><span class="p">,</span>
-<span class="g g-Whitespace">     </span><span class="mi">88</span>     <span class="n">IntervalDtype</span><span class="p">,</span>
-<span class="g g-Whitespace">     </span><span class="mi">89</span>     <span class="n">DatetimeTZDtype</span><span class="p">,</span>
-<span class="g g-Whitespace">     </span><span class="mi">90</span>     <span class="n">StringDtype</span><span class="p">,</span>
-<span class="g g-Whitespace">     </span><span class="mi">91</span>     <span class="n">BooleanDtype</span><span class="p">,</span>
-<span class="g g-Whitespace">     </span><span class="mi">92</span>     <span class="c1"># missing</span>
-<span class="g g-Whitespace">     </span><span class="mi">93</span>     <span class="n">NA</span><span class="p">,</span>
-<span class="g g-Whitespace">     </span><span class="mi">94</span>     <span class="n">isna</span><span class="p">,</span>
-<span class="g g-Whitespace">     </span><span class="mi">95</span>     <span class="n">isnull</span><span class="p">,</span>
-<span class="g g-Whitespace">     </span><span class="mi">96</span>     <span class="n">notna</span><span class="p">,</span>
-<span class="g g-Whitespace">     </span><span class="mi">97</span>     <span class="n">notnull</span><span class="p">,</span>
-<span class="g g-Whitespace">     </span><span class="mi">98</span>     <span class="c1"># indexes</span>
-<span class="g g-Whitespace">     </span><span class="mi">99</span>     <span class="n">Index</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">100</span>     <span class="n">CategoricalIndex</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">101</span>     <span class="n">RangeIndex</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">102</span>     <span class="n">MultiIndex</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">103</span>     <span class="n">IntervalIndex</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">104</span>     <span class="n">TimedeltaIndex</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">105</span>     <span class="n">DatetimeIndex</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">106</span>     <span class="n">PeriodIndex</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">107</span>     <span class="n">IndexSlice</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">108</span>     <span class="c1"># tseries</span>
-<span class="g g-Whitespace">    </span><span class="mi">109</span>     <span class="n">NaT</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">110</span>     <span class="n">Period</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">111</span>     <span class="n">period_range</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">112</span>     <span class="n">Timedelta</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">113</span>     <span class="n">timedelta_range</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">114</span>     <span class="n">Timestamp</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">115</span>     <span class="n">date_range</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">116</span>     <span class="n">bdate_range</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">117</span>     <span class="n">Interval</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">118</span>     <span class="n">interval_range</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">119</span>     <span class="n">DateOffset</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">120</span>     <span class="c1"># conversion</span>
-<span class="g g-Whitespace">    </span><span class="mi">121</span>     <span class="n">to_numeric</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">122</span>     <span class="n">to_datetime</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">123</span>     <span class="n">to_timedelta</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">124</span>     <span class="c1"># misc</span>
-<span class="g g-Whitespace">    </span><span class="mi">125</span>     <span class="n">Flags</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">126</span>     <span class="n">Grouper</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">127</span>     <span class="n">factorize</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">128</span>     <span class="n">unique</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">129</span>     <span class="n">value_counts</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">130</span>     <span class="n">NamedAgg</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">131</span>     <span class="n">array</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">132</span>     <span class="n">Categorical</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">133</span>     <span class="n">set_eng_float_format</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">134</span>     <span class="n">Series</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">135</span>     <span class="n">DataFrame</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">136</span> <span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">138</span> <span class="kn">from</span><span class="w"> </span><span class="nn">pandas.core.dtypes.dtypes</span><span class="w"> </span><span class="kn">import</span> <span class="n">SparseDtype</span>
-<span class="g g-Whitespace">    </span><span class="mi">140</span> <span class="kn">from</span><span class="w"> </span><span class="nn">pandas.tseries.api</span><span class="w"> </span><span class="kn">import</span> <span class="n">infer_freq</span>
-
-<span class="n">File</span> <span class="n">c</span><span class="p">:</span>\<span class="n">users</span>\<span class="n">jordan</span>\<span class="n">appdata</span>\<span class="n">local</span>\<span class="n">programs</span>\<span class="n">python</span>\<span class="n">python39</span>\<span class="n">lib</span>\<span class="n">site</span><span class="o">-</span><span class="n">packages</span>\<span class="n">pandas</span>\<span class="n">core</span>\<span class="n">api</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">1</span>
-<span class="ne">----&gt; </span><span class="mi">1</span> <span class="kn">from</span><span class="w"> </span><span class="nn">pandas._libs</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
-<span class="g g-Whitespace">      </span><span class="mi">2</span>     <span class="n">NaT</span><span class="p">,</span>
-<span class="g g-Whitespace">      </span><span class="mi">3</span>     <span class="n">Period</span><span class="p">,</span>
-<span class="g g-Whitespace">      </span><span class="mi">4</span>     <span class="n">Timedelta</span><span class="p">,</span>
-<span class="g g-Whitespace">      </span><span class="mi">5</span>     <span class="n">Timestamp</span><span class="p">,</span>
-<span class="g g-Whitespace">      </span><span class="mi">6</span> <span class="p">)</span>
-<span class="g g-Whitespace">      </span><span class="mi">7</span> <span class="kn">from</span><span class="w"> </span><span class="nn">pandas._libs.missing</span><span class="w"> </span><span class="kn">import</span> <span class="n">NA</span>
-<span class="g g-Whitespace">      </span><span class="mi">9</span> <span class="kn">from</span><span class="w"> </span><span class="nn">pandas.core.dtypes.dtypes</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
-<span class="g g-Whitespace">     </span><span class="mi">10</span>     <span class="n">ArrowDtype</span><span class="p">,</span>
-<span class="g g-Whitespace">     </span><span class="mi">11</span>     <span class="n">CategoricalDtype</span><span class="p">,</span>
-   <span class="p">(</span><span class="o">...</span><span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">14</span>     <span class="n">PeriodDtype</span><span class="p">,</span>
-<span class="g g-Whitespace">     </span><span class="mi">15</span> <span class="p">)</span>
-
-<span class="n">File</span> <span class="n">c</span><span class="p">:</span>\<span class="n">users</span>\<span class="n">jordan</span>\<span class="n">appdata</span>\<span class="n">local</span>\<span class="n">programs</span>\<span class="n">python</span>\<span class="n">python39</span>\<span class="n">lib</span>\<span class="n">site</span><span class="o">-</span><span class="n">packages</span>\<span class="n">pandas</span>\<span class="n">_libs</span>\<span class="fm">__init__</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">18</span>
-<span class="g g-Whitespace">     </span><span class="mi">16</span> <span class="kn">import</span><span class="w"> </span><span class="nn">pandas._libs.pandas_parser</span>  <span class="c1"># noqa: E501 # isort: skip # type: ignore[reportUnusedImport]</span>
-<span class="g g-Whitespace">     </span><span class="mi">17</span> <span class="kn">import</span><span class="w"> </span><span class="nn">pandas._libs.pandas_datetime</span>  <span class="c1"># noqa: F401,E501 # isort: skip # type: ignore[reportUnusedImport]</span>
-<span class="ne">---&gt; </span><span class="mi">18</span> <span class="kn">from</span><span class="w"> </span><span class="nn">pandas._libs.interval</span><span class="w"> </span><span class="kn">import</span> <span class="n">Interval</span>
-<span class="g g-Whitespace">     </span><span class="mi">19</span> <span class="kn">from</span><span class="w"> </span><span class="nn">pandas._libs.tslibs</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
-<span class="g g-Whitespace">     </span><span class="mi">20</span>     <span class="n">NaT</span><span class="p">,</span>
-<span class="g g-Whitespace">     </span><span class="mi">21</span>     <span class="n">NaTType</span><span class="p">,</span>
-   <span class="p">(</span><span class="o">...</span><span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">26</span>     <span class="n">iNaT</span><span class="p">,</span>
-<span class="g g-Whitespace">     </span><span class="mi">27</span> <span class="p">)</span>
-
-<span class="nn">File interval.pyx:1,</span> in <span class="ni">init pandas._libs.interval</span><span class="nt">()</span>
-
-<span class="ne">ValueError</span>: numpy.dtype size changed, may indicate binary incompatibility. Expected 96 from C header, got 88 from PyObject
-</pre></div>
-</div>
-</div>
 </div>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="baggingclassifier-menggunakan-metode-naive-bayes">
@@ -682,115 +572,55 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>c:\Users\Jordan\AppData\Local\Programs\Python\Python39\lib\site-packages\sklearn\naive_bayes.py:509: RuntimeWarning: divide by zero encountered in log
-  jointi = np.log(self.class_prior_[i])
-c:\Users\Jordan\AppData\Local\Programs\Python\Python39\lib\site-packages\sklearn\naive_bayes.py:509: RuntimeWarning: divide by zero encountered in log
-  jointi = np.log(self.class_prior_[i])
-c:\Users\Jordan\AppData\Local\Programs\Python\Python39\lib\site-packages\sklearn\naive_bayes.py:509: RuntimeWarning: divide by zero encountered in log
-  jointi = np.log(self.class_prior_[i])
-c:\Users\Jordan\AppData\Local\Programs\Python\Python39\lib\site-packages\sklearn\naive_bayes.py:509: RuntimeWarning: divide by zero encountered in log
-  jointi = np.log(self.class_prior_[i])
-c:\Users\Jordan\AppData\Local\Programs\Python\Python39\lib\site-packages\sklearn\naive_bayes.py:509: RuntimeWarning: divide by zero encountered in log
-  jointi = np.log(self.class_prior_[i])
-c:\Users\Jordan\AppData\Local\Programs\Python\Python39\lib\site-packages\sklearn\naive_bayes.py:509: RuntimeWarning: divide by zero encountered in log
-  jointi = np.log(self.class_prior_[i])
-c:\Users\Jordan\AppData\Local\Programs\Python\Python39\lib\site-packages\sklearn\naive_bayes.py:509: RuntimeWarning: divide by zero encountered in log
-  jointi = np.log(self.class_prior_[i])
-c:\Users\Jordan\AppData\Local\Programs\Python\Python39\lib\site-packages\sklearn\naive_bayes.py:509: RuntimeWarning: divide by zero encountered in log
-  jointi = np.log(self.class_prior_[i])
-c:\Users\Jordan\AppData\Local\Programs\Python\Python39\lib\site-packages\sklearn\naive_bayes.py:509: RuntimeWarning: divide by zero encountered in log
-  jointi = np.log(self.class_prior_[i])
-c:\Users\Jordan\AppData\Local\Programs\Python\Python39\lib\site-packages\sklearn\naive_bayes.py:509: RuntimeWarning: divide by zero encountered in log
-  jointi = np.log(self.class_prior_[i])
-c:\Users\Jordan\AppData\Local\Programs\Python\Python39\lib\site-packages\sklearn\naive_bayes.py:509: RuntimeWarning: divide by zero encountered in log
-  jointi = np.log(self.class_prior_[i])
-c:\Users\Jordan\AppData\Local\Programs\Python\Python39\lib\site-packages\sklearn\naive_bayes.py:509: RuntimeWarning: divide by zero encountered in log
-  jointi = np.log(self.class_prior_[i])
-c:\Users\Jordan\AppData\Local\Programs\Python\Python39\lib\site-packages\sklearn\naive_bayes.py:509: RuntimeWarning: divide by zero encountered in log
-  jointi = np.log(self.class_prior_[i])
-c:\Users\Jordan\AppData\Local\Programs\Python\Python39\lib\site-packages\sklearn\naive_bayes.py:509: RuntimeWarning: divide by zero encountered in log
-  jointi = np.log(self.class_prior_[i])
-c:\Users\Jordan\AppData\Local\Programs\Python\Python39\lib\site-packages\sklearn\naive_bayes.py:509: RuntimeWarning: divide by zero encountered in log
-  jointi = np.log(self.class_prior_[i])
-c:\Users\Jordan\AppData\Local\Programs\Python\Python39\lib\site-packages\sklearn\naive_bayes.py:509: RuntimeWarning: divide by zero encountered in log
-  jointi = np.log(self.class_prior_[i])
-c:\Users\Jordan\AppData\Local\Programs\Python\Python39\lib\site-packages\sklearn\naive_bayes.py:509: RuntimeWarning: divide by zero encountered in log
-  jointi = np.log(self.class_prior_[i])
-c:\Users\Jordan\AppData\Local\Programs\Python\Python39\lib\site-packages\sklearn\naive_bayes.py:509: RuntimeWarning: divide by zero encountered in log
-  jointi = np.log(self.class_prior_[i])
-c:\Users\Jordan\AppData\Local\Programs\Python\Python39\lib\site-packages\sklearn\naive_bayes.py:509: RuntimeWarning: divide by zero encountered in log
-  jointi = np.log(self.class_prior_[i])
-c:\Users\Jordan\AppData\Local\Programs\Python\Python39\lib\site-packages\sklearn\naive_bayes.py:509: RuntimeWarning: divide by zero encountered in log
-  jointi = np.log(self.class_prior_[i])
-c:\Users\Jordan\AppData\Local\Programs\Python\Python39\lib\site-packages\sklearn\naive_bayes.py:509: RuntimeWarning: divide by zero encountered in log
-  jointi = np.log(self.class_prior_[i])
-c:\Users\Jordan\AppData\Local\Programs\Python\Python39\lib\site-packages\sklearn\naive_bayes.py:509: RuntimeWarning: divide by zero encountered in log
-  jointi = np.log(self.class_prior_[i])
-c:\Users\Jordan\AppData\Local\Programs\Python\Python39\lib\site-packages\sklearn\naive_bayes.py:509: RuntimeWarning: divide by zero encountered in log
-  jointi = np.log(self.class_prior_[i])
-c:\Users\Jordan\AppData\Local\Programs\Python\Python39\lib\site-packages\sklearn\naive_bayes.py:509: RuntimeWarning: divide by zero encountered in log
-  jointi = np.log(self.class_prior_[i])
-c:\Users\Jordan\AppData\Local\Programs\Python\Python39\lib\site-packages\sklearn\naive_bayes.py:509: RuntimeWarning: divide by zero encountered in log
-  jointi = np.log(self.class_prior_[i])
-c:\Users\Jordan\AppData\Local\Programs\Python\Python39\lib\site-packages\sklearn\naive_bayes.py:509: RuntimeWarning: divide by zero encountered in log
-  jointi = np.log(self.class_prior_[i])
-c:\Users\Jordan\AppData\Local\Programs\Python\Python39\lib\site-packages\sklearn\naive_bayes.py:509: RuntimeWarning: divide by zero encountered in log
-  jointi = np.log(self.class_prior_[i])
-c:\Users\Jordan\AppData\Local\Programs\Python\Python39\lib\site-packages\sklearn\naive_bayes.py:509: RuntimeWarning: divide by zero encountered in log
-  jointi = np.log(self.class_prior_[i])
-c:\Users\Jordan\AppData\Local\Programs\Python\Python39\lib\site-packages\sklearn\naive_bayes.py:509: RuntimeWarning: divide by zero encountered in log
-  jointi = np.log(self.class_prior_[i])
-c:\Users\Jordan\AppData\Local\Programs\Python\Python39\lib\site-packages\sklearn\naive_bayes.py:509: RuntimeWarning: divide by zero encountered in log
-  jointi = np.log(self.class_prior_[i])
-c:\Users\Jordan\AppData\Local\Programs\Python\Python39\lib\site-packages\sklearn\naive_bayes.py:509: RuntimeWarning: divide by zero encountered in log
-  jointi = np.log(self.class_prior_[i])
-c:\Users\Jordan\AppData\Local\Programs\Python\Python39\lib\site-packages\sklearn\naive_bayes.py:509: RuntimeWarning: divide by zero encountered in log
-  jointi = np.log(self.class_prior_[i])
-c:\Users\Jordan\AppData\Local\Programs\Python\Python39\lib\site-packages\sklearn\naive_bayes.py:509: RuntimeWarning: divide by zero encountered in log
-  jointi = np.log(self.class_prior_[i])
-c:\Users\Jordan\AppData\Local\Programs\Python\Python39\lib\site-packages\sklearn\naive_bayes.py:509: RuntimeWarning: divide by zero encountered in log
-  jointi = np.log(self.class_prior_[i])
-c:\Users\Jordan\AppData\Local\Programs\Python\Python39\lib\site-packages\sklearn\naive_bayes.py:509: RuntimeWarning: divide by zero encountered in log
-  jointi = np.log(self.class_prior_[i])
-c:\Users\Jordan\AppData\Local\Programs\Python\Python39\lib\site-packages\sklearn\naive_bayes.py:509: RuntimeWarning: divide by zero encountered in log
-  jointi = np.log(self.class_prior_[i])
-c:\Users\Jordan\AppData\Local\Programs\Python\Python39\lib\site-packages\sklearn\naive_bayes.py:509: RuntimeWarning: divide by zero encountered in log
-  jointi = np.log(self.class_prior_[i])
-c:\Users\Jordan\AppData\Local\Programs\Python\Python39\lib\site-packages\sklearn\naive_bayes.py:509: RuntimeWarning: divide by zero encountered in log
-  jointi = np.log(self.class_prior_[i])
-c:\Users\Jordan\AppData\Local\Programs\Python\Python39\lib\site-packages\sklearn\naive_bayes.py:509: RuntimeWarning: divide by zero encountered in log
-  jointi = np.log(self.class_prior_[i])
-c:\Users\Jordan\AppData\Local\Programs\Python\Python39\lib\site-packages\sklearn\naive_bayes.py:509: RuntimeWarning: divide by zero encountered in log
-  jointi = np.log(self.class_prior_[i])
-c:\Users\Jordan\AppData\Local\Programs\Python\Python39\lib\site-packages\sklearn\naive_bayes.py:509: RuntimeWarning: divide by zero encountered in log
-  jointi = np.log(self.class_prior_[i])
-c:\Users\Jordan\AppData\Local\Programs\Python\Python39\lib\site-packages\sklearn\naive_bayes.py:509: RuntimeWarning: divide by zero encountered in log
-  jointi = np.log(self.class_prior_[i])
-c:\Users\Jordan\AppData\Local\Programs\Python\Python39\lib\site-packages\sklearn\naive_bayes.py:509: RuntimeWarning: divide by zero encountered in log
-  jointi = np.log(self.class_prior_[i])
-c:\Users\Jordan\AppData\Local\Programs\Python\Python39\lib\site-packages\sklearn\naive_bayes.py:509: RuntimeWarning: divide by zero encountered in log
-  jointi = np.log(self.class_prior_[i])
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">AttributeError</span><span class="g g-Whitespace">                            </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">line</span> <span class="mi">7</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="n">engine</span> <span class="o">=</span> <span class="n">create_engine</span><span class="p">(</span><span class="s2">&quot;mysql+pymysql://root:@localhost:3306/ecoli&quot;</span><span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="n">query</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span><span class="s2"> SELECT feature1, feature2, feature3, feature4, feature5, feature6, feature7, class_label</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span><span class="s2"> FROM ecoli</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span><span class="s2"> &quot;&quot;&quot;</span>
+<span class="ne">----&gt; </span><span class="mi">7</span> <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_sql</span><span class="p">(</span><span class="n">query</span><span class="p">,</span> <span class="n">engine</span><span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">9</span> <span class="n">X</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;class_label&quot;</span><span class="p">])</span>  <span class="c1"># target dihapus</span>
+<span class="g g-Whitespace">     </span><span class="mi">10</span> <span class="n">y</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;class_label&quot;</span><span class="p">]</span>  <span class="c1"># target label</span>
+
+<span class="nn">File c:\users\jordan\appdata\local\programs\python\python39\lib\site-packages\pandas\io\sql.py:590,</span> in <span class="ni">read_sql</span><span class="nt">(sql, con, index_col, coerce_float, params, parse_dates, columns, chunksize)</span>
+<span class="g g-Whitespace">    </span><span class="mi">581</span>     <span class="k">return</span> <span class="n">pandas_sql</span><span class="o">.</span><span class="n">read_table</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">582</span>         <span class="n">sql</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">583</span>         <span class="n">index_col</span><span class="o">=</span><span class="n">index_col</span><span class="p">,</span>
+   <span class="p">(</span><span class="o">...</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">587</span>         <span class="n">chunksize</span><span class="o">=</span><span class="n">chunksize</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">588</span>     <span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">589</span> <span class="k">else</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">590</span>     <span class="k">return</span> <span class="n">pandas_sql</span><span class="o">.</span><span class="n">read_query</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">591</span>         <span class="n">sql</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">592</span>         <span class="n">index_col</span><span class="o">=</span><span class="n">index_col</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">593</span>         <span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">594</span>         <span class="n">coerce_float</span><span class="o">=</span><span class="n">coerce_float</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">595</span>         <span class="n">parse_dates</span><span class="o">=</span><span class="n">parse_dates</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">596</span>         <span class="n">chunksize</span><span class="o">=</span><span class="n">chunksize</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">597</span>     <span class="p">)</span>
+
+<span class="nn">File c:\users\jordan\appdata\local\programs\python\python39\lib\site-packages\pandas\io\sql.py:1560,</span> in <span class="ni">SQLDatabase.read_query</span><span class="nt">(self, sql, index_col, coerce_float, parse_dates, params, chunksize, dtype)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1512</span><span class="w"> </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="g g-Whitespace">   </span><span class="mi">1513</span><span class="sd"> Read SQL query into a DataFrame.</span>
+<span class="g g-Whitespace">   </span><span class="mi">1514</span><span class="sd"> </span>
+<span class="sd">   (...)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1556</span><span class="sd"> </span>
+<span class="g g-Whitespace">   </span><span class="mi">1557</span><span class="sd"> &quot;&quot;&quot;</span>
+<span class="g g-Whitespace">   </span><span class="mi">1558</span> <span class="n">args</span> <span class="o">=</span> <span class="n">_convert_params</span><span class="p">(</span><span class="n">sql</span><span class="p">,</span> <span class="n">params</span><span class="p">)</span>
+<span class="ne">-&gt; </span><span class="mi">1560</span> <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1561</span> <span class="n">columns</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
+<span class="g g-Whitespace">   </span><span class="mi">1563</span> <span class="k">if</span> <span class="n">chunksize</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+
+<span class="nn">File c:\users\jordan\appdata\local\programs\python\python39\lib\site-packages\pandas\io\sql.py:1405,</span> in <span class="ni">SQLDatabase.execute</span><span class="nt">(self, *args, **kwargs)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1403</span> <span class="k">def</span><span class="w"> </span><span class="nf">execute</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="g g-Whitespace">   </span><span class="mi">1404</span><span class="w">     </span><span class="sd">&quot;&quot;&quot;Simple passthrough to SQLAlchemy connectable&quot;&quot;&quot;</span>
+<span class="ne">-&gt; </span><span class="mi">1405</span>     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">connectable</span><span class="o">.</span><span class="n">execution_options</span><span class="p">()</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+<span class="ne">AttributeError</span>: &#39;OptionEngine&#39; object has no attribute &#39;execute&#39;
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Akurasi: 0.7647058823529411
-Classification Report:
-               precision    recall  f1-score   support
-
-          cp       0.92      0.96      0.94        25
-          im       0.77      0.81      0.79        21
-         imL       0.00      0.00      0.00         0
-         imU       0.00      0.00      0.00         5
-          om       0.00      0.00      0.00         5
-         omL       0.00      0.00      0.00         1
-          pp       0.61      1.00      0.76        11
-
-    accuracy                           0.76        68
-   macro avg       0.33      0.40      0.36        68
-weighted avg       0.68      0.76      0.71        68
-</pre></div>
-</div>
-<img alt="../_images/7aec6659f0568ce8bebc87031e10c242027703d9739cdf7cc88057a1168d6192.png" src="../_images/7aec6659f0568ce8bebc87031e10c242027703d9739cdf7cc88057a1168d6192.png" />
-<img alt="../_images/c6e2bac7472fe2496754f571737883cff51b070197aa0ee40cb9947d177cf07d.png" src="../_images/c6e2bac7472fe2496754f571737883cff51b070197aa0ee40cb9947d177cf07d.png" />
 </div>
 </div>
 </section>
