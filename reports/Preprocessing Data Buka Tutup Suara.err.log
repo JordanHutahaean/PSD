@@ -87,7 +87,7 @@ Traceback (most recent call last):  File "c:\users\jordan\appdata\local\programs
     if await self.run_code(code, result, async_=asy):
   File "c:\users\jordan\appdata\local\programs\python\python39\lib\site-packages\IPython\core\interactiveshell.py", line 3550, in run_code
     exec(code_obj, self.user_global_ns, self.user_ns)
-  File "C:\Users\Jordan\AppData\Local\Temp\ipykernel_9880\2308826984.py", line 2, in <module>
+  File "C:\Users\Jordan\AppData\Local\Temp\ipykernel_15584\2308826984.py", line 2, in <module>
     import librosa.display
   File "c:\users\jordan\appdata\local\programs\python\python39\lib\site-packages\librosa\display.py", line 44, in <module>
     from matplotlib import colormaps as mcm
