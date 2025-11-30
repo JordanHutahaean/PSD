@@ -16,18 +16,202 @@ Traceback (most recent call last):
     return future.result()
   File "c:\users\jordan\appdata\local\programs\python\python39\lib\site-packages\nbclient\client.py", line 709, in async_execute
     await self.async_execute_cell(
-  File "c:\users\jordan\appdata\local\programs\python\python39\lib\site-packages\nbclient\client.py", line 1005, in async_execute_cell
-    exec_reply = await self.task_poll_for_reply
-  File "c:\users\jordan\appdata\local\programs\python\python39\lib\site-packages\nbclient\client.py", line 806, in _async_poll_for_reply
-    error_on_timeout_execute_reply = await self._async_handle_timeout(timeout, cell)
-  File "c:\users\jordan\appdata\local\programs\python\python39\lib\site-packages\nbclient\client.py", line 856, in _async_handle_timeout
-    raise CellTimeoutError.error_from_timeout_and_cell(
-nbclient.exceptions.CellTimeoutError: A cell timed out while it was being executed, after 30 seconds.
-The message was: Cell execution timed out.
-Here is a preview of the cell contents:
--------------------
-['import openeo', 'import pandas as pd', 'import matplotlib.pyplot as plt', 'import os', '']
-...
-['plt.xticks(rotation=45)', 'plt.grid(True)', 'plt.legend()', 'plt.tight_layout()', 'plt.show()']
--------------------
+  File "c:\users\jordan\appdata\local\programs\python\python39\lib\site-packages\nbclient\client.py", line 1062, in async_execute_cell
+    await self._check_raise_for_error(cell, cell_index, exec_reply)
+  File "c:\users\jordan\appdata\local\programs\python\python39\lib\site-packages\nbclient\client.py", line 918, in _check_raise_for_error
+    raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
+nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
+------------------
+import openeo
+import pandas as pd
+import matplotlib.pyplot as plt
+import os
+
+# 1. Koneksi ke Copernicus Data Space
+connection = openeo.connect("openeo.dataspace.copernicus.eu").authenticate_oidc()
+
+# 2. AOI: Surabaya
+aoi = {
+    "type": "Polygon",
+    "coordinates": [
+        [
+            [112.72060203417936, -7.283148232556897],
+            [112.72060203417936, -7.3397802255418725],
+            [112.78011892090984, -7.3397802255418725],
+            [112.78011892090984, -7.283148232556897],
+            [112.72060203417936, -7.283148232556897],
+        ]
+    ],
+}
+
+# 3. Ambil data Sentinel-5P (band "NO2")
+s5p = connection.load_collection(
+    "SENTINEL_5P_L2",
+    spatial_extent={
+        "west": 112.72060203417936,
+        "south": -7.3397802255418725,
+        "east": 112.78011892090984,
+        "north": -7.283148232556897,
+    },
+    temporal_extent=["2020-06-01", "2021-06-30"],
+    bands=["NO2"],
+)
+
+# 4. Mask nilai negatif (data invalid)
+def mask_invalid(x):
+    return x < 0
+
+s5p_masked = s5p.mask(s5p.apply(mask_invalid))
+
+# 5. Agregasi temporal harian
+daily_mean = s5p_masked.aggregate_temporal_period(period="day", reducer="mean")
+
+# 6. Agregasi spasial (rata-rata dalam AOI)
+daily_mean_aoi = daily_mean.aggregate_spatial(geometries=aoi, reducer="mean")
+
+# 7. Jalankan batch job dan hasilkan file CSV
+job = daily_mean_aoi.execute_batch(out_format="CSV")
+
+# 8. Unduh hasil job
+results = job.get_results()
+results.download_files("no2_results_surabaya")
+
+# 9. Baca file CSV hasil
+for f in os.listdir("no2_results_surabaya"):
+    if f.endswith(".csv"):
+        df = pd.read_csv(os.path.join("no2_results_surabaya", f))
+        print("File ditemukan:", f)
+        break
+
+# 10. Pastikan kolom tanggal benar
+df["date"] = pd.to_datetime(df["date"])
+
+# 11. Buat kolom bulan (YYYY-MM)
+df["month"] = df["date"].dt.to_period("M")
+
+# 12. Hitung rata-rata NO2 per bulan
+df_monthly = df.groupby("month", as_index=False)["NO2"].mean()
+
+# 13. Visualisasi hasil
+plt.figure(figsize=(10,5))
+plt.plot(df_monthly["month"].astype(str), df_monthly["NO2"], marker="o", color="blue", label="NO₂ Rata-rata per Bulan")
+plt.title("Rata-rata Bulanan NO₂ (Sentinel-5P) di Surabaya")
+plt.xlabel("Bulan")
+plt.ylabel("Konsentrasi NO₂")
+plt.xticks(rotation=45)
+plt.grid(True)
+plt.legend()
+plt.tight_layout()
+plt.show()
+
+------------------
+
+
+[1;31m---------------------------------------------------------------------------[0m
+[1;31mValueError[0m                                Traceback (most recent call last)
+Cell [1;32mIn[1], line 2[0m
+[0;32m      1[0m [38;5;28;01mimport[39;00m[38;5;250m [39m[38;5;21;01mopeneo[39;00m
+[1;32m----> 2[0m [38;5;28;01mimport[39;00m[38;5;250m [39m[38;5;21;01mpandas[39;00m[38;5;250m [39m[38;5;28;01mas[39;00m[38;5;250m [39m[38;5;21;01mpd[39;00m
+[0;32m      3[0m [38;5;28;01mimport[39;00m[38;5;250m [39m[38;5;21;01mmatplotlib[39;00m[38;5;21;01m.[39;00m[38;5;21;01mpyplot[39;00m[38;5;250m [39m[38;5;28;01mas[39;00m[38;5;250m [39m[38;5;21;01mplt[39;00m
+[0;32m      4[0m [38;5;28;01mimport[39;00m[38;5;250m [39m[38;5;21;01mos[39;00m
+
+File [1;32mc:\users\jordan\appdata\local\programs\python\python39\lib\site-packages\pandas\__init__.py:73[0m
+[0;32m     70[0m [38;5;66;03m# let init-time option registration happen[39;00m
+[0;32m     71[0m [38;5;28;01mimport[39;00m[38;5;250m [39m[38;5;21;01mpandas[39;00m[38;5;21;01m.[39;00m[38;5;21;01mcore[39;00m[38;5;21;01m.[39;00m[38;5;21;01mconfig_init[39;00m  [38;5;66;03m# pyright: ignore[reportUnusedImport] # noqa: F401[39;00m
+[1;32m---> 73[0m [38;5;28;01mfrom[39;00m[38;5;250m [39m[38;5;21;01mpandas[39;00m[38;5;21;01m.[39;00m[38;5;21;01mcore[39;00m[38;5;21;01m.[39;00m[38;5;21;01mapi[39;00m[38;5;250m [39m[38;5;28;01mimport[39;00m (
+[0;32m     74[0m     [38;5;66;03m# dtype[39;00m
+[0;32m     75[0m     ArrowDtype,
+[0;32m     76[0m     Int8Dtype,
+[0;32m     77[0m     Int16Dtype,
+[0;32m     78[0m     Int32Dtype,
+[0;32m     79[0m     Int64Dtype,
+[0;32m     80[0m     UInt8Dtype,
+[0;32m     81[0m     UInt16Dtype,
+[0;32m     82[0m     UInt32Dtype,
+[0;32m     83[0m     UInt64Dtype,
+[0;32m     84[0m     Float32Dtype,
+[0;32m     85[0m     Float64Dtype,
+[0;32m     86[0m     CategoricalDtype,
+[0;32m     87[0m     PeriodDtype,
+[0;32m     88[0m     IntervalDtype,
+[0;32m     89[0m     DatetimeTZDtype,
+[0;32m     90[0m     StringDtype,
+[0;32m     91[0m     BooleanDtype,
+[0;32m     92[0m     [38;5;66;03m# missing[39;00m
+[0;32m     93[0m     NA,
+[0;32m     94[0m     isna,
+[0;32m     95[0m     isnull,
+[0;32m     96[0m     notna,
+[0;32m     97[0m     notnull,
+[0;32m     98[0m     [38;5;66;03m# indexes[39;00m
+[0;32m     99[0m     Index,
+[0;32m    100[0m     CategoricalIndex,
+[0;32m    101[0m     RangeIndex,
+[0;32m    102[0m     MultiIndex,
+[0;32m    103[0m     IntervalIndex,
+[0;32m    104[0m     TimedeltaIndex,
+[0;32m    105[0m     DatetimeIndex,
+[0;32m    106[0m     PeriodIndex,
+[0;32m    107[0m     IndexSlice,
+[0;32m    108[0m     [38;5;66;03m# tseries[39;00m
+[0;32m    109[0m     NaT,
+[0;32m    110[0m     Period,
+[0;32m    111[0m     period_range,
+[0;32m    112[0m     Timedelta,
+[0;32m    113[0m     timedelta_range,
+[0;32m    114[0m     Timestamp,
+[0;32m    115[0m     date_range,
+[0;32m    116[0m     bdate_range,
+[0;32m    117[0m     Interval,
+[0;32m    118[0m     interval_range,
+[0;32m    119[0m     DateOffset,
+[0;32m    120[0m     [38;5;66;03m# conversion[39;00m
+[0;32m    121[0m     to_numeric,
+[0;32m    122[0m     to_datetime,
+[0;32m    123[0m     to_timedelta,
+[0;32m    124[0m     [38;5;66;03m# misc[39;00m
+[0;32m    125[0m     Flags,
+[0;32m    126[0m     Grouper,
+[0;32m    127[0m     factorize,
+[0;32m    128[0m     unique,
+[0;32m    129[0m     value_counts,
+[0;32m    130[0m     NamedAgg,
+[0;32m    131[0m     array,
+[0;32m    132[0m     Categorical,
+[0;32m    133[0m     set_eng_float_format,
+[0;32m    134[0m     Series,
+[0;32m    135[0m     DataFrame,
+[0;32m    136[0m )
+[0;32m    138[0m [38;5;28;01mfrom[39;00m[38;5;250m [39m[38;5;21;01mpandas[39;00m[38;5;21;01m.[39;00m[38;5;21;01mcore[39;00m[38;5;21;01m.[39;00m[38;5;21;01mdtypes[39;00m[38;5;21;01m.[39;00m[38;5;21;01mdtypes[39;00m[38;5;250m [39m[38;5;28;01mimport[39;00m SparseDtype
+[0;32m    140[0m [38;5;28;01mfrom[39;00m[38;5;250m [39m[38;5;21;01mpandas[39;00m[38;5;21;01m.[39;00m[38;5;21;01mtseries[39;00m[38;5;21;01m.[39;00m[38;5;21;01mapi[39;00m[38;5;250m [39m[38;5;28;01mimport[39;00m infer_freq
+
+File [1;32mc:\users\jordan\appdata\local\programs\python\python39\lib\site-packages\pandas\core\api.py:1[0m
+[1;32m----> 1[0m [38;5;28;01mfrom[39;00m[38;5;250m [39m[38;5;21;01mpandas[39;00m[38;5;21;01m.[39;00m[38;5;21;01m_libs[39;00m[38;5;250m [39m[38;5;28;01mimport[39;00m (
+[0;32m      2[0m     NaT,
+[0;32m      3[0m     Period,
+[0;32m      4[0m     Timedelta,
+[0;32m      5[0m     Timestamp,
+[0;32m      6[0m )
+[0;32m      7[0m [38;5;28;01mfrom[39;00m[38;5;250m [39m[38;5;21;01mpandas[39;00m[38;5;21;01m.[39;00m[38;5;21;01m_libs[39;00m[38;5;21;01m.[39;00m[38;5;21;01mmissing[39;00m[38;5;250m [39m[38;5;28;01mimport[39;00m NA
+[0;32m      9[0m [38;5;28;01mfrom[39;00m[38;5;250m [39m[38;5;21;01mpandas[39;00m[38;5;21;01m.[39;00m[38;5;21;01mcore[39;00m[38;5;21;01m.[39;00m[38;5;21;01mdtypes[39;00m[38;5;21;01m.[39;00m[38;5;21;01mdtypes[39;00m[38;5;250m [39m[38;5;28;01mimport[39;00m (
+[0;32m     10[0m     ArrowDtype,
+[0;32m     11[0m     CategoricalDtype,
+[1;32m   (...)[0m
+[0;32m     14[0m     PeriodDtype,
+[0;32m     15[0m )
+
+File [1;32mc:\users\jordan\appdata\local\programs\python\python39\lib\site-packages\pandas\_libs\__init__.py:18[0m
+[0;32m     16[0m [38;5;28;01mimport[39;00m[38;5;250m [39m[38;5;21;01mpandas[39;00m[38;5;21;01m.[39;00m[38;5;21;01m_libs[39;00m[38;5;21;01m.[39;00m[38;5;21;01mpandas_parser[39;00m  [38;5;66;03m# noqa: E501 # isort: skip # type: ignore[reportUnusedImport][39;00m
+[0;32m     17[0m [38;5;28;01mimport[39;00m[38;5;250m [39m[38;5;21;01mpandas[39;00m[38;5;21;01m.[39;00m[38;5;21;01m_libs[39;00m[38;5;21;01m.[39;00m[38;5;21;01mpandas_datetime[39;00m  [38;5;66;03m# noqa: F401,E501 # isort: skip # type: ignore[reportUnusedImport][39;00m
+[1;32m---> 18[0m [38;5;28;01mfrom[39;00m[38;5;250m [39m[38;5;21;01mpandas[39;00m[38;5;21;01m.[39;00m[38;5;21;01m_libs[39;00m[38;5;21;01m.[39;00m[38;5;21;01minterval[39;00m[38;5;250m [39m[38;5;28;01mimport[39;00m Interval
+[0;32m     19[0m [38;5;28;01mfrom[39;00m[38;5;250m [39m[38;5;21;01mpandas[39;00m[38;5;21;01m.[39;00m[38;5;21;01m_libs[39;00m[38;5;21;01m.[39;00m[38;5;21;01mtslibs[39;00m[38;5;250m [39m[38;5;28;01mimport[39;00m (
+[0;32m     20[0m     NaT,
+[0;32m     21[0m     NaTType,
+[1;32m   (...)[0m
+[0;32m     26[0m     iNaT,
+[0;32m     27[0m )
+
+File [1;32minterval.pyx:1[0m, in [0;36minit pandas._libs.interval[1;34m()[0m
+
+[1;31mValueError[0m: numpy.dtype size changed, may indicate binary incompatibility. Expected 96 from C header, got 88 from PyObject
 
