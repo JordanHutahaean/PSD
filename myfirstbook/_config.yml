@@ -13,7 +13,7 @@ execute:
 # Define the name of the latex output file for PDF builds
 latex:
   latex_documents:
-    targetname: book.tex  
+    targetname: book.tex
 
 # Add a bibtex file so that we can create citations
 bibtex_bibfiles:
@@ -21,17 +21,16 @@ bibtex_bibfiles:
 
 # Information about where the book exists on the web
 repository:
-  url: https://github.com/executablebooks/jupyter-book  # Online location of your book
-  path_to_book: docs  # Optional path to your book, relative to the repository root
-  branch: master  # Which branch of the repository should be used when creating links (optional)
+  url: https://github.com/executablebooks/jupyter-book
+  path_to_book: docs
+  branch: master
 
 # Add GitHub buttons to your book
-# See https://jupyterbook.org/customize/config.html#add-a-link-to-your-repository
 html:
   use_repository_button: true
   use_issues_button: true
-  use_edit_page_button: false     # tombol "edit this page" dinonaktifkan
-  collapse_navigation: false      # ⬅️ sidebar langsung terbuka
-  favicon: jeriko.jpeg            # opsional: pakai logo juga untuk favicon
+  use_edit_page_button: false
+  collapse_navigation: false
+  favicon: jeriko.jpeg
   extra_footer: |
     <p style="text-align:center;">© 2025 Jordan Hutahaean</p>

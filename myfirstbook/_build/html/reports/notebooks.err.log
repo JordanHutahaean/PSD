@@ -22,14 +22,10 @@ Traceback (most recent call last):
     raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
 nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
 ------------------
-import librosa
-import librosa.display
+from matplotlib import rcParams, cycler
 import matplotlib.pyplot as plt
 import numpy as np
-import soundfile as sf
-import os
-import pandas as pd
-from IPython.display import Audio, display
+plt.ion()
 ------------------
 
 ----- stderr -----
@@ -87,10 +83,8 @@ Traceback (most recent call last):  File "c:\users\jordan\appdata\local\programs
     if await self.run_code(code, result, async_=asy):
   File "c:\users\jordan\appdata\local\programs\python\python39\lib\site-packages\IPython\core\interactiveshell.py", line 3550, in run_code
     exec(code_obj, self.user_global_ns, self.user_ns)
-  File "C:\Users\Jordan\AppData\Local\Temp\ipykernel_9880\2308826984.py", line 2, in <module>
-    import librosa.display
-  File "c:\users\jordan\appdata\local\programs\python\python39\lib\site-packages\librosa\display.py", line 44, in <module>
-    from matplotlib import colormaps as mcm
+  File "C:\Users\Jordan\AppData\Local\Temp\ipykernel_22016\2191868119.py", line 1, in <module>
+    from matplotlib import rcParams, cycler
   File "c:\users\jordan\appdata\local\programs\python\python39\lib\site-packages\matplotlib\__init__.py", line 157, in <module>
     from . import _api, _version, cbook, _docstring, rcsetup
   File "c:\users\jordan\appdata\local\programs\python\python39\lib\site-packages\matplotlib\rcsetup.py", line 27, in <module>
@@ -107,18 +101,10 @@ Traceback (most recent call last):  File "c:\users\jordan\appdata\local\programs
 
 [1;31m---------------------------------------------------------------------------[0m
 [1;31mImportError[0m                               Traceback (most recent call last)
-Cell [1;32mIn[1], line 2[0m
-[0;32m      1[0m [38;5;28;01mimport[39;00m[38;5;250m [39m[38;5;21;01mlibrosa[39;00m
-[1;32m----> 2[0m [38;5;28;01mimport[39;00m[38;5;250m [39m[38;5;21;01mlibrosa[39;00m[38;5;21;01m.[39;00m[38;5;21;01mdisplay[39;00m
-[0;32m      3[0m [38;5;28;01mimport[39;00m[38;5;250m [39m[38;5;21;01mmatplotlib[39;00m[38;5;21;01m.[39;00m[38;5;21;01mpyplot[39;00m[38;5;250m [39m[38;5;28;01mas[39;00m[38;5;250m [39m[38;5;21;01mplt[39;00m
-[0;32m      4[0m [38;5;28;01mimport[39;00m[38;5;250m [39m[38;5;21;01mnumpy[39;00m[38;5;250m [39m[38;5;28;01mas[39;00m[38;5;250m [39m[38;5;21;01mnp[39;00m
-
-File [1;32mc:\users\jordan\appdata\local\programs\python\python39\lib\site-packages\librosa\display.py:44[0m
-[0;32m     41[0m [38;5;28;01mimport[39;00m[38;5;250m [39m[38;5;21;01mwarnings[39;00m
-[0;32m     43[0m [38;5;28;01mimport[39;00m[38;5;250m [39m[38;5;21;01mnumpy[39;00m[38;5;250m [39m[38;5;28;01mas[39;00m[38;5;250m [39m[38;5;21;01mnp[39;00m
-[1;32m---> 44[0m [38;5;28;01mfrom[39;00m[38;5;250m [39m[38;5;21;01mmatplotlib[39;00m[38;5;250m [39m[38;5;28;01mimport[39;00m colormaps [38;5;28;01mas[39;00m mcm
-[0;32m     45[0m [38;5;28;01mimport[39;00m[38;5;250m [39m[38;5;21;01mmatplotlib[39;00m[38;5;21;01m.[39;00m[38;5;21;01maxes[39;00m[38;5;250m [39m[38;5;28;01mas[39;00m[38;5;250m [39m[38;5;21;01mmplaxes[39;00m
-[0;32m     46[0m [38;5;28;01mimport[39;00m[38;5;250m [39m[38;5;21;01mmatplotlib[39;00m[38;5;21;01m.[39;00m[38;5;21;01mticker[39;00m[38;5;250m [39m[38;5;28;01mas[39;00m[38;5;250m [39m[38;5;21;01mmplticker[39;00m
+Cell [1;32mIn[1], line 1[0m
+[1;32m----> 1[0m [38;5;28;01mfrom[39;00m[38;5;250m [39m[38;5;21;01mmatplotlib[39;00m[38;5;250m [39m[38;5;28;01mimport[39;00m rcParams, cycler
+[0;32m      2[0m [38;5;28;01mimport[39;00m[38;5;250m [39m[38;5;21;01mmatplotlib[39;00m[38;5;21;01m.[39;00m[38;5;21;01mpyplot[39;00m[38;5;250m [39m[38;5;28;01mas[39;00m[38;5;250m [39m[38;5;21;01mplt[39;00m
+[0;32m      3[0m [38;5;28;01mimport[39;00m[38;5;250m [39m[38;5;21;01mnumpy[39;00m[38;5;250m [39m[38;5;28;01mas[39;00m[38;5;250m [39m[38;5;21;01mnp[39;00m
 
 File [1;32mc:\users\jordan\appdata\local\programs\python\python39\lib\site-packages\matplotlib\__init__.py:157[0m
 [0;32m    153[0m [38;5;28;01mfrom[39;00m[38;5;250m [39m[38;5;21;01mpackaging[39;00m[38;5;21;01m.[39;00m[38;5;21;01mversion[39;00m[38;5;250m [39m[38;5;28;01mimport[39;00m parse [38;5;28;01mas[39;00m parse_version

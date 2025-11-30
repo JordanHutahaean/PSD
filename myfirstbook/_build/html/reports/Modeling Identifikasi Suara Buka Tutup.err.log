@@ -25,158 +25,126 @@ nbclient.exceptions.CellExecutionError: An error occurred while executing the fo
 import librosa
 import numpy as np
 import pandas as pd
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import StandardScaler
 import pickle
+import sounddevice as sd
+import soundfile as sf
 from IPython.display import Audio, display
-
-# ────────────────────────────────
-# 1️⃣ Muat model dan scaler
-# ────────────────────────────────
-model = pickle.load(open("model_knn_buka_tutup.pkl", "rb"))
-scaler = pickle.load(open("scaler_buka_tutup.pkl", "rb"))
-
-# ────────────────────────────────
-# 2️⃣ Tentukan file audio yang mau diuji
-# ────────────────────────────────
-file_path = "dataset48k/val/tutup/tutup48k-tutup_151.wav.wav"   # ganti sesuai file kamu
-sr = 48000  # karena dataset48k → 48 kHz
-
-# ────────────────────────────────
-# 3️⃣ Load dan tampilkan audio
-# ────────────────────────────────
-y, _ = librosa.load(file_path, sr=sr)
-display(Audio(data=y, rate=_))
-
-# ────────────────────────────────
-# 4️⃣ Preprocessing audio (trim & normalisasi)
-# ────────────────────────────────
-y_trimmed, _ = librosa.effects.trim(y, top_db=20)
-y_norm = y_trimmed / np.max(np.abs(y_trimmed))
-
-# ────────────────────────────────
-# 5️⃣ Ekstraksi fitur (sama seperti waktu training)
-# ────────────────────────────────
-def extract_features(y, sr):
-    mean = np.mean(y)
-    std = np.std(y)
-    rms = np.mean(librosa.feature.rms(y=y))
-    zcr = np.mean(librosa.feature.zero_crossing_rate(y))
-    centroid = np.mean(librosa.feature.spectral_centroid(y=y, sr=sr))
-    bandwidth = np.mean(librosa.feature.spectral_bandwidth(y=y, sr=sr))
-    contrast = np.mean(librosa.feature.spectral_contrast(y=y, sr=sr))
-    rolloff = np.mean(librosa.feature.spectral_rolloff(y=y, sr=sr))
-    return {
-        "mean": mean,
-        "std": std,
-        "rms": rms,
-        "zcr": zcr,
-        "centroid": centroid,
-        "bandwidth": bandwidth,
-        "contrast": contrast,
-        "rolloff": rolloff
-    }
-
-feat = extract_features(y_norm, sr)
-feat_df = pd.DataFrame([feat])
-
-# ────────────────────────────────
-# 6️⃣ Normalisasi fitur menggunakan scaler
-# ────────────────────────────────
-feat_scaled = scaler.transform(feat_df)
-
-# ────────────────────────────────
-# 7️⃣ Prediksi label dan probabilitas
-# ────────────────────────────────
-pred = model.predict(feat_scaled)[0]
-prob = model.predict_proba(feat_scaled)[0]
-classes = model.classes_
-
-# ────────────────────────────────
-# 8️⃣ Tampilkan hasil prediksi
-# ────────────────────────────────
-print("\n🎧 Hasil Klasifikasi:")
-print("--------------------------")
-print("Prediksi :", pred)
-print("\nProbabilitas:")
-for cls, p in zip(classes, prob):
-    print(f"{cls}: {p*100:.2f}%")
-
+import pickle
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.metrics import accuracy_score, confusion_matrix, classification_report
+import matplotlib.pyplot as plt
+import seaborn as sns
 ------------------
 
 
 [1;31m---------------------------------------------------------------------------[0m
 [1;31mValueError[0m                                Traceback (most recent call last)
-Cell [1;32mIn[7], line 60[0m
-[0;32m     55[0m feat_df [38;5;241m=[39m pd[38;5;241m.[39mDataFrame([feat])
-[0;32m     57[0m [38;5;66;03m# ────────────────────────────────[39;00m
-[0;32m     58[0m [38;5;66;03m# 6️⃣ Normalisasi fitur menggunakan scaler[39;00m
-[0;32m     59[0m [38;5;66;03m# ────────────────────────────────[39;00m
-[1;32m---> 60[0m feat_scaled [38;5;241m=[39m [43mscaler[49m[38;5;241;43m.[39;49m[43mtransform[49m[43m([49m[43mfeat_df[49m[43m)[49m
-[0;32m     62[0m [38;5;66;03m# ────────────────────────────────[39;00m
-[0;32m     63[0m [38;5;66;03m# 7️⃣ Prediksi label dan probabilitas[39;00m
-[0;32m     64[0m [38;5;66;03m# ────────────────────────────────[39;00m
-[0;32m     65[0m pred [38;5;241m=[39m model[38;5;241m.[39mpredict(feat_scaled)[[38;5;241m0[39m]
+Cell [1;32mIn[1], line 3[0m
+[0;32m      1[0m [38;5;28;01mimport[39;00m[38;5;250m [39m[38;5;21;01mlibrosa[39;00m
+[0;32m      2[0m [38;5;28;01mimport[39;00m[38;5;250m [39m[38;5;21;01mnumpy[39;00m[38;5;250m [39m[38;5;28;01mas[39;00m[38;5;250m [39m[38;5;21;01mnp[39;00m
+[1;32m----> 3[0m [38;5;28;01mimport[39;00m[38;5;250m [39m[38;5;21;01mpandas[39;00m[38;5;250m [39m[38;5;28;01mas[39;00m[38;5;250m [39m[38;5;21;01mpd[39;00m
+[0;32m      4[0m [38;5;28;01mfrom[39;00m[38;5;250m [39m[38;5;21;01msklearn[39;00m[38;5;21;01m.[39;00m[38;5;21;01mmodel_selection[39;00m[38;5;250m [39m[38;5;28;01mimport[39;00m train_test_split
+[0;32m      5[0m [38;5;28;01mfrom[39;00m[38;5;250m [39m[38;5;21;01msklearn[39;00m[38;5;21;01m.[39;00m[38;5;21;01mpreprocessing[39;00m[38;5;250m [39m[38;5;28;01mimport[39;00m StandardScaler
 
-File [1;32mc:\users\jordan\appdata\local\programs\python\python39\lib\site-packages\sklearn\utils\_set_output.py:319[0m, in [0;36m_wrap_method_output.<locals>.wrapped[1;34m(self, X, *args, **kwargs)[0m
-[0;32m    317[0m [38;5;129m@wraps[39m(f)
-[0;32m    318[0m [38;5;28;01mdef[39;00m[38;5;250m [39m[38;5;21mwrapped[39m([38;5;28mself[39m, X, [38;5;241m*[39margs, [38;5;241m*[39m[38;5;241m*[39mkwargs):
-[1;32m--> 319[0m     data_to_wrap [38;5;241m=[39m f([38;5;28mself[39m, X, [38;5;241m*[39margs, [38;5;241m*[39m[38;5;241m*[39mkwargs)
-[0;32m    320[0m     [38;5;28;01mif[39;00m [38;5;28misinstance[39m(data_to_wrap, [38;5;28mtuple[39m):
-[0;32m    321[0m         [38;5;66;03m# only wrap the first output for cross decomposition[39;00m
-[0;32m    322[0m         return_tuple [38;5;241m=[39m (
-[0;32m    323[0m             _wrap_data_with_container(method, data_to_wrap[[38;5;241m0[39m], X, [38;5;28mself[39m),
-[0;32m    324[0m             [38;5;241m*[39mdata_to_wrap[[38;5;241m1[39m:],
-[0;32m    325[0m         )
+File [1;32mc:\users\jordan\appdata\local\programs\python\python39\lib\site-packages\pandas\__init__.py:73[0m
+[0;32m     70[0m [38;5;66;03m# let init-time option registration happen[39;00m
+[0;32m     71[0m [38;5;28;01mimport[39;00m[38;5;250m [39m[38;5;21;01mpandas[39;00m[38;5;21;01m.[39;00m[38;5;21;01mcore[39;00m[38;5;21;01m.[39;00m[38;5;21;01mconfig_init[39;00m  [38;5;66;03m# pyright: ignore[reportUnusedImport] # noqa: F401[39;00m
+[1;32m---> 73[0m [38;5;28;01mfrom[39;00m[38;5;250m [39m[38;5;21;01mpandas[39;00m[38;5;21;01m.[39;00m[38;5;21;01mcore[39;00m[38;5;21;01m.[39;00m[38;5;21;01mapi[39;00m[38;5;250m [39m[38;5;28;01mimport[39;00m (
+[0;32m     74[0m     [38;5;66;03m# dtype[39;00m
+[0;32m     75[0m     ArrowDtype,
+[0;32m     76[0m     Int8Dtype,
+[0;32m     77[0m     Int16Dtype,
+[0;32m     78[0m     Int32Dtype,
+[0;32m     79[0m     Int64Dtype,
+[0;32m     80[0m     UInt8Dtype,
+[0;32m     81[0m     UInt16Dtype,
+[0;32m     82[0m     UInt32Dtype,
+[0;32m     83[0m     UInt64Dtype,
+[0;32m     84[0m     Float32Dtype,
+[0;32m     85[0m     Float64Dtype,
+[0;32m     86[0m     CategoricalDtype,
+[0;32m     87[0m     PeriodDtype,
+[0;32m     88[0m     IntervalDtype,
+[0;32m     89[0m     DatetimeTZDtype,
+[0;32m     90[0m     StringDtype,
+[0;32m     91[0m     BooleanDtype,
+[0;32m     92[0m     [38;5;66;03m# missing[39;00m
+[0;32m     93[0m     NA,
+[0;32m     94[0m     isna,
+[0;32m     95[0m     isnull,
+[0;32m     96[0m     notna,
+[0;32m     97[0m     notnull,
+[0;32m     98[0m     [38;5;66;03m# indexes[39;00m
+[0;32m     99[0m     Index,
+[0;32m    100[0m     CategoricalIndex,
+[0;32m    101[0m     RangeIndex,
+[0;32m    102[0m     MultiIndex,
+[0;32m    103[0m     IntervalIndex,
+[0;32m    104[0m     TimedeltaIndex,
+[0;32m    105[0m     DatetimeIndex,
+[0;32m    106[0m     PeriodIndex,
+[0;32m    107[0m     IndexSlice,
+[0;32m    108[0m     [38;5;66;03m# tseries[39;00m
+[0;32m    109[0m     NaT,
+[0;32m    110[0m     Period,
+[0;32m    111[0m     period_range,
+[0;32m    112[0m     Timedelta,
+[0;32m    113[0m     timedelta_range,
+[0;32m    114[0m     Timestamp,
+[0;32m    115[0m     date_range,
+[0;32m    116[0m     bdate_range,
+[0;32m    117[0m     Interval,
+[0;32m    118[0m     interval_range,
+[0;32m    119[0m     DateOffset,
+[0;32m    120[0m     [38;5;66;03m# conversion[39;00m
+[0;32m    121[0m     to_numeric,
+[0;32m    122[0m     to_datetime,
+[0;32m    123[0m     to_timedelta,
+[0;32m    124[0m     [38;5;66;03m# misc[39;00m
+[0;32m    125[0m     Flags,
+[0;32m    126[0m     Grouper,
+[0;32m    127[0m     factorize,
+[0;32m    128[0m     unique,
+[0;32m    129[0m     value_counts,
+[0;32m    130[0m     NamedAgg,
+[0;32m    131[0m     array,
+[0;32m    132[0m     Categorical,
+[0;32m    133[0m     set_eng_float_format,
+[0;32m    134[0m     Series,
+[0;32m    135[0m     DataFrame,
+[0;32m    136[0m )
+[0;32m    138[0m [38;5;28;01mfrom[39;00m[38;5;250m [39m[38;5;21;01mpandas[39;00m[38;5;21;01m.[39;00m[38;5;21;01mcore[39;00m[38;5;21;01m.[39;00m[38;5;21;01mdtypes[39;00m[38;5;21;01m.[39;00m[38;5;21;01mdtypes[39;00m[38;5;250m [39m[38;5;28;01mimport[39;00m SparseDtype
+[0;32m    140[0m [38;5;28;01mfrom[39;00m[38;5;250m [39m[38;5;21;01mpandas[39;00m[38;5;21;01m.[39;00m[38;5;21;01mtseries[39;00m[38;5;21;01m.[39;00m[38;5;21;01mapi[39;00m[38;5;250m [39m[38;5;28;01mimport[39;00m infer_freq
 
-File [1;32mc:\users\jordan\appdata\local\programs\python\python39\lib\site-packages\sklearn\preprocessing\_data.py:1062[0m, in [0;36mStandardScaler.transform[1;34m(self, X, copy)[0m
-[0;32m   1059[0m check_is_fitted([38;5;28mself[39m)
-[0;32m   1061[0m copy [38;5;241m=[39m copy [38;5;28;01mif[39;00m copy [38;5;129;01mis[39;00m [38;5;129;01mnot[39;00m [38;5;28;01mNone[39;00m [38;5;28;01melse[39;00m [38;5;28mself[39m[38;5;241m.[39mcopy
-[1;32m-> 1062[0m X [38;5;241m=[39m [43mvalidate_data[49m[43m([49m
-[0;32m   1063[0m [43m    [49m[38;5;28;43mself[39;49m[43m,[49m
-[0;32m   1064[0m [43m    [49m[43mX[49m[43m,[49m
-[0;32m   1065[0m [43m    [49m[43mreset[49m[38;5;241;43m=[39;49m[38;5;28;43;01mFalse[39;49;00m[43m,[49m
-[0;32m   1066[0m [43m    [49m[43maccept_sparse[49m[38;5;241;43m=[39;49m[38;5;124;43m"[39;49m[38;5;124;43mcsr[39;49m[38;5;124;43m"[39;49m[43m,[49m
-[0;32m   1067[0m [43m    [49m[43mcopy[49m[38;5;241;43m=[39;49m[43mcopy[49m[43m,[49m
-[0;32m   1068[0m [43m    [49m[43mdtype[49m[38;5;241;43m=[39;49m[43mFLOAT_DTYPES[49m[43m,[49m
-[0;32m   1069[0m [43m    [49m[43mforce_writeable[49m[38;5;241;43m=[39;49m[38;5;28;43;01mTrue[39;49;00m[43m,[49m
-[0;32m   1070[0m [43m    [49m[43mensure_all_finite[49m[38;5;241;43m=[39;49m[38;5;124;43m"[39;49m[38;5;124;43mallow-nan[39;49m[38;5;124;43m"[39;49m[43m,[49m
-[0;32m   1071[0m [43m[49m[43m)[49m
-[0;32m   1073[0m [38;5;28;01mif[39;00m sparse[38;5;241m.[39missparse(X):
-[0;32m   1074[0m     [38;5;28;01mif[39;00m [38;5;28mself[39m[38;5;241m.[39mwith_mean:
-
-File [1;32mc:\users\jordan\appdata\local\programs\python\python39\lib\site-packages\sklearn\utils\validation.py:2919[0m, in [0;36mvalidate_data[1;34m(_estimator, X, y, reset, validate_separately, skip_check_array, **check_params)[0m
-[0;32m   2835[0m [38;5;28;01mdef[39;00m[38;5;250m [39m[38;5;21mvalidate_data[39m(
-[0;32m   2836[0m     _estimator,
-[0;32m   2837[0m     [38;5;241m/[39m,
+File [1;32mc:\users\jordan\appdata\local\programs\python\python39\lib\site-packages\pandas\core\api.py:1[0m
+[1;32m----> 1[0m [38;5;28;01mfrom[39;00m[38;5;250m [39m[38;5;21;01mpandas[39;00m[38;5;21;01m.[39;00m[38;5;21;01m_libs[39;00m[38;5;250m [39m[38;5;28;01mimport[39;00m (
+[0;32m      2[0m     NaT,
+[0;32m      3[0m     Period,
+[0;32m      4[0m     Timedelta,
+[0;32m      5[0m     Timestamp,
+[0;32m      6[0m )
+[0;32m      7[0m [38;5;28;01mfrom[39;00m[38;5;250m [39m[38;5;21;01mpandas[39;00m[38;5;21;01m.[39;00m[38;5;21;01m_libs[39;00m[38;5;21;01m.[39;00m[38;5;21;01mmissing[39;00m[38;5;250m [39m[38;5;28;01mimport[39;00m NA
+[0;32m      9[0m [38;5;28;01mfrom[39;00m[38;5;250m [39m[38;5;21;01mpandas[39;00m[38;5;21;01m.[39;00m[38;5;21;01mcore[39;00m[38;5;21;01m.[39;00m[38;5;21;01mdtypes[39;00m[38;5;21;01m.[39;00m[38;5;21;01mdtypes[39;00m[38;5;250m [39m[38;5;28;01mimport[39;00m (
+[0;32m     10[0m     ArrowDtype,
+[0;32m     11[0m     CategoricalDtype,
 [1;32m   (...)[0m
-[0;32m   2843[0m     [38;5;241m*[39m[38;5;241m*[39mcheck_params,
-[0;32m   2844[0m ):
-[0;32m   2845[0m [38;5;250m    [39m[38;5;124;03m"""Validate input data and set or check feature names and counts of the input.[39;00m
-[0;32m   2846[0m 
-[0;32m   2847[0m [38;5;124;03m    This helper function should be used in an estimator that requires input[39;00m
+[0;32m     14[0m     PeriodDtype,
+[0;32m     15[0m )
+
+File [1;32mc:\users\jordan\appdata\local\programs\python\python39\lib\site-packages\pandas\_libs\__init__.py:18[0m
+[0;32m     16[0m [38;5;28;01mimport[39;00m[38;5;250m [39m[38;5;21;01mpandas[39;00m[38;5;21;01m.[39;00m[38;5;21;01m_libs[39;00m[38;5;21;01m.[39;00m[38;5;21;01mpandas_parser[39;00m  [38;5;66;03m# noqa: E501 # isort: skip # type: ignore[reportUnusedImport][39;00m
+[0;32m     17[0m [38;5;28;01mimport[39;00m[38;5;250m [39m[38;5;21;01mpandas[39;00m[38;5;21;01m.[39;00m[38;5;21;01m_libs[39;00m[38;5;21;01m.[39;00m[38;5;21;01mpandas_datetime[39;00m  [38;5;66;03m# noqa: F401,E501 # isort: skip # type: ignore[reportUnusedImport][39;00m
+[1;32m---> 18[0m [38;5;28;01mfrom[39;00m[38;5;250m [39m[38;5;21;01mpandas[39;00m[38;5;21;01m.[39;00m[38;5;21;01m_libs[39;00m[38;5;21;01m.[39;00m[38;5;21;01minterval[39;00m[38;5;250m [39m[38;5;28;01mimport[39;00m Interval
+[0;32m     19[0m [38;5;28;01mfrom[39;00m[38;5;250m [39m[38;5;21;01mpandas[39;00m[38;5;21;01m.[39;00m[38;5;21;01m_libs[39;00m[38;5;21;01m.[39;00m[38;5;21;01mtslibs[39;00m[38;5;250m [39m[38;5;28;01mimport[39;00m (
+[0;32m     20[0m     NaT,
+[0;32m     21[0m     NaTType,
 [1;32m   (...)[0m
-[0;32m   2917[0m [38;5;124;03m        validated.[39;00m
-[0;32m   2918[0m [38;5;124;03m    """[39;00m
-[1;32m-> 2919[0m     [43m_check_feature_names[49m[43m([49m[43m_estimator[49m[43m,[49m[43m [49m[43mX[49m[43m,[49m[43m [49m[43mreset[49m[38;5;241;43m=[39;49m[43mreset[49m[43m)[49m
-[0;32m   2920[0m     tags [38;5;241m=[39m get_tags(_estimator)
-[0;32m   2921[0m     [38;5;28;01mif[39;00m y [38;5;129;01mis[39;00m [38;5;28;01mNone[39;00m [38;5;129;01mand[39;00m tags[38;5;241m.[39mtarget_tags[38;5;241m.[39mrequired:
+[0;32m     26[0m     iNaT,
+[0;32m     27[0m )
 
-File [1;32mc:\users\jordan\appdata\local\programs\python\python39\lib\site-packages\sklearn\utils\validation.py:2777[0m, in [0;36m_check_feature_names[1;34m(estimator, X, reset)[0m
-[0;32m   2774[0m [38;5;28;01mif[39;00m [38;5;129;01mnot[39;00m missing_names [38;5;129;01mand[39;00m [38;5;129;01mnot[39;00m unexpected_names:
-[0;32m   2775[0m     message [38;5;241m+[39m[38;5;241m=[39m [38;5;124m"[39m[38;5;124mFeature names must be in the same order as they were in fit.[39m[38;5;130;01m\n[39;00m[38;5;124m"[39m
-[1;32m-> 2777[0m [38;5;28;01mraise[39;00m [38;5;167;01mValueError[39;00m(message)
+File [1;32minterval.pyx:1[0m, in [0;36minit pandas._libs.interval[1;34m()[0m
 
-[1;31mValueError[0m: The feature names should match those that were passed during fit.
-Feature names unseen at fit time:
-- contrast
-- mean
-- rms
-- std
-Feature names seen at fit time, yet now missing:
-- mfcc_1
-- mfcc_10
-- mfcc_11
-- mfcc_12
-- mfcc_13
-- ...
-
+[1;31mValueError[0m: numpy.dtype size changed, may indicate binary incompatibility. Expected 96 from C header, got 88 from PyObject
 

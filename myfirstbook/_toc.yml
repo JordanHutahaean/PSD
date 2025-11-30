@@ -2,22 +2,22 @@ format: jb-book
 root: intro
 
 chapters:
-  - file: PSD
+  - file: psd
   - file: bisnis
     sections:
       - file: data/eksplorasi_data
-      - file: Preprocessing_Data_(NO2_surabaya)
-  - file: DataUNderstanding
-    sections: 
-      - file: KNN_Regression Data_(NO2_surabaya)   
-  - file: Preprocessing/preporecing
+      - file: data/preprocessing_data_no2_surabaya
+  - file: dataunderstanding
+    sections:
+      - file: data/knn_regression_data_no2_surabaya
+  - file: preprocessing/preprocessing
   - file: balance/balance_adasyn
-  - file : balance_smote
+  - file: balance/balance_smote
   - file: balance/balance_randomforest
   - file: balance/balance_naivebayes
-  - file: balance/Bagging_Classifier
-  - file: balance/decision_tre
-  - file: gambar_01/Preprocessing_data_ecoli
-  - file: Preprocessing Data Buka Tutup Suara
-  - file: Modeling Identifikasi Suara Buka Tutup
+  - file: balance/bagging_classifier
+  - file: balance/decision_tree
+  - file: gambar_01/preprocessing_data_ecoli
+  - file: preprocessing_data_buka_tutup_suara
+  - file: modeling_identifikasi_suara_buka_tutup
   - file: jarak

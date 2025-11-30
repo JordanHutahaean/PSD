@@ -22,89 +22,24 @@ Traceback (most recent call last):
     raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
 nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
 ------------------
+import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
-import numpy as np
-from sklearn.decomposition import PCA
-from sqlalchemy import create_engine
-from collections import Counter
-from imblearn.over_sampling import ADASYN  # 🔹 ganti ke ADASYN
-
-# === 1. Koneksi ke MySQL XAMPP ===
-engine = create_engine("mysql+pymysql://root:@localhost:3306/ecoli")
-
-# ambil data dari tabel
-df = pd.read_sql("SELECT * FROM ecoli;", engine)
-class_counts = df['class_label'].value_counts().sort_index()
-nt = df.drop(columns=["class_label", "id_protein"])
-ns = df["class_label"]
-
-# ==== PCA data asli ====
-
-pca = PCA(n_components=2)
-X_pca = pca.fit_transform(nt)
-
-plt.figure(figsize=(8,6))
-for label in np.unique(ns):
-    idx = (ns == label)
-    plt.scatter(X_pca[idx,0], X_pca[idx,1], label=label, alpha=0.7)
-plt.title("PCA Scatter Plot (Original Data)")
-plt.xlabel("PC1"); plt.ylabel("PC2")
-plt.legend(); plt.show()
-
-# ==== FIX DATA KOTOR ====
-mask = ns != "class_label"
-nt = nt[mask]
-ns = ns[mask]
-
-temp = sorted(class_counts)
-temp.pop(0)
-
-for i in range(0, 7):
-    n = temp[i] - 1
-
-    nt, ns = ADASYN(n_neighbors=n, sampling_strategy='minority').fit_resample(nt, ns)
-
-df_resampled = pd.DataFrame(nt)  
-df_resampled["class_label"] = ns  
-
-df_resampled.to_csv("hasil_oversampling_ADASYN.csv", index=False)
-
-print(f"{sorted(Counter(ns).items())}")
-
-# === 2. PCA ===
-pca = PCA(n_components=2)     
-principalComponents = pca.fit_transform(nt)
-principalDf = pd.DataFrame(data=principalComponents, columns=['principal component 1', 'principal component 2'])
-finalDf = pd.concat([principalDf, ns.reset_index(drop=True)], axis=1)
-print(finalDf)
-# === 3. Visualisasi ===
-fig, ax = plt.subplots(figsize=(10, 6))
-targets = sorted(finalDf['class_label'].unique())
-colors = plt.cm.get_cmap('tab10', len(targets))
-for i, target in enumerate(targets):
-    indicesToKeep = finalDf['class_label'] == target
-    ax.scatter(finalDf.loc[indicesToKeep, 'principal component 1'], 
-               finalDf.loc[indicesToKeep, 'principal component 2'], 
-               c=[colors(i)], s=50, label=target)
-ax.legend()
-ax.grid()
-plt.title('PCA of Ecoli Dataset after ADASYN Oversampling')
-plt.xlabel('Principal Component 1')
-plt.ylabel('Principal Component 2')
-
-plt.show()
-
-
+from sklearn.preprocessing import StandardScaler
+from sklearn.datasets import make_regression
+from sklearn.model_selection import train_test_split
+from sklearn.neighbors import KNeighborsRegressor
+from sklearn.metrics import r2_score, mean_squared_error
 ------------------
 
 
 [1;31m---------------------------------------------------------------------------[0m
 [1;31mValueError[0m                                Traceback (most recent call last)
-Cell [1;32mIn[1], line 1[0m
-[1;32m----> 1[0m [38;5;28;01mimport[39;00m[38;5;250m [39m[38;5;21;01mpandas[39;00m[38;5;250m [39m[38;5;28;01mas[39;00m[38;5;250m [39m[38;5;21;01mpd[39;00m
-[0;32m      2[0m [38;5;28;01mimport[39;00m[38;5;250m [39m[38;5;21;01mmatplotlib[39;00m[38;5;21;01m.[39;00m[38;5;21;01mpyplot[39;00m[38;5;250m [39m[38;5;28;01mas[39;00m[38;5;250m [39m[38;5;21;01mplt[39;00m
-[0;32m      3[0m [38;5;28;01mimport[39;00m[38;5;250m [39m[38;5;21;01mnumpy[39;00m[38;5;250m [39m[38;5;28;01mas[39;00m[38;5;250m [39m[38;5;21;01mnp[39;00m
+Cell [1;32mIn[1], line 2[0m
+[0;32m      1[0m [38;5;28;01mimport[39;00m[38;5;250m [39m[38;5;21;01mnumpy[39;00m[38;5;250m [39m[38;5;28;01mas[39;00m[38;5;250m [39m[38;5;21;01mnp[39;00m
+[1;32m----> 2[0m [38;5;28;01mimport[39;00m[38;5;250m [39m[38;5;21;01mpandas[39;00m[38;5;250m [39m[38;5;28;01mas[39;00m[38;5;250m [39m[38;5;21;01mpd[39;00m
+[0;32m      3[0m [38;5;28;01mimport[39;00m[38;5;250m [39m[38;5;21;01mmatplotlib[39;00m[38;5;21;01m.[39;00m[38;5;21;01mpyplot[39;00m[38;5;250m [39m[38;5;28;01mas[39;00m[38;5;250m [39m[38;5;21;01mplt[39;00m
+[0;32m      4[0m [38;5;28;01mfrom[39;00m[38;5;250m [39m[38;5;21;01msklearn[39;00m[38;5;21;01m.[39;00m[38;5;21;01mpreprocessing[39;00m[38;5;250m [39m[38;5;28;01mimport[39;00m StandardScaler
 
 File [1;32mc:\users\jordan\appdata\local\programs\python\python39\lib\site-packages\pandas\__init__.py:73[0m
 [0;32m     70[0m [38;5;66;03m# let init-time option registration happen[39;00m
