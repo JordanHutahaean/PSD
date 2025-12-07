@@ -263,6 +263,9 @@
 
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Projek Akhir Dataset TwoPatterns</a></li>
 
+
+
+
 </ul>
 
     </div>
@@ -459,7 +462,14 @@ document.write(`
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Projek Akhir Dataset TwoPatterns</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#data-understanding">Data Understanding</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#business-understanding-dataset-twopatterns">BUSINESS UNDERSTANDING – Dataset TwoPatterns</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#latar-belakang-masalah">1. Latar Belakang Masalah</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#permasalahan-yang-ingin-diselesaikan">2. Permasalahan yang Ingin Diselesaikan</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#tujuan-proyek">3. Tujuan Proyek</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#ruang-lingkup-pekerjaan">4. Ruang Lingkup Pekerjaan</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#manfaat-nilai-bisnis">5. Manfaat / Nilai Bisnis</a></li>
 </ul>
 
             </nav>
@@ -475,8 +485,68 @@ document.write(`
   <section class="tex2jax_ignore mathjax_ignore" id="projek-akhir-dataset-twopatterns">
 <h1>Projek Akhir Dataset TwoPatterns<a class="headerlink" href="#projek-akhir-dataset-twopatterns" title="Link to this heading">#</a></h1>
 </section>
-<section class="tex2jax_ignore mathjax_ignore" id="data-understanding">
-<h1>Data Understanding<a class="headerlink" href="#data-understanding" title="Link to this heading">#</a></h1>
+<section class="tex2jax_ignore mathjax_ignore" id="business-understanding-dataset-twopatterns">
+<h1>BUSINESS UNDERSTANDING – Dataset TwoPatterns<a class="headerlink" href="#business-understanding-dataset-twopatterns" title="Link to this heading">#</a></h1>
+<section id="latar-belakang-masalah">
+<h2>1. Latar Belakang Masalah<a class="headerlink" href="#latar-belakang-masalah" title="Link to this heading">#</a></h2>
+<p>Banyak sistem modern bergantung pada data time series (deret waktu), seperti:</p>
+<p>1.sinyal sensor industri</p>
+<p>2.aktivitas medis (ECG, EEG)</p>
+<p>3.getaran mesin</p>
+<p>4.pola gerakan</p>
+<p>5.data IoT</p>
+<p>Tantangannya:
+Bagaimana cara mengenali pola tertentu di dalam sinyal?</p>
+</section>
+<section id="permasalahan-yang-ingin-diselesaikan">
+<h2>2. Permasalahan yang Ingin Diselesaikan<a class="headerlink" href="#permasalahan-yang-ingin-diselesaikan" title="Link to this heading">#</a></h2>
+<p>Dataset TwoPatterns dibuat untuk memecahkan pertanyaan sederhana namun penting:</p>
+<p>Bisakah sistem otomatis membedakan dua jenis pola sinyal yang berbeda?</p>
+<p>Dua pola tersebut:</p>
+<p>Pattern A: naik → turun</p>
+<p>Pattern B: turun → naik</p>
+<p>Masalah ini menjadi fondasi dasar untuk:</p>
+<p>deteksi anomali</p>
+<p>pengenalan gerakan</p>
+<p>identifikasi kondisi mesin</p>
+<p>analisis kesehatan berbasis sinyal</p>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="tujuan-proyek">
+<h1>3. Tujuan Proyek<a class="headerlink" href="#tujuan-proyek" title="Link to this heading">#</a></h1>
+<p>Tujuan utamanya adalah:</p>
+<p>✔ Membuat model klasifikasi time series</p>
+<p>yang dapat:</p>
+<p>1.membaca sinyal (data deret waktu)</p>
+<p>2.mengenali pola naik-turun atau turun-naik</p>
+<p>3.memberikan label class 1 atau class 2</p>
+<p>Dengan demikian, proyek ini bertujuan menghasilkan model pembeda pola pada sinyal 2-dimensi.</p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="ruang-lingkup-pekerjaan">
+<h1>4. Ruang Lingkup Pekerjaan<a class="headerlink" href="#ruang-lingkup-pekerjaan" title="Link to this heading">#</a></h1>
+<p>Dalam proyek klasifikasi time series ini, ruang lingkupnya adalah:</p>
+<p>1.Menggunakan dataset TwoPatterns (TRAIN &amp; TEST).</p>
+<p>2.Melakukan preprocessing data time series.</p>
+<p>3.Melatih model machine learning atau deep learning.</p>
+<p>4.Mengukur performa model untuk melihat seberapa baik ia mengenali pola.</p>
+<p>5.Menghasilkan interpretasi dan visualisasi pola.</p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="manfaat-nilai-bisnis">
+<h1>5. Manfaat / Nilai Bisnis<a class="headerlink" href="#manfaat-nilai-bisnis" title="Link to this heading">#</a></h1>
+<p>Walaupun dataset ini bersifat akademik, konsepnya mempunyai manfaat besar:</p>
+<p>✔ Deteksi dini kerusakan mesin</p>
+<p>Model dapat mengenali pola getaran yang abnormal.</p>
+<p>✔ Klasifikasi sinyal kesehatan (ECG, EEG)</p>
+<p>Membedakan pola jantung normal vs tidak normal.</p>
+<p>✔ Analisis perilaku sensor IoT</p>
+<p>Memahami perubahan pola data pada perangkat pintar.</p>
+<p>✔ Riset algoritma time series</p>
+<p>Dataset ini sering dipakai untuk membandingkan performa algoritma seperti:
+1.SVM</p>
+<p>2.Random Forest</p>
+<p>3.CNN</p>
+<p>4.LSTM</p>
+<p>5.InceptionTime</p>
 </section>
 
     <script type="text/x-thebe-config">
@@ -535,7 +605,14 @@ document.write(`
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Projek Akhir Dataset TwoPatterns</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#data-understanding">Data Understanding</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#business-understanding-dataset-twopatterns">BUSINESS UNDERSTANDING – Dataset TwoPatterns</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#latar-belakang-masalah">1. Latar Belakang Masalah</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#permasalahan-yang-ingin-diselesaikan">2. Permasalahan yang Ingin Diselesaikan</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#tujuan-proyek">3. Tujuan Proyek</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#ruang-lingkup-pekerjaan">4. Ruang Lingkup Pekerjaan</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#manfaat-nilai-bisnis">5. Manfaat / Nilai Bisnis</a></li>
 </ul>
 
   </nav></div>
