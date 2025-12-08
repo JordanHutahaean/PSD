@@ -484,7 +484,7 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#melihat-mean-std-min-max-setiap-sampel">Melihat mean, std, min, max setiap sampel.</a></li>
 </ul>
 </li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#distribusi-kelas">3. Distribusi Kelas</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#distribusi-kelas-label">3. Distribusi Kelas Label</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#melihat-apakah-seimbang-atau-tidak">Melihat apakah seimbang atau tidak.</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#visualisasi-contoh-time-series-per-kelas">4. Visualisasi Contoh Time Series (Per Kelas)</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ini-penting-untuk-memahami-pola-two-patterns">Ini penting untuk memahami pola “two patterns”.</a></li>
@@ -518,6 +518,7 @@ document.write(`
 <p>Kelas 3 → pola A dua kali</p>
 <p>Kelas 4 → pola B dua kali</p>
 <p>Dataset TwoPatterns disimpan dalam format .ts (Time Series Format).</p>
+<p>CNN 1D cocok untuk datanya</p>
 <section id="latar-belakang-masalah">
 <h2>1. Latar Belakang Masalah<a class="headerlink" href="#latar-belakang-masalah" title="Link to this heading">#</a></h2>
 <p>Banyak sistem modern bergantung pada data time series (deret waktu), seperti:</p>
@@ -678,8 +679,8 @@ Rata-rata max   : 1.5901346292
 <p>Cocok untuk model ML tanpa preprocessing tambahan</p>
 </section>
 </section>
-<section class="tex2jax_ignore mathjax_ignore" id="distribusi-kelas">
-<h1>3. Distribusi Kelas<a class="headerlink" href="#distribusi-kelas" title="Link to this heading">#</a></h1>
+<section class="tex2jax_ignore mathjax_ignore" id="distribusi-kelas-label">
+<h1>3. Distribusi Kelas Label<a class="headerlink" href="#distribusi-kelas-label" title="Link to this heading">#</a></h1>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="melihat-apakah-seimbang-atau-tidak">
 <h1>Melihat apakah seimbang atau tidak.<a class="headerlink" href="#melihat-apakah-seimbang-atau-tidak" title="Link to this heading">#</a></h1>
@@ -801,6 +802,84 @@ Ada NaN di test?  False
 <p>Semua fitur pada setiap sampel memiliki panjang (jumlah kolom) yang konsisten.</p>
 <p>Tidak ada baris yang memiliki jumlah fitur lebih sedikit atau lebih banyak.</p>
 <p>Dataset valid, tidak korup, dan aman untuk masuk ke model machine learning.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">count_features_ts</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">f</span><span class="p">:</span>
+            <span class="n">line</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+
+            <span class="c1"># mulai membaca setelah @data</span>
+            <span class="k">if</span> <span class="n">line</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;@data&quot;</span><span class="p">:</span>
+                <span class="k">break</span>
+
+        <span class="c1"># ambil satu baris data pertama</span>
+        <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">f</span><span class="p">:</span>
+            <span class="n">line</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+            <span class="k">if</span> <span class="s2">&quot;:&quot;</span> <span class="ow">in</span> <span class="n">line</span><span class="p">:</span>  <span class="c1"># format: data,data,data : label</span>
+                <span class="n">features_str</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;:&quot;</span><span class="p">)</span>
+                <span class="n">features</span> <span class="o">=</span> <span class="n">features_str</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;,&quot;</span><span class="p">)</span>
+                <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="n">features</span><span class="p">)</span>
+
+<span class="c1"># ====== CEK FITUR ======</span>
+<span class="n">train_path</span> <span class="o">=</span> <span class="s2">&quot;TwoPatterns/TwoPatterns_TRAIN.ts&quot;</span>
+<span class="n">test_path</span> <span class="o">=</span> <span class="s2">&quot;TwoPatterns/TwoPatterns_TEST.ts&quot;</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Jumlah fitur TRAIN :&quot;</span><span class="p">,</span> <span class="n">count_features_ts</span><span class="p">(</span><span class="n">train_path</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Jumlah fitur TEST  :&quot;</span><span class="p">,</span> <span class="n">count_features_ts</span><span class="p">(</span><span class="n">test_path</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Jumlah fitur TRAIN : 128
+Jumlah fitur TEST  : 128
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">detect_outliers_zscore</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">threshold</span><span class="o">=</span><span class="mi">3</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    X : numpy array (n_samples, n_features)</span>
+<span class="sd">    threshold : batas Z-Score (default = 3)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">mean</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">std</span>  <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+    <span class="c1"># hitung z-score</span>
+    <span class="n">z_scores</span> <span class="o">=</span> <span class="p">(</span><span class="n">X</span> <span class="o">-</span> <span class="n">mean</span><span class="p">)</span> <span class="o">/</span> <span class="n">std</span>
+
+    <span class="c1"># boolean mask outlier</span>
+    <span class="n">outlier_mask</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">z_scores</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">threshold</span>
+
+    <span class="c1"># jumlah outlier per sample</span>
+    <span class="n">outlier_count_per_sample</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">outlier_mask</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">outlier_mask</span><span class="p">,</span> <span class="n">outlier_count_per_sample</span>
+
+<span class="c1"># ===== JALANKAN =====</span>
+<span class="n">outlier_mask</span><span class="p">,</span> <span class="n">outlier_count</span> <span class="o">=</span> <span class="n">detect_outliers_zscore</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span>
+
+<span class="c1"># total sampel yang mengandung outlier</span>
+<span class="n">n_outlier_samples</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">outlier_count</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Total sampel TRAIN:&quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">X_train</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Sampel yang mengandung outlier :&quot;</span><span class="p">,</span> <span class="n">n_outlier_samples</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Persentase:&quot;</span><span class="p">,</span> <span class="p">(</span><span class="n">n_outlier_samples</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">X_train</span><span class="p">))</span> <span class="o">*</span> <span class="mi">100</span><span class="p">,</span> <span class="s2">&quot;%&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Total sampel TRAIN: 1000
+Sampel yang mengandung outlier : 127
+Persentase: 12.7 %
+</pre></div>
+</div>
+</div>
+</div>
 </section>
 
     <script type="text/x-thebe-config">
@@ -873,7 +952,7 @@ Ada NaN di test?  False
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#melihat-mean-std-min-max-setiap-sampel">Melihat mean, std, min, max setiap sampel.</a></li>
 </ul>
 </li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#distribusi-kelas">3. Distribusi Kelas</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#distribusi-kelas-label">3. Distribusi Kelas Label</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#melihat-apakah-seimbang-atau-tidak">Melihat apakah seimbang atau tidak.</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#visualisasi-contoh-time-series-per-kelas">4. Visualisasi Contoh Time Series (Per Kelas)</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ini-penting-untuk-memahami-pola-two-patterns">Ini penting untuk memahami pola “two patterns”.</a></li>
