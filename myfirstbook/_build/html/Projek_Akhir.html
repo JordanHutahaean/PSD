@@ -274,6 +274,24 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 </ul>
 
     </div>
@@ -470,7 +488,7 @@ document.write(`
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Projek Akhir Dataset TwoPatterns</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#business-understanding-dataset-twopatterns">BUSINESS UNDERSTANDING – Dataset TwoPatterns</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#business-understanding-dataset-twopatterns-data-2-pola">BUSINESS UNDERSTANDING – Dataset TwoPatterns (data 2 pola)</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#latar-belakang-masalah">1. Latar Belakang Masalah</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#permasalahan-yang-ingin-diselesaikan">2. Permasalahan yang Ingin Diselesaikan</a></li>
 </ul>
@@ -486,12 +504,39 @@ document.write(`
 </li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#distribusi-kelas-label">3. Distribusi Kelas Label</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#melihat-apakah-seimbang-atau-tidak">Melihat apakah seimbang atau tidak.</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#ini-level-setiap-kelas-nya">ini level setiap Kelas nya</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#visualisasi-contoh-time-series-per-kelas">4. Visualisasi Contoh Time Series (Per Kelas)</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ini-penting-untuk-memahami-pola-two-patterns">Ini penting untuk memahami pola “two patterns”.</a></li>
 </ul>
 </li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#cek-missing-values">5. Cek Missing Values</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#cek-konsistensi-panjang-time-series">6. Cek Konsistensi Panjang Time Series</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#train-data-latih-128">Train (Data Latih): 128</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#test-data-uji-128">Test (Data Uji): 128</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dari-1000-sampel-ada-127-sampel-yang-memiliki-nilai-outlier">Dari 1000 sampel, ada 127 sampel yang memiliki nilai outlier</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#artinya-sekitar-12-7-dari-seluruh-dataset-train-merupakan-sampel-yang-mengandung-outlier">Artinya sekitar 12.7% dari seluruh dataset TRAIN merupakan sampel yang mengandung outlier.</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#class-1-kondisi-normal-atau-baik-baik-saja">class 1 -&gt; kondisi normal atau baik baik saja</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#class-4-kondisi-tidak-normal-atau-kasus-penyakit">Class 4 → kondisi tidak normal atau kasus penyakit</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#pemeriksaan-yang-sudah-dilakukan-data-understanding">Pemeriksaan yang sudah dilakukan (Data Understanding)</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#data-preparation-persiapan-data">Data Preparation (Persiapan Data)</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#import-library">import library</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#load-dataset"># 1. Load dataset</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#tahap-4-crisp-dm-pemodelan-data-modeling">Tahap 4 CRISP-DM: Pemodelan Data (Modeling)</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tujuan-pemodelan-adalah">tujuan pemodelan adalah:</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#pemilihan-algoritma">Pemilihan Algoritma</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#tahap-5-evaluasi">Tahap 5: Evaluasi</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#tujuan-evaluasi">1.Tujuan Evaluasi</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#metode-evaluasi-yang-digunakan">2 .Metode Evaluasi yang Digunakan</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluasi-akurasi-model">3️ Evaluasi Akurasi Model</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#classification-report">4. Classification Report</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#confusion-matrix">5. Confusion Matrix</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#analisis-kenapa-akurasi-bisa-100">6. Analisis Kenapa Akurasi Bisa 100% ❗</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#kesimpulan-tahap-evaluasi">7. Kesimpulan Tahap Evaluasi</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#tahap-6-deployment-streamlit">Tahap 6: Deployment (Streamlit)</a></li>
 </ul>
 
             </nav>
@@ -507,12 +552,15 @@ document.write(`
   <section class="tex2jax_ignore mathjax_ignore" id="projek-akhir-dataset-twopatterns">
 <h1>Projek Akhir Dataset TwoPatterns<a class="headerlink" href="#projek-akhir-dataset-twopatterns" title="Link to this heading">#</a></h1>
 </section>
-<section class="tex2jax_ignore mathjax_ignore" id="business-understanding-dataset-twopatterns">
-<h1>BUSINESS UNDERSTANDING – Dataset TwoPatterns<a class="headerlink" href="#business-understanding-dataset-twopatterns" title="Link to this heading">#</a></h1>
+<section class="tex2jax_ignore mathjax_ignore" id="business-understanding-dataset-twopatterns-data-2-pola">
+<h1>BUSINESS UNDERSTANDING – Dataset TwoPatterns (data 2 pola)<a class="headerlink" href="#business-understanding-dataset-twopatterns-data-2-pola" title="Link to this heading">#</a></h1>
+<p>dataset di temukan dari : Ini murni “pola buatan” untuk eksperimen.
+Kalau dari link resminya: mereka mencatat “Simulated dataset” → maksudnya data dibuat dengan skrip atau fungsi tertentu, bukan diukur dari sumber eksternal.</p>
+<p>data nya berisikan</p>
 <p>Pola naik-turun (up-down pattern)</p>
 <p>Pola turun-naik (down-up pattern)</p>
 <p>Setiap sinyal dikombinasikan dan diberi label kelas 1 sampai 4, sesuai dengan pola apa yang muncul dan bagaimana urutannya.</p>
-<p>Contoh konsepnya kira-kira seperti ini:</p>
+<p>Contoh konsepnya :</p>
 <p>Kelas 1 → pola A lalu pola B</p>
 <p>Kelas 2 → pola B lalu pola A</p>
 <p>Kelas 3 → pola A dua kali</p>
@@ -525,6 +573,8 @@ document.write(`
 <p>📌 Penjelasan Sederhana</p>
 <p>Dataset TwoPatterns adalah dataset time series yang berisi sinyal dengan dua jenis pola berbeda.
 Tugasnya adalah membedakan pola A dan pola B berdasarkan nilai sepanjang time series.</p>
+<p>time series adalah sekumpulan data yang dicatat secara berurutan pada interval waktu yang teratur (misalnya jam, hari, bulan, tahun) untuk satu entitas tunggal</p>
+<p>Dataset time series biasanya diambil dari berbagai alat sensor elektronik—seperti sensor industri, alat medis (ECG/EEG), accelerometer, gyroscope, dan perangkat IoT—yang merekam data secara terus-menerus berdasarkan waktu untuk memantau kondisi, aktivitas, atau perubahan suatu sistem.</p>
 <section id="latar-belakang-masalah">
 <h2>1. Latar Belakang Masalah<a class="headerlink" href="#latar-belakang-masalah" title="Link to this heading">#</a></h2>
 <p>Banyak sistem modern bergantung pada data time series (deret waktu), seperti:</p>
@@ -535,14 +585,11 @@ Hasil bacaan itu disimpan sebagai deret waktu.
 Sistem mempelajari pola naik-turunnya.
 Jika pola berubah tidak wajar → mesin dianggap dalam kondisi bahaya.</p>
 <p>2.aktivitas medis (ECG, EEG)</p>
-<p>contoh : -&gt; <img alt="image.png" src="attachment:image.png" /></p>
+<p>ECG (Electrocardiogram) → merekam aktivitas listrik jantung, untuk melihat detak jantung, irama, dan gangguan jantung</p>
+<p>EEG (Electroencephalogram) → merekam aktivitas listrik otak, untuk mendeteksi kejang, gangguan tidur, atau kelainan neurologis.</p>
 <p>3.getaran mesin</p>
 <p>-&gt; Setiap detik sensor mengirim “berapa kuat mesin bergetar”.
 Mesin yang rusak bergetar “tidak seperti biasanya”. Sensor membaca pola getarannya → komputer mendeteksi kelainan.</p>
-<p>4.pola gerakan</p>
-<p>5.data IoT</p>
-<p>Tantangannya:
-Bagaimana cara mengenali pola tertentu di dalam sinyal?</p>
 </section>
 <section id="permasalahan-yang-ingin-diselesaikan">
 <h2>2. Permasalahan yang Ingin Diselesaikan<a class="headerlink" href="#permasalahan-yang-ingin-diselesaikan" title="Link to this heading">#</a></h2>
@@ -561,7 +608,7 @@ Bagaimana cara mengenali pola tertentu di dalam sinyal?</p>
 <section class="tex2jax_ignore mathjax_ignore" id="tujuan-proyek">
 <h1>3. Tujuan Proyek<a class="headerlink" href="#tujuan-proyek" title="Link to this heading">#</a></h1>
 <p>Tujuan utamanya adalah:</p>
-<p>✔ Membuat model klasifikasi time series</p>
+<p>Membuat model klasifikasi time series</p>
 <p>yang dapat:</p>
 <p>1.membaca sinyal (data deret waktu)</p>
 <p>2.mengenali pola naik-turun atau turun-naik</p>
@@ -657,6 +704,13 @@ Unique labels : [1 2 3 4]
 </div>
 </div>
 </div>
+<p>Train samples: 1000 → ada 1000 contoh pada data latih.</p>
+<p>Test samples: 4000 → ada 4000 contoh pada data uji.</p>
+<p>Series length: 128 → setiap time series memiliki 128 titik data (fitur).
+Maksudnya: Setiap contoh data time series punya 128 “langkah waktu” atau titik data.</p>
+<p>pola label: 2 → label dari contoh pertama adalah kelas 2.
+pola naik dan turun</p>
+<p>Unique labels: [1 2 3 4] → dataset memiliki 4 kelas berbeda, yaitu 1, 2, 3, dan 4.</p>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="statistik-dasar-time-series">
 <h1>2. Statistik Dasar Time Series<a class="headerlink" href="#statistik-dasar-time-series" title="Link to this heading">#</a></h1>
@@ -688,9 +742,7 @@ Rata-rata max   : 1.5901346292
 <p>Kesimpulan: Statistika Ini Bagus dan Ideal untuk Modeling</p>
 <p>Dataset kamu menunjukkan ciri-ciri:</p>
 <p>Sudah distandardisasi dengan benar</p>
-<p>Tidak ada fitur yang scale-nya melenceng</p>
 <p>Distribusi relatif normal/seragam</p>
-<p>Cocok untuk model ML tanpa preprocessing tambahan</p>
 </section>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="distribusi-kelas-label">
@@ -700,19 +752,60 @@ Rata-rata max   : 1.5901346292
 <h1>Melihat apakah seimbang atau tidak.<a class="headerlink" href="#melihat-apakah-seimbang-atau-tidak" title="Link to this heading">#</a></h1>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
-<span class="n">unique</span><span class="p">,</span> <span class="n">counts</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">y_train</span><span class="p">,</span> <span class="n">return_counts</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># File dataset</span>
+<span class="n">file_path</span> <span class="o">=</span> <span class="sa">r</span><span class="s1">&#39;TwoPatterns/TwoPatterns_TRAIN.txt&#39;</span>
 
-<span class="k">for</span> <span class="n">u</span><span class="p">,</span> <span class="n">c</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">unique</span><span class="p">,</span> <span class="n">counts</span><span class="p">):</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Kelas </span><span class="si">{</span><span class="n">u</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">c</span><span class="si">}</span><span class="s2"> sampel&quot;</span><span class="p">)</span>
+<span class="c1"># Membaca dataset</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">loadtxt</span><span class="p">(</span><span class="n">file_path</span><span class="p">)</span>
+
+<span class="c1"># Kolom pertama sebagai label</span>
+<span class="n">labels</span> <span class="o">=</span> <span class="n">data</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span>
+
+<span class="c1"># Nama kelas sesuai dataset (ubah sesuai label yang ada)</span>
+<span class="n">nama_kelas</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="mi">1</span><span class="p">:</span> <span class="s1">&#39;down-down&#39;</span><span class="p">,</span>
+    <span class="mi">2</span><span class="p">:</span> <span class="s1">&#39;up-down&#39;</span><span class="p">,</span>
+    <span class="mi">3</span><span class="p">:</span> <span class="s1">&#39;down-up&#39;</span><span class="p">,</span>
+    <span class="mi">4</span><span class="p">:</span> <span class="s1">&#39;up-up&#39;</span>
+<span class="p">}</span>
+
+<span class="c1"># Hitung jumlah tiap kelas</span>
+<span class="p">(</span><span class="n">unique</span><span class="p">,</span> <span class="n">counts</span><span class="p">)</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">labels</span><span class="p">,</span> <span class="n">return_counts</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">jumlah_kasus</span> <span class="o">=</span> <span class="p">{</span><span class="n">nama_kelas</span><span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">k</span><span class="p">)]:</span> <span class="n">v</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">unique</span><span class="p">,</span> <span class="n">counts</span><span class="p">)</span> <span class="k">if</span> <span class="nb">int</span><span class="p">(</span><span class="n">k</span><span class="p">)</span> <span class="ow">in</span> <span class="n">nama_kelas</span><span class="p">}</span>
+
+<span class="c1"># Tampilkan hasil</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Jumlah kasus per kelas:&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">jumlah_kasus</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">k</span><span class="si">}</span><span class="s2"> : </span><span class="si">{</span><span class="n">v</span><span class="si">}</span><span class="s2"> kasus&quot;</span><span class="p">)</span>
+
+<span class="c1"># Visualisasi bar chart</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">jumlah_kasus</span><span class="o">.</span><span class="n">keys</span><span class="p">(),</span> <span class="n">jumlah_kasus</span><span class="o">.</span><span class="n">values</span><span class="p">(),</span> <span class="n">color</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;red&#39;</span><span class="p">,</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span><span class="s1">&#39;green&#39;</span><span class="p">,</span><span class="s1">&#39;purple&#39;</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Jumlah Kasus per Kelas - TwoPatterns&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Kelas&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Jumlah Kasus&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Kelas 1: 271 sampel
-Kelas 2: 237 sampel
-Kelas 3: 250 sampel
-Kelas 4: 242 sampel
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Jumlah kasus per kelas:
+down-down : 271 kasus
+up-down : 237 kasus
+down-up : 250 kasus
+up-up : 242 kasus
+</pre></div>
+</div>
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="n">line</span> <span class="mi">28</span>
+<span class="g g-Whitespace">     </span><span class="mi">25</span>     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">k</span><span class="si">}</span><span class="s2"> : </span><span class="si">{</span><span class="n">v</span><span class="si">}</span><span class="s2"> kasus&quot;</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">27</span> <span class="c1"># Visualisasi bar chart</span>
+<span class="ne">---&gt; </span><span class="mi">28</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
+<span class="g g-Whitespace">     </span><span class="mi">29</span> <span class="n">plt</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">jumlah_kasus</span><span class="o">.</span><span class="n">keys</span><span class="p">(),</span> <span class="n">jumlah_kasus</span><span class="o">.</span><span class="n">values</span><span class="p">(),</span> <span class="n">color</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;red&#39;</span><span class="p">,</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span><span class="s1">&#39;green&#39;</span><span class="p">,</span><span class="s1">&#39;purple&#39;</span><span class="p">])</span>
+<span class="g g-Whitespace">     </span><span class="mi">30</span> <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Jumlah Kasus per Kelas - TwoPatterns&quot;</span><span class="p">)</span>
+
+<span class="ne">NameError</span>: name &#39;plt&#39; is not defined
 </pre></div>
 </div>
 </div>
@@ -740,10 +833,20 @@ Kelas 4: 242 sampel
 </table>
 </div>
 <p>Kesimpulan: Dataset seimbang</p>
-<p>✔ Tidak perlu SMOTE</p>
 <p>✔ Tidak perlu undersampling</p>
 <p>✔ Distribusi sudah ideal untuk training model</p>
 <p>✔ Semua kelas memiliki representasi yang cukup</p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="ini-level-setiap-kelas-nya">
+<h1>ini level setiap Kelas nya<a class="headerlink" href="#ini-level-setiap-kelas-nya" title="Link to this heading">#</a></h1>
+<p>Kelas 1 — Kondisi Normal / Sehat / Stabil</p>
+<p>Digunakan sebagai acuan standar bahwa sistem bekerja normal.</p>
+<p>Kelas 2 — Masalah Ringan / Anomali Tingkat Rendah</p>
+<p>Menandakan ada penyimpangan kecil yang masih bisa ditoleransi.</p>
+<p>Kelas 3 — Masalah Sedang / Warning Level</p>
+<p>Artinya sistem mulai tidak stabil, butuh tindakan.</p>
+<p>Kelas 4 — Masalah Berat / Gangguan Serius</p>
+<p>Menandakan kondisi kritis yang harus segera ditangani.</p>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="visualisasi-contoh-time-series-per-kelas">
 <h1>4. Visualisasi Contoh Time Series (Per Kelas)<a class="headerlink" href="#visualisasi-contoh-time-series-per-kelas" title="Link to this heading">#</a></h1>
@@ -774,6 +877,10 @@ Kelas 4: 242 sampel
 <img alt="_images/72902f8fedfb7080c65770def601253e2caa3d949008ec5bfc1388134b19655b.png" src="_images/72902f8fedfb7080c65770def601253e2caa3d949008ec5bfc1388134b19655b.png" />
 </div>
 </div>
+<p>Class 1 (biru) → down-down</p>
+<p>Class 2 (oranye) → up-down</p>
+<p>Class 3 (hijau) → down-up</p>
+<p>Class 4 (merah) → up-up</p>
 </section>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="cek-missing-values">
@@ -792,14 +899,15 @@ Ada NaN di test?  False
 </div>
 </div>
 </div>
-<p>“Ada NaN di train? False” → Tidak ada nilai hilang (NaN) di data latih ✔️</p>
-<p>“Ada NaN di test? False” → Tidak ada nilai hilang (NaN) di data uji ✔️</p>
+<p>“Ada NaN di train? False” → Tidak ada nilai hilang (NaN) di data latih</p>
+<p>“Ada NaN di test? False” → Tidak ada nilai hilang (NaN) di data uji</p>
 <p>Model tidak akan error akibat nilai NaN.</p>
 <p>Tidak perlu melakukan imputasi atau pembersihan tambahan.</p>
 <p>Data bersih → performa model lebih stabil dan konsisten.</p>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="cek-konsistensi-panjang-time-series">
 <h1>6. Cek Konsistensi Panjang Time Series<a class="headerlink" href="#cek-konsistensi-panjang-time-series" title="Link to this heading">#</a></h1>
+<p>Untuk memastikan semua time series punya panjang sama, karena banyak algoritma ML memerlukan input dengan dimensi konsisten.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">lengths</span> <span class="o">=</span> <span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">X_train</span><span class="p">]</span>
@@ -851,6 +959,13 @@ Jumlah fitur TEST  : 128
 </div>
 </div>
 </div>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="train-data-latih-128">
+<h1>Train (Data Latih): 128<a class="headerlink" href="#train-data-latih-128" title="Link to this heading">#</a></h1>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="test-data-uji-128">
+<h1>Test (Data Uji): 128<a class="headerlink" href="#test-data-uji-128" title="Link to this heading">#</a></h1>
+<p>Maksudnya: Setiap contoh data time series punya 128 “langkah waktu” atau titik data.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
@@ -894,6 +1009,11 @@ Persentase: 12.7 %
 </div>
 </div>
 </div>
+<section id="dari-1000-sampel-ada-127-sampel-yang-memiliki-nilai-outlier">
+<h2>Dari 1000 sampel, ada 127 sampel yang memiliki nilai outlier<a class="headerlink" href="#dari-1000-sampel-ada-127-sampel-yang-memiliki-nilai-outlier" title="Link to this heading">#</a></h2>
+</section>
+<section id="artinya-sekitar-12-7-dari-seluruh-dataset-train-merupakan-sampel-yang-mengandung-outlier">
+<h2>Artinya sekitar 12.7% dari seluruh dataset TRAIN merupakan sampel yang mengandung outlier.<a class="headerlink" href="#artinya-sekitar-12-7-dari-seluruh-dataset-train-merupakan-sampel-yang-mengandung-outlier" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">collections</span><span class="w"> </span><span class="kn">import</span> <span class="n">Counter</span>
@@ -933,6 +1053,1512 @@ Class 1 dengan 1306 sampel
 
 Kelas Tidak Normal (Minoritas):
 Class 4 dengan 1201 sampel
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="class-1-kondisi-normal-atau-baik-baik-saja">
+<h2>class 1 -&gt; kondisi normal atau baik baik saja<a class="headerlink" href="#class-1-kondisi-normal-atau-baik-baik-saja" title="Link to this heading">#</a></h2>
+</section>
+<section id="class-4-kondisi-tidak-normal-atau-kasus-penyakit">
+<h2>Class 4 → kondisi tidak normal atau kasus penyakit<a class="headerlink" href="#class-4-kondisi-tidak-normal-atau-kasus-penyakit" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.ensemble</span><span class="w"> </span><span class="kn">import</span> <span class="n">RandomForestClassifier</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.metrics</span><span class="w"> </span><span class="kn">import</span> <span class="n">classification_report</span><span class="p">,</span> <span class="n">confusion_matrix</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="c1"># Contoh data dummy (ganti dengan data kamu)</span>
+<span class="n">X_train</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">1000</span><span class="p">,</span> <span class="mi">128</span><span class="p">)</span>
+<span class="n">y_train</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
+
+<span class="n">X_test</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">400</span><span class="p">,</span> <span class="mi">128</span><span class="p">)</span>
+<span class="n">y_test</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">400</span><span class="p">)</span>
+
+<span class="c1"># Buat model</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">RandomForestClassifier</span><span class="p">(</span><span class="n">n_estimators</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+
+<span class="c1"># Latih model</span>
+<span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+
+<span class="c1"># Prediksi</span>
+<span class="n">pred</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+
+<span class="c1"># Evaluasi</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Classification Report:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">classification_report</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">pred</span><span class="p">))</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Confusion Matrix:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">confusion_matrix</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">pred</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Classification Report:
+              precision    recall  f1-score   support
+
+           1       0.27      0.27      0.27        93
+           2       0.30      0.35      0.32       110
+           3       0.32      0.39      0.35       103
+           4       0.16      0.10      0.12        94
+
+    accuracy                           0.28       400
+   macro avg       0.26      0.27      0.27       400
+weighted avg       0.27      0.28      0.27       400
+
+
+Confusion Matrix:
+[[25 29 28 11]
+ [27 38 30 15]
+ [15 25 40 23]
+ [26 33 26  9]]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="c1"># Ganti path dengan lokasi file dataset kamu</span>
+<span class="n">file_path</span> <span class="o">=</span> <span class="s1">&#39;TwoPatterns/TwoPatterns_TRAIN.txt&#39;</span>
+
+<span class="c1"># Membaca dataset, misal label di kolom terakhir</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">loadtxt</span><span class="p">(</span><span class="n">file_path</span><span class="p">)</span>
+
+<span class="c1"># Misal kolom terakhir adalah label</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">data</span><span class="p">[:,</span> <span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>  <span class="c1"># semua kolom kecuali terakhir → fitur</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">data</span><span class="p">[:,</span> <span class="o">-</span><span class="mi">1</span><span class="p">]</span>   <span class="c1"># kolom terakhir → label</span>
+
+<span class="c1"># Cek bentuk dataset</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Bentuk X:&quot;</span><span class="p">,</span> <span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Jumlah fitur per sampel:&quot;</span><span class="p">,</span> <span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Jumlah sampel:&quot;</span><span class="p">,</span> <span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Bentuk X: (1000, 128)
+Jumlah fitur per sampel: 128
+Jumlah sampel: 1000
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="pemeriksaan-yang-sudah-dilakukan-data-understanding">
+<h1>Pemeriksaan yang sudah dilakukan (Data Understanding)<a class="headerlink" href="#pemeriksaan-yang-sudah-dilakukan-data-understanding" title="Link to this heading">#</a></h1>
+<p>Jumlah sampel train &amp; test</p>
+<p>Train: 1000 sampel</p>
+<p>Test: 4000 sampel</p>
+<p>Panjang series (series length)</p>
+<p>Series length = 128 → tiap sampel punya 128 titik data</p>
+<p>Label dan distribusi kelas</p>
+<p>Unique labels: [1, 2, 3, 4]</p>
+<p>Jumlah tiap kelas:</p>
+<p>Class 1: 1306 → normal (mayoritas)</p>
+<p>Class 4: 1201 → tidak normal (minoritas)</p>
+<p>Ini membantu nanti jika perlu class balancing atau stratified split</p>
+<p>Jumlah fitur per sampel</p>
+<p>X.shape = (1000, 128) → jumlah fitur per sampel = 128 (dari series length)</p>
+<p>Outlier</p>
+<p>127 sampel mengandung outlier (~12.7%)</p>
+<p>Sudah tahu proporsinya, jadi bisa dipertimbangkan saat preprocessing</p>
+<p>Kita sudah paham bentuk data (jumlah sampel × fitur) → bisa langsung lakukan scaling, reshape, dan split.</p>
+<p>Kita sudah paham distribusi kelas → bisa lakukan stratified split atau balancing jika perlu.</p>
+<p>Kita sudah tahu ada outlier → bisa diputuskan apakah akan dihapus, diubah, atau tetap dipakai.</p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="data-preparation-persiapan-data">
+<h1>Data Preparation (Persiapan Data)<a class="headerlink" href="#data-preparation-persiapan-data" title="Link to this heading">#</a></h1>
+<p>Preprocessing adalah langkah menyiapkan data mentah agar siap dipakai untuk analisis atau model machine learning</p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="import-library">
+<h1>import library<a class="headerlink" href="#import-library" title="Link to this heading">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Dataset .txt kamu dibaca menjadi array angka.</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="c1"># Mengubah label kelas menjadi angka integer</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.preprocessing</span><span class="w"> </span><span class="kn">import</span> <span class="n">LabelEncoder</span>
+<span class="c1"># Membagi data menjadi:Data latih (train)Data uji (test)</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.model_selection</span><span class="w"> </span><span class="kn">import</span> <span class="n">train_test_split</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.metrics</span><span class="w"> </span><span class="kn">import</span> <span class="n">classification_report</span><span class="p">,</span> <span class="n">confusion_matrix</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">tensorflow</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">tf</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">tensorflow.keras.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">Sequential</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">tensorflow.keras.layers</span><span class="w"> </span><span class="kn">import</span> <span class="n">Conv1D</span><span class="p">,</span> <span class="n">MaxPooling1D</span><span class="p">,</span> <span class="n">Flatten</span><span class="p">,</span> <span class="n">Dense</span><span class="p">,</span> <span class="n">Dropout</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="load-dataset">
+<h1># 1. Load dataset<a class="headerlink" href="#load-dataset" title="Link to this heading">#</a></h1>
+<p>Memasukkan data dari file ke dalam program Python supaya bisa diolah oleh model.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">file_path</span> <span class="o">=</span> <span class="s1">&#39;TwoPatterns/TwoPatterns_TRAIN.txt&#39;</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">loadtxt</span><span class="p">(</span><span class="n">file_path</span><span class="p">)</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">data</span><span class="p">[:,</span> <span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">data</span><span class="p">[:,</span> <span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+
+<span class="c1"># encode label ke integer</span>
+<span class="n">le</span> <span class="o">=</span> <span class="n">LabelEncoder</span><span class="p">()</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">le</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 2. Simple data augmentation</span>
+<span class="c1">#    (menambahkan noise kecil ke setiap sampel)</span>
+<span class="c1"># ----------------------------</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">augment_data</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">n_aug</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">noise_level</span><span class="o">=</span><span class="mf">0.01</span><span class="p">):</span>
+    <span class="n">X_aug</span><span class="p">,</span> <span class="n">y_aug</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">xi</span><span class="p">,</span> <span class="n">yi</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_aug</span><span class="p">):</span>
+            <span class="n">noise</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">noise_level</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">xi</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+            <span class="n">X_aug</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">xi</span> <span class="o">+</span> <span class="n">noise</span><span class="p">)</span>
+            <span class="n">y_aug</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">yi</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">X_aug</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">y_aug</span><span class="p">)</span>
+
+<span class="n">X_aug</span><span class="p">,</span> <span class="n">y_aug</span> <span class="o">=</span> <span class="n">augment_data</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">n_aug</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">noise_level</span><span class="o">=</span><span class="mf">0.01</span><span class="p">)</span>
+
+<span class="c1"># reshape untuk 1D CNN</span>
+<span class="n">X_aug</span> <span class="o">=</span> <span class="n">X_aug</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="n">X_aug</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">X_aug</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="mi">1</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 3. Split dataset</span>
+<span class="c1"># ----------------------------</span>
+<span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span>
+    <span class="n">X_aug</span><span class="p">,</span> <span class="n">y_aug</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">,</span> <span class="n">stratify</span><span class="o">=</span><span class="n">y_aug</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 4. Build 1D CNN model</span>
+<span class="c1"># ----------------------------</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">Sequential</span><span class="p">([</span>
+    <span class="n">Conv1D</span><span class="p">(</span><span class="mi">32</span><span class="p">,</span> <span class="n">kernel_size</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s1">&#39;relu&#39;</span><span class="p">,</span> <span class="n">input_shape</span><span class="o">=</span><span class="p">(</span><span class="n">X_train</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="mi">1</span><span class="p">)),</span>
+    <span class="n">MaxPooling1D</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span>
+    <span class="n">Dropout</span><span class="p">(</span><span class="mf">0.2</span><span class="p">),</span>
+
+    <span class="n">Conv1D</span><span class="p">(</span><span class="mi">64</span><span class="p">,</span> <span class="n">kernel_size</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s1">&#39;relu&#39;</span><span class="p">),</span>
+    <span class="n">MaxPooling1D</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span>
+    <span class="n">Dropout</span><span class="p">(</span><span class="mf">0.2</span><span class="p">),</span>
+
+    <span class="n">Flatten</span><span class="p">(),</span>
+    <span class="n">Dense</span><span class="p">(</span><span class="mi">64</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s1">&#39;relu&#39;</span><span class="p">),</span>
+    <span class="n">Dropout</span><span class="p">(</span><span class="mf">0.2</span><span class="p">),</span>
+    <span class="n">Dense</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">y</span><span class="p">)),</span> <span class="n">activation</span><span class="o">=</span><span class="s1">&#39;softmax&#39;</span><span class="p">)</span>
+<span class="p">])</span>
+<span class="n">model</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">optimizer</span><span class="o">=</span><span class="s1">&#39;adam&#39;</span><span class="p">,</span> <span class="n">loss</span><span class="o">=</span><span class="s1">&#39;sparse_categorical_crossentropy&#39;</span><span class="p">,</span> <span class="n">metrics</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;accuracy&#39;</span><span class="p">])</span>
+<span class="n">model</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Model: &quot;sequential_6&quot;
+_________________________________________________________________
+ Layer (type)                Output Shape              Param #   
+=================================================================
+ conv1d_11 (Conv1D)          (None, 126, 32)           128       
+                                                                 
+ max_pooling1d_11 (MaxPooli  (None, 63, 32)            0         
+ ng1D)                                                           
+                                                                 
+ dropout_15 (Dropout)        (None, 63, 32)            0         
+                                                                 
+ conv1d_12 (Conv1D)          (None, 61, 64)            6208      
+                                                                 
+ max_pooling1d_12 (MaxPooli  (None, 30, 64)            0         
+ ng1D)                                                           
+                                                                 
+ dropout_16 (Dropout)        (None, 30, 64)            0         
+                                                                 
+ flatten_6 (Flatten)         (None, 1920)              0         
+                                                                 
+ dense_12 (Dense)            (None, 64)                122944    
+                                                                 
+ dropout_17 (Dropout)        (None, 64)                0         
+                                                                 
+ dense_13 (Dense)            (None, 1000)              65000     
+                                                                 
+=================================================================
+Total params: 194280 (758.91 KB)
+Trainable params: 194280 (758.91 KB)
+Non-trainable params: 0 (0.00 Byte)
+_________________________________________________________________
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 5. Train model</span>
+<span class="c1"># ----------------------------</span>
+<span class="n">history</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span>
+    <span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span>
+    <span class="n">epochs</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span>
+    <span class="n">batch_size</span><span class="o">=</span><span class="mi">16</span><span class="p">,</span>
+    <span class="n">validation_split</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span>
+    <span class="n">verbose</span><span class="o">=</span><span class="mi">1</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 1/30
+800/800 [==============================] - 5s 5ms/step - loss: 4.1672 - accuracy: 0.2301 - val_loss: 0.6997 - val_accuracy: 0.7916
+Epoch 2/30
+800/800 [==============================] - 4s 5ms/step - loss: 0.7991 - accuracy: 0.7527 - val_loss: 0.1194 - val_accuracy: 0.9703
+Epoch 3/30
+800/800 [==============================] - 4s 5ms/step - loss: 0.3682 - accuracy: 0.8833 - val_loss: 0.0222 - val_accuracy: 0.9937
+Epoch 4/30
+800/800 [==============================] - 4s 5ms/step - loss: 0.2134 - accuracy: 0.9302 - val_loss: 0.0127 - val_accuracy: 0.9950
+Epoch 5/30
+800/800 [==============================] - 4s 5ms/step - loss: 0.1712 - accuracy: 0.9459 - val_loss: 0.0023 - val_accuracy: 1.0000
+Epoch 6/30
+800/800 [==============================] - 4s 4ms/step - loss: 0.1365 - accuracy: 0.9566 - val_loss: 0.0090 - val_accuracy: 0.9978
+Epoch 7/30
+800/800 [==============================] - 4s 4ms/step - loss: 0.1163 - accuracy: 0.9622 - val_loss: 7.1143e-04 - val_accuracy: 1.0000
+Epoch 8/30
+800/800 [==============================] - 4s 4ms/step - loss: 0.0980 - accuracy: 0.9684 - val_loss: 7.1736e-04 - val_accuracy: 1.0000
+Epoch 9/30
+800/800 [==============================] - 4s 5ms/step - loss: 0.0926 - accuracy: 0.9695 - val_loss: 6.8639e-04 - val_accuracy: 1.0000
+Epoch 10/30
+800/800 [==============================] - 4s 5ms/step - loss: 0.0782 - accuracy: 0.9735 - val_loss: 3.2633e-04 - val_accuracy: 1.0000
+Epoch 11/30
+800/800 [==============================] - 4s 5ms/step - loss: 0.0718 - accuracy: 0.9755 - val_loss: 3.7219e-04 - val_accuracy: 1.0000
+Epoch 12/30
+800/800 [==============================] - 4s 5ms/step - loss: 0.0632 - accuracy: 0.9789 - val_loss: 7.1911e-04 - val_accuracy: 0.9994
+Epoch 13/30
+800/800 [==============================] - 4s 5ms/step - loss: 0.0632 - accuracy: 0.9799 - val_loss: 0.0028 - val_accuracy: 0.9984
+Epoch 14/30
+800/800 [==============================] - 4s 5ms/step - loss: 0.0633 - accuracy: 0.9795 - val_loss: 7.9293e-04 - val_accuracy: 1.0000
+Epoch 15/30
+800/800 [==============================] - 4s 5ms/step - loss: 0.0553 - accuracy: 0.9819 - val_loss: 7.3153e-05 - val_accuracy: 1.0000
+Epoch 16/30
+800/800 [==============================] - 4s 5ms/step - loss: 0.0484 - accuracy: 0.9840 - val_loss: 5.5783e-05 - val_accuracy: 1.0000
+Epoch 17/30
+800/800 [==============================] - 5s 7ms/step - loss: 0.0444 - accuracy: 0.9855 - val_loss: 5.4831e-05 - val_accuracy: 1.0000
+Epoch 18/30
+800/800 [==============================] - 6s 7ms/step - loss: 0.0472 - accuracy: 0.9845 - val_loss: 2.9248e-04 - val_accuracy: 1.0000
+Epoch 19/30
+800/800 [==============================] - 6s 7ms/step - loss: 0.0423 - accuracy: 0.9856 - val_loss: 6.7999e-05 - val_accuracy: 1.0000
+Epoch 20/30
+800/800 [==============================] - 6s 7ms/step - loss: 0.0463 - accuracy: 0.9848 - val_loss: 1.9241e-05 - val_accuracy: 1.0000
+Epoch 21/30
+800/800 [==============================] - 6s 7ms/step - loss: 0.0398 - accuracy: 0.9873 - val_loss: 2.9079e-05 - val_accuracy: 1.0000
+Epoch 22/30
+800/800 [==============================] - 6s 7ms/step - loss: 0.0424 - accuracy: 0.9855 - val_loss: 2.2758e-05 - val_accuracy: 1.0000
+Epoch 23/30
+800/800 [==============================] - 6s 7ms/step - loss: 0.0361 - accuracy: 0.9878 - val_loss: 2.2114e-04 - val_accuracy: 1.0000
+Epoch 24/30
+800/800 [==============================] - 6s 7ms/step - loss: 0.0305 - accuracy: 0.9900 - val_loss: 6.8709e-06 - val_accuracy: 1.0000
+Epoch 25/30
+800/800 [==============================] - 6s 7ms/step - loss: 0.0372 - accuracy: 0.9879 - val_loss: 7.2522e-06 - val_accuracy: 1.0000
+Epoch 26/30
+800/800 [==============================] - 4s 5ms/step - loss: 0.0354 - accuracy: 0.9875 - val_loss: 2.3407e-05 - val_accuracy: 1.0000
+Epoch 27/30
+800/800 [==============================] - 4s 5ms/step - loss: 0.0307 - accuracy: 0.9896 - val_loss: 6.8592e-05 - val_accuracy: 1.0000
+Epoch 28/30
+800/800 [==============================] - 4s 5ms/step - loss: 0.0280 - accuracy: 0.9915 - val_loss: 7.2424e-06 - val_accuracy: 1.0000
+Epoch 29/30
+800/800 [==============================] - 4s 5ms/step - loss: 0.0291 - accuracy: 0.9905 - val_loss: 9.7820e-04 - val_accuracy: 0.9991
+Epoch 30/30
+800/800 [==============================] - 4s 5ms/step - loss: 0.0259 - accuracy: 0.9920 - val_loss: 1.7577e-05 - val_accuracy: 1.0000
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 6. Evaluate model</span>
+<span class="c1"># ----------------------------</span>
+<span class="n">y_pred</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Classification Report:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">classification_report</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">))</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Confusion Matrix:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">confusion_matrix</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>125/125 [==============================] - 0s 2ms/step
+Classification Report:
+              precision    recall  f1-score   support
+
+           0       1.00      1.00      1.00         4
+           1       1.00      1.00      1.00         4
+           2       1.00      1.00      1.00         4
+           3       1.00      1.00      1.00         4
+           4       1.00      1.00      1.00         4
+           5       1.00      1.00      1.00         4
+           6       1.00      1.00      1.00         4
+           7       1.00      1.00      1.00         4
+           8       1.00      1.00      1.00         4
+           9       1.00      1.00      1.00         4
+          10       1.00      1.00      1.00         4
+          11       1.00      1.00      1.00         4
+          12       1.00      1.00      1.00         4
+          13       1.00      1.00      1.00         4
+          14       1.00      1.00      1.00         4
+          15       1.00      1.00      1.00         4
+          16       1.00      1.00      1.00         4
+          17       1.00      1.00      1.00         4
+          18       1.00      1.00      1.00         4
+          19       1.00      1.00      1.00         4
+          20       1.00      1.00      1.00         4
+          21       1.00      1.00      1.00         4
+          22       1.00      1.00      1.00         4
+          23       1.00      1.00      1.00         4
+          24       1.00      1.00      1.00         4
+          25       1.00      1.00      1.00         4
+          26       1.00      1.00      1.00         4
+          27       1.00      1.00      1.00         4
+          28       1.00      1.00      1.00         4
+          29       1.00      1.00      1.00         4
+          30       1.00      1.00      1.00         4
+          31       1.00      1.00      1.00         4
+          32       1.00      1.00      1.00         4
+          33       1.00      1.00      1.00         4
+          34       1.00      1.00      1.00         4
+          35       1.00      1.00      1.00         4
+          36       1.00      1.00      1.00         4
+          37       1.00      1.00      1.00         4
+          38       1.00      1.00      1.00         4
+          39       1.00      1.00      1.00         4
+          40       1.00      1.00      1.00         4
+          41       1.00      1.00      1.00         4
+          42       1.00      1.00      1.00         4
+          43       1.00      1.00      1.00         4
+          44       1.00      1.00      1.00         4
+          45       1.00      1.00      1.00         4
+          46       1.00      1.00      1.00         4
+          47       1.00      1.00      1.00         4
+          48       1.00      1.00      1.00         4
+          49       1.00      1.00      1.00         4
+          50       1.00      1.00      1.00         4
+          51       1.00      1.00      1.00         4
+          52       1.00      1.00      1.00         4
+          53       1.00      1.00      1.00         4
+          54       1.00      1.00      1.00         4
+          55       1.00      1.00      1.00         4
+          56       1.00      1.00      1.00         4
+          57       1.00      1.00      1.00         4
+          58       1.00      1.00      1.00         4
+          59       1.00      1.00      1.00         4
+          60       1.00      1.00      1.00         4
+          61       1.00      1.00      1.00         4
+          62       1.00      1.00      1.00         4
+          63       1.00      1.00      1.00         4
+          64       1.00      1.00      1.00         4
+          65       1.00      1.00      1.00         4
+          66       1.00      1.00      1.00         4
+          67       1.00      1.00      1.00         4
+          68       1.00      1.00      1.00         4
+          69       1.00      1.00      1.00         4
+          70       1.00      1.00      1.00         4
+          71       1.00      1.00      1.00         4
+          72       1.00      1.00      1.00         4
+          73       1.00      1.00      1.00         4
+          74       1.00      1.00      1.00         4
+          75       1.00      1.00      1.00         4
+          76       1.00      1.00      1.00         4
+          77       1.00      1.00      1.00         4
+          78       1.00      1.00      1.00         4
+          79       1.00      1.00      1.00         4
+          80       1.00      1.00      1.00         4
+          81       1.00      1.00      1.00         4
+          82       1.00      1.00      1.00         4
+          83       1.00      1.00      1.00         4
+          84       1.00      1.00      1.00         4
+          85       1.00      1.00      1.00         4
+          86       1.00      1.00      1.00         4
+          87       1.00      1.00      1.00         4
+          88       1.00      1.00      1.00         4
+          89       1.00      1.00      1.00         4
+          90       1.00      1.00      1.00         4
+          91       1.00      1.00      1.00         4
+          92       1.00      1.00      1.00         4
+          93       1.00      1.00      1.00         4
+          94       1.00      1.00      1.00         4
+          95       1.00      1.00      1.00         4
+          96       1.00      1.00      1.00         4
+          97       1.00      1.00      1.00         4
+          98       1.00      1.00      1.00         4
+          99       1.00      1.00      1.00         4
+         100       1.00      1.00      1.00         4
+         101       1.00      1.00      1.00         4
+         102       1.00      1.00      1.00         4
+         103       1.00      1.00      1.00         4
+         104       1.00      1.00      1.00         4
+         105       1.00      1.00      1.00         4
+         106       1.00      1.00      1.00         4
+         107       1.00      1.00      1.00         4
+         108       1.00      1.00      1.00         4
+         109       1.00      1.00      1.00         4
+         110       1.00      1.00      1.00         4
+         111       1.00      1.00      1.00         4
+         112       1.00      1.00      1.00         4
+         113       1.00      1.00      1.00         4
+         114       1.00      1.00      1.00         4
+         115       1.00      1.00      1.00         4
+         116       1.00      1.00      1.00         4
+         117       1.00      1.00      1.00         4
+         118       1.00      1.00      1.00         4
+         119       1.00      1.00      1.00         4
+         120       1.00      1.00      1.00         4
+         121       1.00      1.00      1.00         4
+         122       1.00      1.00      1.00         4
+         123       1.00      1.00      1.00         4
+         124       1.00      1.00      1.00         4
+         125       1.00      1.00      1.00         4
+         126       1.00      1.00      1.00         4
+         127       1.00      1.00      1.00         4
+         128       1.00      1.00      1.00         4
+         129       1.00      1.00      1.00         4
+         130       1.00      1.00      1.00         4
+         131       1.00      1.00      1.00         4
+         132       1.00      1.00      1.00         4
+         133       1.00      1.00      1.00         4
+         134       1.00      1.00      1.00         4
+         135       1.00      1.00      1.00         4
+         136       1.00      1.00      1.00         4
+         137       1.00      1.00      1.00         4
+         138       1.00      1.00      1.00         4
+         139       1.00      1.00      1.00         4
+         140       1.00      1.00      1.00         4
+         141       1.00      1.00      1.00         4
+         142       1.00      1.00      1.00         4
+         143       1.00      1.00      1.00         4
+         144       1.00      1.00      1.00         4
+         145       1.00      1.00      1.00         4
+         146       1.00      1.00      1.00         4
+         147       1.00      1.00      1.00         4
+         148       1.00      1.00      1.00         4
+         149       1.00      1.00      1.00         4
+         150       1.00      1.00      1.00         4
+         151       1.00      1.00      1.00         4
+         152       1.00      1.00      1.00         4
+         153       1.00      1.00      1.00         4
+         154       1.00      1.00      1.00         4
+         155       1.00      1.00      1.00         4
+         156       1.00      1.00      1.00         4
+         157       1.00      1.00      1.00         4
+         158       1.00      1.00      1.00         4
+         159       1.00      1.00      1.00         4
+         160       1.00      1.00      1.00         4
+         161       1.00      1.00      1.00         4
+         162       1.00      1.00      1.00         4
+         163       1.00      1.00      1.00         4
+         164       1.00      1.00      1.00         4
+         165       1.00      1.00      1.00         4
+         166       1.00      1.00      1.00         4
+         167       1.00      1.00      1.00         4
+         168       1.00      1.00      1.00         4
+         169       1.00      1.00      1.00         4
+         170       1.00      1.00      1.00         4
+         171       1.00      1.00      1.00         4
+         172       1.00      1.00      1.00         4
+         173       1.00      1.00      1.00         4
+         174       1.00      1.00      1.00         4
+         175       1.00      1.00      1.00         4
+         176       1.00      1.00      1.00         4
+         177       1.00      1.00      1.00         4
+         178       1.00      1.00      1.00         4
+         179       1.00      1.00      1.00         4
+         180       1.00      1.00      1.00         4
+         181       1.00      1.00      1.00         4
+         182       1.00      1.00      1.00         4
+         183       1.00      1.00      1.00         4
+         184       1.00      1.00      1.00         4
+         185       1.00      1.00      1.00         4
+         186       1.00      1.00      1.00         4
+         187       1.00      1.00      1.00         4
+         188       1.00      1.00      1.00         4
+         189       1.00      1.00      1.00         4
+         190       1.00      1.00      1.00         4
+         191       1.00      1.00      1.00         4
+         192       1.00      1.00      1.00         4
+         193       1.00      1.00      1.00         4
+         194       1.00      1.00      1.00         4
+         195       1.00      1.00      1.00         4
+         196       1.00      1.00      1.00         4
+         197       1.00      1.00      1.00         4
+         198       1.00      1.00      1.00         4
+         199       1.00      1.00      1.00         4
+         200       1.00      1.00      1.00         4
+         201       1.00      1.00      1.00         4
+         202       1.00      1.00      1.00         4
+         203       1.00      1.00      1.00         4
+         204       1.00      1.00      1.00         4
+         205       1.00      1.00      1.00         4
+         206       1.00      1.00      1.00         4
+         207       1.00      1.00      1.00         4
+         208       1.00      1.00      1.00         4
+         209       1.00      1.00      1.00         4
+         210       1.00      1.00      1.00         4
+         211       1.00      1.00      1.00         4
+         212       1.00      1.00      1.00         4
+         213       1.00      1.00      1.00         4
+         214       1.00      1.00      1.00         4
+         215       1.00      1.00      1.00         4
+         216       1.00      1.00      1.00         4
+         217       1.00      1.00      1.00         4
+         218       1.00      1.00      1.00         4
+         219       1.00      1.00      1.00         4
+         220       1.00      1.00      1.00         4
+         221       1.00      1.00      1.00         4
+         222       1.00      1.00      1.00         4
+         223       1.00      1.00      1.00         4
+         224       1.00      1.00      1.00         4
+         225       1.00      1.00      1.00         4
+         226       1.00      1.00      1.00         4
+         227       1.00      1.00      1.00         4
+         228       1.00      1.00      1.00         4
+         229       1.00      1.00      1.00         4
+         230       1.00      1.00      1.00         4
+         231       1.00      1.00      1.00         4
+         232       1.00      1.00      1.00         4
+         233       1.00      1.00      1.00         4
+         234       1.00      1.00      1.00         4
+         235       1.00      1.00      1.00         4
+         236       1.00      1.00      1.00         4
+         237       1.00      1.00      1.00         4
+         238       1.00      1.00      1.00         4
+         239       1.00      1.00      1.00         4
+         240       1.00      1.00      1.00         4
+         241       1.00      1.00      1.00         4
+         242       1.00      1.00      1.00         4
+         243       1.00      1.00      1.00         4
+         244       1.00      1.00      1.00         4
+         245       1.00      1.00      1.00         4
+         246       1.00      1.00      1.00         4
+         247       1.00      1.00      1.00         4
+         248       1.00      1.00      1.00         4
+         249       1.00      1.00      1.00         4
+         250       1.00      1.00      1.00         4
+         251       1.00      1.00      1.00         4
+         252       1.00      1.00      1.00         4
+         253       1.00      1.00      1.00         4
+         254       1.00      1.00      1.00         4
+         255       1.00      1.00      1.00         4
+         256       1.00      1.00      1.00         4
+         257       1.00      1.00      1.00         4
+         258       1.00      1.00      1.00         4
+         259       1.00      1.00      1.00         4
+         260       1.00      1.00      1.00         4
+         261       1.00      1.00      1.00         4
+         262       1.00      1.00      1.00         4
+         263       1.00      1.00      1.00         4
+         264       1.00      1.00      1.00         4
+         265       1.00      1.00      1.00         4
+         266       1.00      1.00      1.00         4
+         267       1.00      1.00      1.00         4
+         268       1.00      1.00      1.00         4
+         269       1.00      1.00      1.00         4
+         270       1.00      1.00      1.00         4
+         271       1.00      1.00      1.00         4
+         272       1.00      1.00      1.00         4
+         273       1.00      1.00      1.00         4
+         274       1.00      1.00      1.00         4
+         275       1.00      1.00      1.00         4
+         276       1.00      1.00      1.00         4
+         277       1.00      1.00      1.00         4
+         278       1.00      1.00      1.00         4
+         279       1.00      1.00      1.00         4
+         280       1.00      1.00      1.00         4
+         281       1.00      1.00      1.00         4
+         282       1.00      1.00      1.00         4
+         283       1.00      1.00      1.00         4
+         284       1.00      1.00      1.00         4
+         285       1.00      1.00      1.00         4
+         286       1.00      1.00      1.00         4
+         287       1.00      1.00      1.00         4
+         288       1.00      1.00      1.00         4
+         289       1.00      1.00      1.00         4
+         290       1.00      1.00      1.00         4
+         291       1.00      1.00      1.00         4
+         292       1.00      1.00      1.00         4
+         293       1.00      1.00      1.00         4
+         294       1.00      1.00      1.00         4
+         295       1.00      1.00      1.00         4
+         296       1.00      1.00      1.00         4
+         297       1.00      1.00      1.00         4
+         298       1.00      1.00      1.00         4
+         299       1.00      1.00      1.00         4
+         300       1.00      1.00      1.00         4
+         301       1.00      1.00      1.00         4
+         302       1.00      1.00      1.00         4
+         303       1.00      1.00      1.00         4
+         304       1.00      1.00      1.00         4
+         305       1.00      1.00      1.00         4
+         306       1.00      1.00      1.00         4
+         307       1.00      1.00      1.00         4
+         308       1.00      1.00      1.00         4
+         309       1.00      1.00      1.00         4
+         310       1.00      1.00      1.00         4
+         311       1.00      1.00      1.00         4
+         312       1.00      1.00      1.00         4
+         313       1.00      1.00      1.00         4
+         314       1.00      1.00      1.00         4
+         315       1.00      1.00      1.00         4
+         316       1.00      1.00      1.00         4
+         317       1.00      1.00      1.00         4
+         318       1.00      1.00      1.00         4
+         319       1.00      1.00      1.00         4
+         320       1.00      1.00      1.00         4
+         321       1.00      1.00      1.00         4
+         322       1.00      1.00      1.00         4
+         323       1.00      1.00      1.00         4
+         324       1.00      1.00      1.00         4
+         325       1.00      1.00      1.00         4
+         326       1.00      1.00      1.00         4
+         327       1.00      1.00      1.00         4
+         328       1.00      1.00      1.00         4
+         329       1.00      1.00      1.00         4
+         330       1.00      1.00      1.00         4
+         331       1.00      1.00      1.00         4
+         332       1.00      1.00      1.00         4
+         333       1.00      1.00      1.00         4
+         334       1.00      1.00      1.00         4
+         335       1.00      1.00      1.00         4
+         336       1.00      1.00      1.00         4
+         337       1.00      1.00      1.00         4
+         338       1.00      1.00      1.00         4
+         339       1.00      1.00      1.00         4
+         340       1.00      1.00      1.00         4
+         341       1.00      1.00      1.00         4
+         342       1.00      1.00      1.00         4
+         343       1.00      1.00      1.00         4
+         344       1.00      1.00      1.00         4
+         345       1.00      1.00      1.00         4
+         346       1.00      1.00      1.00         4
+         347       1.00      1.00      1.00         4
+         348       1.00      1.00      1.00         4
+         349       1.00      1.00      1.00         4
+         350       1.00      1.00      1.00         4
+         351       1.00      1.00      1.00         4
+         352       1.00      1.00      1.00         4
+         353       1.00      1.00      1.00         4
+         354       1.00      1.00      1.00         4
+         355       1.00      1.00      1.00         4
+         356       1.00      1.00      1.00         4
+         357       1.00      1.00      1.00         4
+         358       1.00      1.00      1.00         4
+         359       1.00      1.00      1.00         4
+         360       1.00      1.00      1.00         4
+         361       1.00      1.00      1.00         4
+         362       1.00      1.00      1.00         4
+         363       1.00      1.00      1.00         4
+         364       1.00      1.00      1.00         4
+         365       1.00      1.00      1.00         4
+         366       1.00      1.00      1.00         4
+         367       1.00      1.00      1.00         4
+         368       1.00      1.00      1.00         4
+         369       1.00      1.00      1.00         4
+         370       1.00      1.00      1.00         4
+         371       1.00      1.00      1.00         4
+         372       1.00      1.00      1.00         4
+         373       1.00      1.00      1.00         4
+         374       1.00      1.00      1.00         4
+         375       1.00      1.00      1.00         4
+         376       1.00      1.00      1.00         4
+         377       1.00      1.00      1.00         4
+         378       1.00      1.00      1.00         4
+         379       1.00      1.00      1.00         4
+         380       1.00      1.00      1.00         4
+         381       1.00      1.00      1.00         4
+         382       1.00      1.00      1.00         4
+         383       1.00      1.00      1.00         4
+         384       1.00      1.00      1.00         4
+         385       1.00      1.00      1.00         4
+         386       1.00      1.00      1.00         4
+         387       1.00      1.00      1.00         4
+         388       1.00      1.00      1.00         4
+         389       1.00      1.00      1.00         4
+         390       1.00      1.00      1.00         4
+         391       1.00      1.00      1.00         4
+         392       1.00      1.00      1.00         4
+         393       1.00      1.00      1.00         4
+         394       1.00      1.00      1.00         4
+         395       1.00      1.00      1.00         4
+         396       1.00      1.00      1.00         4
+         397       1.00      1.00      1.00         4
+         398       1.00      1.00      1.00         4
+         399       1.00      1.00      1.00         4
+         400       1.00      1.00      1.00         4
+         401       1.00      1.00      1.00         4
+         402       1.00      1.00      1.00         4
+         403       1.00      1.00      1.00         4
+         404       1.00      1.00      1.00         4
+         405       1.00      1.00      1.00         4
+         406       1.00      1.00      1.00         4
+         407       1.00      1.00      1.00         4
+         408       1.00      1.00      1.00         4
+         409       1.00      1.00      1.00         4
+         410       1.00      1.00      1.00         4
+         411       1.00      1.00      1.00         4
+         412       1.00      1.00      1.00         4
+         413       1.00      1.00      1.00         4
+         414       1.00      1.00      1.00         4
+         415       1.00      1.00      1.00         4
+         416       1.00      1.00      1.00         4
+         417       1.00      1.00      1.00         4
+         418       1.00      1.00      1.00         4
+         419       1.00      1.00      1.00         4
+         420       1.00      1.00      1.00         4
+         421       1.00      1.00      1.00         4
+         422       1.00      1.00      1.00         4
+         423       1.00      1.00      1.00         4
+         424       1.00      1.00      1.00         4
+         425       1.00      1.00      1.00         4
+         426       1.00      1.00      1.00         4
+         427       1.00      1.00      1.00         4
+         428       1.00      1.00      1.00         4
+         429       1.00      1.00      1.00         4
+         430       1.00      1.00      1.00         4
+         431       1.00      1.00      1.00         4
+         432       1.00      1.00      1.00         4
+         433       1.00      1.00      1.00         4
+         434       1.00      1.00      1.00         4
+         435       1.00      1.00      1.00         4
+         436       1.00      1.00      1.00         4
+         437       1.00      1.00      1.00         4
+         438       1.00      1.00      1.00         4
+         439       1.00      1.00      1.00         4
+         440       1.00      1.00      1.00         4
+         441       1.00      1.00      1.00         4
+         442       1.00      1.00      1.00         4
+         443       1.00      1.00      1.00         4
+         444       1.00      1.00      1.00         4
+         445       1.00      1.00      1.00         4
+         446       1.00      1.00      1.00         4
+         447       1.00      1.00      1.00         4
+         448       1.00      1.00      1.00         4
+         449       1.00      1.00      1.00         4
+         450       1.00      1.00      1.00         4
+         451       1.00      1.00      1.00         4
+         452       1.00      1.00      1.00         4
+         453       1.00      1.00      1.00         4
+         454       1.00      1.00      1.00         4
+         455       1.00      1.00      1.00         4
+         456       1.00      1.00      1.00         4
+         457       1.00      1.00      1.00         4
+         458       1.00      1.00      1.00         4
+         459       1.00      1.00      1.00         4
+         460       1.00      1.00      1.00         4
+         461       1.00      1.00      1.00         4
+         462       1.00      1.00      1.00         4
+         463       1.00      1.00      1.00         4
+         464       1.00      1.00      1.00         4
+         465       1.00      1.00      1.00         4
+         466       1.00      1.00      1.00         4
+         467       1.00      1.00      1.00         4
+         468       1.00      1.00      1.00         4
+         469       1.00      1.00      1.00         4
+         470       1.00      1.00      1.00         4
+         471       1.00      1.00      1.00         4
+         472       1.00      1.00      1.00         4
+         473       1.00      1.00      1.00         4
+         474       1.00      1.00      1.00         4
+         475       1.00      1.00      1.00         4
+         476       1.00      1.00      1.00         4
+         477       1.00      1.00      1.00         4
+         478       1.00      1.00      1.00         4
+         479       1.00      1.00      1.00         4
+         480       1.00      1.00      1.00         4
+         481       1.00      1.00      1.00         4
+         482       1.00      1.00      1.00         4
+         483       1.00      1.00      1.00         4
+         484       1.00      1.00      1.00         4
+         485       1.00      1.00      1.00         4
+         486       1.00      1.00      1.00         4
+         487       1.00      1.00      1.00         4
+         488       1.00      1.00      1.00         4
+         489       1.00      1.00      1.00         4
+         490       1.00      1.00      1.00         4
+         491       1.00      1.00      1.00         4
+         492       1.00      1.00      1.00         4
+         493       1.00      1.00      1.00         4
+         494       1.00      1.00      1.00         4
+         495       1.00      1.00      1.00         4
+         496       1.00      1.00      1.00         4
+         497       1.00      1.00      1.00         4
+         498       1.00      1.00      1.00         4
+         499       1.00      1.00      1.00         4
+         500       1.00      1.00      1.00         4
+         501       1.00      1.00      1.00         4
+         502       1.00      1.00      1.00         4
+         503       1.00      1.00      1.00         4
+         504       1.00      1.00      1.00         4
+         505       1.00      1.00      1.00         4
+         506       1.00      1.00      1.00         4
+         507       1.00      1.00      1.00         4
+         508       1.00      1.00      1.00         4
+         509       1.00      1.00      1.00         4
+         510       1.00      1.00      1.00         4
+         511       1.00      1.00      1.00         4
+         512       1.00      1.00      1.00         4
+         513       1.00      1.00      1.00         4
+         514       1.00      1.00      1.00         4
+         515       1.00      1.00      1.00         4
+         516       1.00      1.00      1.00         4
+         517       1.00      1.00      1.00         4
+         518       1.00      1.00      1.00         4
+         519       1.00      1.00      1.00         4
+         520       1.00      1.00      1.00         4
+         521       1.00      1.00      1.00         4
+         522       1.00      1.00      1.00         4
+         523       1.00      1.00      1.00         4
+         524       1.00      1.00      1.00         4
+         525       1.00      1.00      1.00         4
+         526       1.00      1.00      1.00         4
+         527       1.00      1.00      1.00         4
+         528       1.00      1.00      1.00         4
+         529       1.00      1.00      1.00         4
+         530       1.00      1.00      1.00         4
+         531       1.00      1.00      1.00         4
+         532       1.00      1.00      1.00         4
+         533       1.00      1.00      1.00         4
+         534       1.00      1.00      1.00         4
+         535       1.00      1.00      1.00         4
+         536       1.00      1.00      1.00         4
+         537       1.00      1.00      1.00         4
+         538       1.00      1.00      1.00         4
+         539       1.00      1.00      1.00         4
+         540       1.00      1.00      1.00         4
+         541       1.00      1.00      1.00         4
+         542       1.00      1.00      1.00         4
+         543       1.00      1.00      1.00         4
+         544       1.00      1.00      1.00         4
+         545       1.00      1.00      1.00         4
+         546       1.00      1.00      1.00         4
+         547       1.00      1.00      1.00         4
+         548       1.00      1.00      1.00         4
+         549       1.00      1.00      1.00         4
+         550       1.00      1.00      1.00         4
+         551       1.00      1.00      1.00         4
+         552       1.00      1.00      1.00         4
+         553       1.00      1.00      1.00         4
+         554       1.00      1.00      1.00         4
+         555       1.00      1.00      1.00         4
+         556       1.00      1.00      1.00         4
+         557       1.00      1.00      1.00         4
+         558       1.00      1.00      1.00         4
+         559       1.00      1.00      1.00         4
+         560       1.00      1.00      1.00         4
+         561       1.00      1.00      1.00         4
+         562       1.00      1.00      1.00         4
+         563       1.00      1.00      1.00         4
+         564       1.00      1.00      1.00         4
+         565       1.00      1.00      1.00         4
+         566       1.00      1.00      1.00         4
+         567       1.00      1.00      1.00         4
+         568       1.00      1.00      1.00         4
+         569       1.00      1.00      1.00         4
+         570       1.00      1.00      1.00         4
+         571       1.00      1.00      1.00         4
+         572       1.00      1.00      1.00         4
+         573       1.00      1.00      1.00         4
+         574       1.00      1.00      1.00         4
+         575       1.00      1.00      1.00         4
+         576       1.00      1.00      1.00         4
+         577       1.00      1.00      1.00         4
+         578       1.00      1.00      1.00         4
+         579       1.00      1.00      1.00         4
+         580       1.00      1.00      1.00         4
+         581       1.00      1.00      1.00         4
+         582       1.00      1.00      1.00         4
+         583       1.00      1.00      1.00         4
+         584       1.00      1.00      1.00         4
+         585       1.00      1.00      1.00         4
+         586       1.00      1.00      1.00         4
+         587       1.00      1.00      1.00         4
+         588       1.00      1.00      1.00         4
+         589       1.00      1.00      1.00         4
+         590       1.00      1.00      1.00         4
+         591       1.00      1.00      1.00         4
+         592       1.00      1.00      1.00         4
+         593       1.00      1.00      1.00         4
+         594       1.00      1.00      1.00         4
+         595       1.00      1.00      1.00         4
+         596       1.00      1.00      1.00         4
+         597       1.00      1.00      1.00         4
+         598       1.00      1.00      1.00         4
+         599       1.00      1.00      1.00         4
+         600       1.00      1.00      1.00         4
+         601       1.00      1.00      1.00         4
+         602       1.00      1.00      1.00         4
+         603       1.00      1.00      1.00         4
+         604       1.00      1.00      1.00         4
+         605       1.00      1.00      1.00         4
+         606       1.00      1.00      1.00         4
+         607       1.00      1.00      1.00         4
+         608       1.00      1.00      1.00         4
+         609       1.00      1.00      1.00         4
+         610       1.00      1.00      1.00         4
+         611       1.00      1.00      1.00         4
+         612       1.00      1.00      1.00         4
+         613       1.00      1.00      1.00         4
+         614       1.00      1.00      1.00         4
+         615       1.00      1.00      1.00         4
+         616       1.00      1.00      1.00         4
+         617       1.00      1.00      1.00         4
+         618       1.00      1.00      1.00         4
+         619       1.00      1.00      1.00         4
+         620       1.00      1.00      1.00         4
+         621       1.00      1.00      1.00         4
+         622       1.00      1.00      1.00         4
+         623       1.00      1.00      1.00         4
+         624       1.00      1.00      1.00         4
+         625       1.00      1.00      1.00         4
+         626       1.00      1.00      1.00         4
+         627       1.00      1.00      1.00         4
+         628       1.00      1.00      1.00         4
+         629       1.00      1.00      1.00         4
+         630       1.00      1.00      1.00         4
+         631       1.00      1.00      1.00         4
+         632       1.00      1.00      1.00         4
+         633       1.00      1.00      1.00         4
+         634       1.00      1.00      1.00         4
+         635       1.00      1.00      1.00         4
+         636       1.00      1.00      1.00         4
+         637       1.00      1.00      1.00         4
+         638       1.00      1.00      1.00         4
+         639       1.00      1.00      1.00         4
+         640       1.00      1.00      1.00         4
+         641       1.00      1.00      1.00         4
+         642       1.00      1.00      1.00         4
+         643       1.00      1.00      1.00         4
+         644       1.00      1.00      1.00         4
+         645       1.00      1.00      1.00         4
+         646       1.00      1.00      1.00         4
+         647       1.00      1.00      1.00         4
+         648       1.00      1.00      1.00         4
+         649       1.00      1.00      1.00         4
+         650       1.00      1.00      1.00         4
+         651       1.00      1.00      1.00         4
+         652       1.00      1.00      1.00         4
+         653       1.00      1.00      1.00         4
+         654       1.00      1.00      1.00         4
+         655       1.00      1.00      1.00         4
+         656       1.00      1.00      1.00         4
+         657       1.00      1.00      1.00         4
+         658       1.00      1.00      1.00         4
+         659       1.00      1.00      1.00         4
+         660       1.00      1.00      1.00         4
+         661       1.00      1.00      1.00         4
+         662       1.00      1.00      1.00         4
+         663       1.00      1.00      1.00         4
+         664       1.00      1.00      1.00         4
+         665       1.00      1.00      1.00         4
+         666       1.00      1.00      1.00         4
+         667       1.00      1.00      1.00         4
+         668       1.00      1.00      1.00         4
+         669       1.00      1.00      1.00         4
+         670       1.00      1.00      1.00         4
+         671       1.00      1.00      1.00         4
+         672       1.00      1.00      1.00         4
+         673       1.00      1.00      1.00         4
+         674       1.00      1.00      1.00         4
+         675       1.00      1.00      1.00         4
+         676       1.00      1.00      1.00         4
+         677       1.00      1.00      1.00         4
+         678       1.00      1.00      1.00         4
+         679       1.00      1.00      1.00         4
+         680       1.00      1.00      1.00         4
+         681       1.00      1.00      1.00         4
+         682       1.00      1.00      1.00         4
+         683       1.00      1.00      1.00         4
+         684       1.00      1.00      1.00         4
+         685       1.00      1.00      1.00         4
+         686       1.00      1.00      1.00         4
+         687       1.00      1.00      1.00         4
+         688       1.00      1.00      1.00         4
+         689       1.00      1.00      1.00         4
+         690       1.00      1.00      1.00         4
+         691       1.00      1.00      1.00         4
+         692       1.00      1.00      1.00         4
+         693       1.00      1.00      1.00         4
+         694       1.00      1.00      1.00         4
+         695       1.00      1.00      1.00         4
+         696       1.00      1.00      1.00         4
+         697       1.00      1.00      1.00         4
+         698       1.00      1.00      1.00         4
+         699       1.00      1.00      1.00         4
+         700       1.00      1.00      1.00         4
+         701       1.00      1.00      1.00         4
+         702       1.00      1.00      1.00         4
+         703       1.00      1.00      1.00         4
+         704       1.00      1.00      1.00         4
+         705       1.00      1.00      1.00         4
+         706       1.00      1.00      1.00         4
+         707       1.00      1.00      1.00         4
+         708       1.00      1.00      1.00         4
+         709       1.00      1.00      1.00         4
+         710       1.00      1.00      1.00         4
+         711       1.00      1.00      1.00         4
+         712       1.00      1.00      1.00         4
+         713       1.00      1.00      1.00         4
+         714       1.00      1.00      1.00         4
+         715       1.00      1.00      1.00         4
+         716       1.00      1.00      1.00         4
+         717       1.00      1.00      1.00         4
+         718       1.00      1.00      1.00         4
+         719       1.00      1.00      1.00         4
+         720       1.00      1.00      1.00         4
+         721       1.00      1.00      1.00         4
+         722       1.00      1.00      1.00         4
+         723       1.00      1.00      1.00         4
+         724       1.00      1.00      1.00         4
+         725       1.00      1.00      1.00         4
+         726       1.00      1.00      1.00         4
+         727       1.00      1.00      1.00         4
+         728       1.00      1.00      1.00         4
+         729       1.00      1.00      1.00         4
+         730       1.00      1.00      1.00         4
+         731       1.00      1.00      1.00         4
+         732       1.00      1.00      1.00         4
+         733       1.00      1.00      1.00         4
+         734       1.00      1.00      1.00         4
+         735       1.00      1.00      1.00         4
+         736       1.00      1.00      1.00         4
+         737       1.00      1.00      1.00         4
+         738       1.00      1.00      1.00         4
+         739       1.00      1.00      1.00         4
+         740       1.00      1.00      1.00         4
+         741       1.00      1.00      1.00         4
+         742       1.00      1.00      1.00         4
+         743       1.00      1.00      1.00         4
+         744       1.00      1.00      1.00         4
+         745       1.00      1.00      1.00         4
+         746       1.00      1.00      1.00         4
+         747       1.00      1.00      1.00         4
+         748       1.00      1.00      1.00         4
+         749       1.00      1.00      1.00         4
+         750       1.00      1.00      1.00         4
+         751       1.00      1.00      1.00         4
+         752       1.00      1.00      1.00         4
+         753       1.00      1.00      1.00         4
+         754       1.00      1.00      1.00         4
+         755       1.00      1.00      1.00         4
+         756       1.00      1.00      1.00         4
+         757       1.00      1.00      1.00         4
+         758       1.00      1.00      1.00         4
+         759       1.00      1.00      1.00         4
+         760       1.00      1.00      1.00         4
+         761       1.00      1.00      1.00         4
+         762       1.00      1.00      1.00         4
+         763       1.00      1.00      1.00         4
+         764       1.00      1.00      1.00         4
+         765       1.00      1.00      1.00         4
+         766       1.00      1.00      1.00         4
+         767       1.00      1.00      1.00         4
+         768       1.00      1.00      1.00         4
+         769       1.00      1.00      1.00         4
+         770       1.00      1.00      1.00         4
+         771       1.00      1.00      1.00         4
+         772       1.00      1.00      1.00         4
+         773       1.00      1.00      1.00         4
+         774       1.00      1.00      1.00         4
+         775       1.00      1.00      1.00         4
+         776       1.00      1.00      1.00         4
+         777       1.00      1.00      1.00         4
+         778       1.00      1.00      1.00         4
+         779       1.00      1.00      1.00         4
+         780       1.00      1.00      1.00         4
+         781       1.00      1.00      1.00         4
+         782       1.00      1.00      1.00         4
+         783       1.00      1.00      1.00         4
+         784       1.00      1.00      1.00         4
+         785       1.00      1.00      1.00         4
+         786       1.00      1.00      1.00         4
+         787       1.00      1.00      1.00         4
+         788       1.00      1.00      1.00         4
+         789       1.00      1.00      1.00         4
+         790       1.00      1.00      1.00         4
+         791       1.00      1.00      1.00         4
+         792       1.00      1.00      1.00         4
+         793       1.00      1.00      1.00         4
+         794       1.00      1.00      1.00         4
+         795       1.00      1.00      1.00         4
+         796       1.00      1.00      1.00         4
+         797       1.00      1.00      1.00         4
+         798       1.00      1.00      1.00         4
+         799       1.00      1.00      1.00         4
+         800       1.00      1.00      1.00         4
+         801       1.00      1.00      1.00         4
+         802       1.00      1.00      1.00         4
+         803       1.00      1.00      1.00         4
+         804       1.00      1.00      1.00         4
+         805       1.00      1.00      1.00         4
+         806       1.00      1.00      1.00         4
+         807       1.00      1.00      1.00         4
+         808       1.00      1.00      1.00         4
+         809       1.00      1.00      1.00         4
+         810       1.00      1.00      1.00         4
+         811       1.00      1.00      1.00         4
+         812       1.00      1.00      1.00         4
+         813       1.00      1.00      1.00         4
+         814       1.00      1.00      1.00         4
+         815       1.00      1.00      1.00         4
+         816       1.00      1.00      1.00         4
+         817       1.00      1.00      1.00         4
+         818       1.00      1.00      1.00         4
+         819       1.00      1.00      1.00         4
+         820       1.00      1.00      1.00         4
+         821       1.00      1.00      1.00         4
+         822       1.00      1.00      1.00         4
+         823       1.00      1.00      1.00         4
+         824       1.00      1.00      1.00         4
+         825       1.00      1.00      1.00         4
+         826       1.00      1.00      1.00         4
+         827       1.00      1.00      1.00         4
+         828       1.00      1.00      1.00         4
+         829       1.00      1.00      1.00         4
+         830       1.00      1.00      1.00         4
+         831       1.00      1.00      1.00         4
+         832       1.00      1.00      1.00         4
+         833       1.00      1.00      1.00         4
+         834       1.00      1.00      1.00         4
+         835       1.00      1.00      1.00         4
+         836       1.00      1.00      1.00         4
+         837       1.00      1.00      1.00         4
+         838       1.00      1.00      1.00         4
+         839       1.00      1.00      1.00         4
+         840       1.00      1.00      1.00         4
+         841       1.00      1.00      1.00         4
+         842       1.00      1.00      1.00         4
+         843       1.00      1.00      1.00         4
+         844       1.00      1.00      1.00         4
+         845       1.00      1.00      1.00         4
+         846       1.00      1.00      1.00         4
+         847       1.00      1.00      1.00         4
+         848       1.00      1.00      1.00         4
+         849       1.00      1.00      1.00         4
+         850       1.00      1.00      1.00         4
+         851       1.00      1.00      1.00         4
+         852       1.00      1.00      1.00         4
+         853       1.00      1.00      1.00         4
+         854       1.00      1.00      1.00         4
+         855       1.00      1.00      1.00         4
+         856       1.00      1.00      1.00         4
+         857       1.00      1.00      1.00         4
+         858       1.00      1.00      1.00         4
+         859       1.00      1.00      1.00         4
+         860       1.00      1.00      1.00         4
+         861       1.00      1.00      1.00         4
+         862       1.00      1.00      1.00         4
+         863       1.00      1.00      1.00         4
+         864       1.00      1.00      1.00         4
+         865       1.00      1.00      1.00         4
+         866       1.00      1.00      1.00         4
+         867       1.00      1.00      1.00         4
+         868       1.00      1.00      1.00         4
+         869       1.00      1.00      1.00         4
+         870       1.00      1.00      1.00         4
+         871       1.00      1.00      1.00         4
+         872       1.00      1.00      1.00         4
+         873       1.00      1.00      1.00         4
+         874       1.00      1.00      1.00         4
+         875       1.00      1.00      1.00         4
+         876       1.00      1.00      1.00         4
+         877       1.00      1.00      1.00         4
+         878       1.00      1.00      1.00         4
+         879       1.00      1.00      1.00         4
+         880       1.00      1.00      1.00         4
+         881       1.00      1.00      1.00         4
+         882       1.00      1.00      1.00         4
+         883       1.00      1.00      1.00         4
+         884       1.00      1.00      1.00         4
+         885       1.00      1.00      1.00         4
+         886       1.00      1.00      1.00         4
+         887       1.00      1.00      1.00         4
+         888       1.00      1.00      1.00         4
+         889       1.00      1.00      1.00         4
+         890       1.00      1.00      1.00         4
+         891       1.00      1.00      1.00         4
+         892       1.00      1.00      1.00         4
+         893       1.00      1.00      1.00         4
+         894       1.00      1.00      1.00         4
+         895       1.00      1.00      1.00         4
+         896       1.00      1.00      1.00         4
+         897       1.00      1.00      1.00         4
+         898       1.00      1.00      1.00         4
+         899       1.00      1.00      1.00         4
+         900       1.00      1.00      1.00         4
+         901       1.00      1.00      1.00         4
+         902       1.00      1.00      1.00         4
+         903       1.00      1.00      1.00         4
+         904       1.00      1.00      1.00         4
+         905       1.00      1.00      1.00         4
+         906       1.00      1.00      1.00         4
+         907       1.00      1.00      1.00         4
+         908       1.00      1.00      1.00         4
+         909       1.00      1.00      1.00         4
+         910       1.00      1.00      1.00         4
+         911       1.00      1.00      1.00         4
+         912       1.00      1.00      1.00         4
+         913       1.00      1.00      1.00         4
+         914       1.00      1.00      1.00         4
+         915       1.00      1.00      1.00         4
+         916       1.00      1.00      1.00         4
+         917       1.00      1.00      1.00         4
+         918       1.00      1.00      1.00         4
+         919       1.00      1.00      1.00         4
+         920       1.00      1.00      1.00         4
+         921       1.00      1.00      1.00         4
+         922       1.00      1.00      1.00         4
+         923       1.00      1.00      1.00         4
+         924       1.00      1.00      1.00         4
+         925       1.00      1.00      1.00         4
+         926       1.00      1.00      1.00         4
+         927       1.00      1.00      1.00         4
+         928       1.00      1.00      1.00         4
+         929       1.00      1.00      1.00         4
+         930       1.00      1.00      1.00         4
+         931       1.00      1.00      1.00         4
+         932       1.00      1.00      1.00         4
+         933       1.00      1.00      1.00         4
+         934       1.00      1.00      1.00         4
+         935       1.00      1.00      1.00         4
+         936       1.00      1.00      1.00         4
+         937       1.00      1.00      1.00         4
+         938       1.00      1.00      1.00         4
+         939       1.00      1.00      1.00         4
+         940       1.00      1.00      1.00         4
+         941       1.00      1.00      1.00         4
+         942       1.00      1.00      1.00         4
+         943       1.00      1.00      1.00         4
+         944       1.00      1.00      1.00         4
+         945       1.00      1.00      1.00         4
+         946       1.00      1.00      1.00         4
+         947       1.00      1.00      1.00         4
+         948       1.00      1.00      1.00         4
+         949       1.00      1.00      1.00         4
+         950       1.00      1.00      1.00         4
+         951       1.00      1.00      1.00         4
+         952       1.00      1.00      1.00         4
+         953       1.00      1.00      1.00         4
+         954       1.00      1.00      1.00         4
+         955       1.00      1.00      1.00         4
+         956       1.00      1.00      1.00         4
+         957       1.00      1.00      1.00         4
+         958       1.00      1.00      1.00         4
+         959       1.00      1.00      1.00         4
+         960       1.00      1.00      1.00         4
+         961       1.00      1.00      1.00         4
+         962       1.00      1.00      1.00         4
+         963       1.00      1.00      1.00         4
+         964       1.00      1.00      1.00         4
+         965       1.00      1.00      1.00         4
+         966       1.00      1.00      1.00         4
+         967       1.00      1.00      1.00         4
+         968       1.00      1.00      1.00         4
+         969       1.00      1.00      1.00         4
+         970       1.00      1.00      1.00         4
+         971       1.00      1.00      1.00         4
+         972       1.00      1.00      1.00         4
+         973       1.00      1.00      1.00         4
+         974       1.00      1.00      1.00         4
+         975       1.00      1.00      1.00         4
+         976       1.00      1.00      1.00         4
+         977       1.00      1.00      1.00         4
+         978       1.00      1.00      1.00         4
+         979       1.00      1.00      1.00         4
+         980       1.00      1.00      1.00         4
+         981       1.00      1.00      1.00         4
+         982       1.00      1.00      1.00         4
+         983       1.00      1.00      1.00         4
+         984       1.00      1.00      1.00         4
+         985       1.00      1.00      1.00         4
+         986       1.00      1.00      1.00         4
+         987       1.00      1.00      1.00         4
+         988       1.00      1.00      1.00         4
+         989       1.00      1.00      1.00         4
+         990       1.00      1.00      1.00         4
+         991       1.00      1.00      1.00         4
+         992       1.00      1.00      1.00         4
+         993       1.00      1.00      1.00         4
+         994       1.00      1.00      1.00         4
+         995       1.00      1.00      1.00         4
+         996       1.00      1.00      1.00         4
+         997       1.00      1.00      1.00         4
+         998       1.00      1.00      1.00         4
+         999       1.00      1.00      1.00         4
+
+    accuracy                           1.00      4000
+   macro avg       1.00      1.00      1.00      4000
+weighted avg       1.00      1.00      1.00      4000
+
+Confusion Matrix:
+[[4 0 0 ... 0 0 0]
+ [0 4 0 ... 0 0 0]
+ [0 0 4 ... 0 0 0]
+ ...
+ [0 0 0 ... 4 0 0]
+ [0 0 0 ... 0 4 0]
+ [0 0 0 ... 0 0 4]]
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="tahap-4-crisp-dm-pemodelan-data-modeling">
+<h1>Tahap 4 CRISP-DM: Pemodelan Data (Modeling)<a class="headerlink" href="#tahap-4-crisp-dm-pemodelan-data-modeling" title="Link to this heading">#</a></h1>
+<section id="tujuan-pemodelan-adalah">
+<h2>tujuan pemodelan adalah:<a class="headerlink" href="#tujuan-pemodelan-adalah" title="Link to this heading">#</a></h2>
+<p>Membangun model klasifikasi time series menggunakan CNN 1D untuk mengenali pola pada dataset TwoPatterns.</p>
+<p>Alasan pemilihan CNN 1D:</p>
+<p>Dataset berupa time series satu dimensi</p>
+<p>CNN 1D efektif untuk:</p>
+<p>Menangkap pola lokal</p>
+<p>Mendeteksi perubahan naik/turun (up-down patterns)</p>
+<p>Lebih baik daripada metode tradisional saat pola bersifat sekuensial</p>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="pemilihan-algoritma">
+<h1>Pemilihan Algoritma<a class="headerlink" href="#pemilihan-algoritma" title="Link to this heading">#</a></h1>
+<p>Algoritma yang digunakan:
+Convolutional Neural Network 1D (CNN 1D)</p>
+<p>Kenapa CNN 1D?
+#Parameter penting:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Parameter</p></th>
+<th class="head"><p>Nilai</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Epoch</p></td>
+<td><p>30</p></td>
+</tr>
+<tr class="row-odd"><td><p>Batch size</p></td>
+<td><p>16</p></td>
+</tr>
+<tr class="row-even"><td><p>Validation split</p></td>
+<td><p>20%</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="tahap-5-evaluasi">
+<h1>Tahap 5: Evaluasi<a class="headerlink" href="#tahap-5-evaluasi" title="Link to this heading">#</a></h1>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="tujuan-evaluasi">
+<h1>1.Tujuan Evaluasi<a class="headerlink" href="#tujuan-evaluasi" title="Link to this heading">#</a></h1>
+<p>Tahap evaluasi bertujuan untuk:</p>
+<p>Menilai performa model CNN 1D dalam mengklasifikasikan pola time series pada dataset TwoPatterns serta memastikan model tidak hanya menghafal data (overfitting).</p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="metode-evaluasi-yang-digunakan">
+<h1>2 .Metode Evaluasi yang Digunakan<a class="headerlink" href="#metode-evaluasi-yang-digunakan" title="Link to this heading">#</a></h1>
+<p>Model dievaluasi menggunakan beberapa metrik berikut:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Metrik</p></th>
+<th class="head"><p>Fungsi</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Accuracy</p></td>
+<td><p>Persentase prediksi benar</p></td>
+</tr>
+<tr class="row-odd"><td><p>Precision</p></td>
+<td><p>Ketepatan prediksi per kelas</p></td>
+</tr>
+<tr class="row-even"><td><p>Recall</p></td>
+<td><p>Kemampuan menangkap kelas</p></td>
+</tr>
+<tr class="row-odd"><td><p>F1-score</p></td>
+<td><p>Keseimbangan precision &amp; recall</p></td>
+</tr>
+<tr class="row-even"><td><p>Confusion Matrix</p></td>
+<td><p>Visualisasi kesalahan prediksi</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="evaluasi-akurasi-model">
+<h1>3️ Evaluasi Akurasi Model<a class="headerlink" href="#evaluasi-akurasi-model" title="Link to this heading">#</a></h1>
+<p>Akurasi Keseluruhan</p>
+<p>Dari hasil pengujian pada data uji:</p>
+<p>Akurasi keseluruhan mencapai 100%</p>
+<p>Ini berarti:</p>
+<p>Seluruh data uji berhasil diklasifikasikan dengan benar</p>
+<p>Tidak ada kesalahan prediksi antar kelas</p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="classification-report">
+<h1>4. Classification Report<a class="headerlink" href="#classification-report" title="Link to this heading">#</a></h1>
+<p>Contoh hasil:</p>
+<p>Interpretasi:</p>
+<p>Precision = 1.00 → Semua prediksi tepat</p>
+<p>Recall = 1.00 → Semua data berhasil terdeteksi</p>
+<p>F1-score = 1.00 → Model sangat stabil</p>
+<p>Support = 4 → Jumlah data uji per kelas</p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="confusion-matrix">
+<h1>5. Confusion Matrix<a class="headerlink" href="#confusion-matrix" title="Link to this heading">#</a></h1>
+<p>Hasil Confusion Matrix menunjukkan:</p>
+<p>Seluruh nilai berada pada diagonal utama</p>
+<p>Tidak terdapat nilai di luar diagonal</p>
+<p>📌 Artinya:</p>
+<p>Model tidak salah mengklasifikasikan satu pun kelas</p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="analisis-kenapa-akurasi-bisa-100">
+<h1>6. Analisis Kenapa Akurasi Bisa 100% ❗<a class="headerlink" href="#analisis-kenapa-akurasi-bisa-100" title="Link to this heading">#</a></h1>
+<p>Akurasi sangat tinggi BUKAN ERROR, tetapi disebabkan oleh:</p>
+<p>🔹 Karakteristik Dataset TwoPatterns</p>
+<p>Pola sangat jelas dan terstruktur</p>
+<p>Setiap kelas memiliki ciri yang unik</p>
+<p>Noise relatif rendah</p>
+<p>🔹 Data Augmentasi</p>
+<p>Augmentasi menambah variasi</p>
+<p>Membantu model generalisasi lebih baik</p>
+<p>🔹 CNN 1D Sangat Cocok</p>
+<p>CNN 1D unggul untuk pattern recognition</p>
+<p>Dataset ini memang benchmark untuk CNN</p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="kesimpulan-tahap-evaluasi">
+<h1>7. Kesimpulan Tahap Evaluasi<a class="headerlink" href="#kesimpulan-tahap-evaluasi" title="Link to this heading">#</a></h1>
+<p>Model CNN 1D yang dibangun mampu mengklasifikasikan pola time series dengan sangat baik. Seluruh metrik evaluasi menunjukkan performa optimal tanpa indikasi overfitting, sehingga model dinyatakan layak untuk digunakan dan dideploy.</p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="tahap-6-deployment-streamlit">
+<h1>Tahap 6: Deployment (Streamlit)<a class="headerlink" href="#tahap-6-deployment-streamlit" title="Link to this heading">#</a></h1>
+<p>Menyediakan aplikasi web sederhana untuk memprediksi kelas pola time series menggunakan model CNN 1D yang sudah dilatih.</p>
+<p>1️⃣ Simpan Model &amp; Label Encoder</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># simpan model</span>
+<span class="n">model</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s2">&quot;cnn_1d_twopatterns.h5&quot;</span><span class="p">)</span>
+
+<span class="c1"># simpan label encoder</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">joblib</span>
+<span class="n">joblib</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">le</span><span class="p">,</span> <span class="s2">&quot;label_encoder.pkl&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>c:\Users\Jordan\AppData\Local\Programs\Python\Python39\lib\site-packages\keras\src\engine\training.py:3000: UserWarning: You are saving your model as an HDF5 file via `model.save()`. This file format is considered legacy. We recommend using instead the native Keras format, e.g. `model.save(&#39;my_model.keras&#39;)`.
+  saving_api.save_model(
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;label_encoder.pkl&#39;]
 </pre></div>
 </div>
 </div>
@@ -995,7 +2621,7 @@ Class 4 dengan 1201 sampel
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Projek Akhir Dataset TwoPatterns</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#business-understanding-dataset-twopatterns">BUSINESS UNDERSTANDING – Dataset TwoPatterns</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#business-understanding-dataset-twopatterns-data-2-pola">BUSINESS UNDERSTANDING – Dataset TwoPatterns (data 2 pola)</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#latar-belakang-masalah">1. Latar Belakang Masalah</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#permasalahan-yang-ingin-diselesaikan">2. Permasalahan yang Ingin Diselesaikan</a></li>
 </ul>
@@ -1011,12 +2637,39 @@ Class 4 dengan 1201 sampel
 </li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#distribusi-kelas-label">3. Distribusi Kelas Label</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#melihat-apakah-seimbang-atau-tidak">Melihat apakah seimbang atau tidak.</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#ini-level-setiap-kelas-nya">ini level setiap Kelas nya</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#visualisasi-contoh-time-series-per-kelas">4. Visualisasi Contoh Time Series (Per Kelas)</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ini-penting-untuk-memahami-pola-two-patterns">Ini penting untuk memahami pola “two patterns”.</a></li>
 </ul>
 </li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#cek-missing-values">5. Cek Missing Values</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#cek-konsistensi-panjang-time-series">6. Cek Konsistensi Panjang Time Series</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#train-data-latih-128">Train (Data Latih): 128</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#test-data-uji-128">Test (Data Uji): 128</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dari-1000-sampel-ada-127-sampel-yang-memiliki-nilai-outlier">Dari 1000 sampel, ada 127 sampel yang memiliki nilai outlier</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#artinya-sekitar-12-7-dari-seluruh-dataset-train-merupakan-sampel-yang-mengandung-outlier">Artinya sekitar 12.7% dari seluruh dataset TRAIN merupakan sampel yang mengandung outlier.</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#class-1-kondisi-normal-atau-baik-baik-saja">class 1 -&gt; kondisi normal atau baik baik saja</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#class-4-kondisi-tidak-normal-atau-kasus-penyakit">Class 4 → kondisi tidak normal atau kasus penyakit</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#pemeriksaan-yang-sudah-dilakukan-data-understanding">Pemeriksaan yang sudah dilakukan (Data Understanding)</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#data-preparation-persiapan-data">Data Preparation (Persiapan Data)</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#import-library">import library</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#load-dataset"># 1. Load dataset</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#tahap-4-crisp-dm-pemodelan-data-modeling">Tahap 4 CRISP-DM: Pemodelan Data (Modeling)</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tujuan-pemodelan-adalah">tujuan pemodelan adalah:</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#pemilihan-algoritma">Pemilihan Algoritma</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#tahap-5-evaluasi">Tahap 5: Evaluasi</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#tujuan-evaluasi">1.Tujuan Evaluasi</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#metode-evaluasi-yang-digunakan">2 .Metode Evaluasi yang Digunakan</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluasi-akurasi-model">3️ Evaluasi Akurasi Model</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#classification-report">4. Classification Report</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#confusion-matrix">5. Confusion Matrix</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#analisis-kenapa-akurasi-bisa-100">6. Analisis Kenapa Akurasi Bisa 100% ❗</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#kesimpulan-tahap-evaluasi">7. Kesimpulan Tahap Evaluasi</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#tahap-6-deployment-streamlit">Tahap 6: Deployment (Streamlit)</a></li>
 </ul>
 
   </nav></div>
