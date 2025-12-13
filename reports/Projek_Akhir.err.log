@@ -1,0 +1,80 @@
+Traceback (most recent call last):
+  File "c:\users\jordan\appdata\local\programs\python\python39\lib\site-packages\jupyter_core\utils\__init__.py", line 154, in wrapped
+    asyncio.get_running_loop()
+RuntimeError: no running event loop
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "c:\users\jordan\appdata\local\programs\python\python39\lib\site-packages\jupyter_cache\executors\utils.py", line 58, in single_nb_execution
+    executenb(
+  File "c:\users\jordan\appdata\local\programs\python\python39\lib\site-packages\nbclient\client.py", line 1319, in execute
+    return NotebookClient(nb=nb, resources=resources, km=km, **kwargs).execute()
+  File "c:\users\jordan\appdata\local\programs\python\python39\lib\site-packages\jupyter_core\utils\__init__.py", line 158, in wrapped
+    return loop.run_until_complete(inner)
+  File "c:\users\jordan\appdata\local\programs\python\python39\lib\asyncio\base_events.py", line 642, in run_until_complete
+    return future.result()
+  File "c:\users\jordan\appdata\local\programs\python\python39\lib\site-packages\nbclient\client.py", line 709, in async_execute
+    await self.async_execute_cell(
+  File "c:\users\jordan\appdata\local\programs\python\python39\lib\site-packages\nbclient\client.py", line 1062, in async_execute_cell
+    await self._check_raise_for_error(cell, cell_index, exec_reply)
+  File "c:\users\jordan\appdata\local\programs\python\python39\lib\site-packages\nbclient\client.py", line 918, in _check_raise_for_error
+    raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
+nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
+------------------
+
+# File dataset
+file_path = r'TwoPatterns/TwoPatterns_TRAIN.txt'
+
+# Membaca dataset
+data = np.loadtxt(file_path)
+
+# Kolom pertama sebagai label
+labels = data[:, 0]
+
+# Nama kelas sesuai dataset (ubah sesuai label yang ada)
+nama_kelas = {
+    1: 'down-down',
+    2: 'up-down',
+    3: 'down-up',
+    4: 'up-up'
+}
+
+# Hitung jumlah tiap kelas
+(unique, counts) = np.unique(labels, return_counts=True)
+jumlah_kasus = {nama_kelas[int(k)]: v for k, v in zip(unique, counts) if int(k) in nama_kelas}
+
+# Tampilkan hasil
+print("Jumlah kasus per kelas:")
+for k, v in jumlah_kasus.items():
+    print(f"{k} : {v} kasus")
+
+# Visualisasi bar chart
+plt.figure(figsize=(8,5))
+plt.bar(jumlah_kasus.keys(), jumlah_kasus.values(), color=['red','blue','green','purple'])
+plt.title("Jumlah Kasus per Kelas - TwoPatterns")
+plt.xlabel("Kelas")
+plt.ylabel("Jumlah Kasus")
+plt.show()
+
+------------------
+
+----- stdout -----
+Jumlah kasus per kelas:
+down-down : 271 kasus
+up-down : 237 kasus
+down-up : 250 kasus
+up-up : 242 kasus
+------------------
+
+[1;31m---------------------------------------------------------------------------[0m
+[1;31mNameError[0m                                 Traceback (most recent call last)
+Cell [1;32mIn[3], line 28[0m
+[0;32m     25[0m     [38;5;28mprint[39m([38;5;124mf[39m[38;5;124m"[39m[38;5;132;01m{[39;00mk[38;5;132;01m}[39;00m[38;5;124m : [39m[38;5;132;01m{[39;00mv[38;5;132;01m}[39;00m[38;5;124m kasus[39m[38;5;124m"[39m)
+[0;32m     27[0m [38;5;66;03m# Visualisasi bar chart[39;00m
+[1;32m---> 28[0m [43mplt[49m[38;5;241m.[39mfigure(figsize[38;5;241m=[39m([38;5;241m8[39m,[38;5;241m5[39m))
+[0;32m     29[0m plt[38;5;241m.[39mbar(jumlah_kasus[38;5;241m.[39mkeys(), jumlah_kasus[38;5;241m.[39mvalues(), color[38;5;241m=[39m[[38;5;124m'[39m[38;5;124mred[39m[38;5;124m'[39m,[38;5;124m'[39m[38;5;124mblue[39m[38;5;124m'[39m,[38;5;124m'[39m[38;5;124mgreen[39m[38;5;124m'[39m,[38;5;124m'[39m[38;5;124mpurple[39m[38;5;124m'[39m])
+[0;32m     30[0m plt[38;5;241m.[39mtitle([38;5;124m"[39m[38;5;124mJumlah Kasus per Kelas - TwoPatterns[39m[38;5;124m"[39m)
+
+[1;31mNameError[0m: name 'plt' is not defined
+
