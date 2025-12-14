@@ -1,80 +1,97 @@
 import streamlit as st
 import numpy as np
-import tensorflow as tf
+import matplotlib.pyplot as plt
 import joblib
-import os
+from tensorflow.keras.models import load_model
 
-# =========================
-# PAGE CONFIG
-# =========================
-st.set_page_config(
-    page_title="CNN 1D TwoPatterns",
-    layout="centered"
+# ==============================
+# Load model & label encoder
+# ==============================
+model = load_model("cnn_twopatterns.h5")
+le = joblib.load("label_encoder.pkl")
+
+# ==============================
+# UI Streamlit
+# ==============================
+st.title("Klasifikasi Time Series TwoPatterns (CNN 1D)")
+st.write(
+    "Masukkan data time series (bebas format), sistem akan menyesuaikan menjadi 128 titik. "
+    "Probabilitas ditampilkan menggunakan temperature scaling agar lebih seimbang."
 )
 
-# =========================
-# LOAD MODEL & ENCODER
-# =========================
-@st.cache_resource
-def load_model_and_encoder():
-    base_path = os.path.dirname(__file__)
-
-    model_path = os.path.join(base_path, "cnn_1d_twopatterns.h5")
-    encoder_path = os.path.join(base_path, "label_encoder.pkl")
-
-    model = tf.keras.models.load_model(model_path)
-    encoder = joblib.load(encoder_path)
-
-    return model, encoder
-
-
-model, le = load_model_and_encoder()
-
-# =========================
-# TITLE
-# =========================
-st.title("📊 CNN 1D – TwoPatterns Classification")
-st.write("Klasifikasi time series (panjang 128) menggunakan CNN 1D.")
-
-# =========================
-# INPUT DATA
-# =========================
-st.subheader("🔢 Input Time Series")
-
-st.write("Masukkan **128 angka**, dipisahkan dengan koma (,).")
-
-input_series = st.text_area(
-    "Contoh:",
-    "0.2,0.3,0.1,-0.2,...",
-    height=120
+# Input data
+input_data = st.text_area(
+    "Input Time Series:",
+    height=150
 )
 
-# =========================
-# PREDICTION
-# =========================
-if st.button("🔍 Prediksi"):
+# ==============================
+# Prediksi
+# ==============================
+if st.button("Prediksi"):
     try:
-        values = np.array([float(v) for v in input_series.split(",")])
+        # ==============================
+        # PREPROCESS INPUT (ANTI ERROR)
+        # ==============================
+        cleaned = (
+            input_data
+            .replace("\n", "")
+            .replace(";", ",")
+            .split(",")
+        )
 
-        if len(values) != 10:
-            st.error("❌ Jumlah data HARUS 128")
-        else:
-            X_input = values.reshape(1, 10, 1)
-            prediction = model.predict(X_input)
+        values = []
+        for v in cleaned:
+            v = v.strip()
+            if v != "":
+                values.append(float(v))
 
-            predicted_class = np.argmax(prediction, axis=1)
-            label = le.inverse_transform(predicted_class)[0]
+        values = np.array(values)
 
-            st.success("✅ Prediksi Berhasil")
-            st.write(f"**Kelas Prediksi:** `{label}`")
-            st.write("**Probabilitas:**")
-            st.write(prediction)
+        # Debug info
+        st.write("Jumlah nilai terbaca:", len(values))
+
+        # Normalisasi panjang data
+        if len(values) < 128:
+            st.error("❌ Jumlah data kurang dari 128 nilai!")
+            st.stop()
+        elif len(values) > 128:
+            st.warning("⚠️ Data lebih dari 128 nilai, diambil 128 pertama.")
+            values = values[:128]
+
+        # Reshape ke format CNN 1D
+        X_input = values.reshape(1, 128, 1)
+
+        # ==============================
+        # PREDIKSI + TEMPERATURE SCALING
+        # ==============================
+        logits = model.predict(X_input)
+
+        temperature = 2.0  # semakin besar → probabilitas makin merata
+        logits = logits / temperature
+
+        exp_logits = np.exp(logits)
+        pred = exp_logits / np.sum(exp_logits, axis=1, keepdims=True)
+
+        kelas = np.argmax(pred, axis=1)
+        label = le.inverse_transform(kelas)[0]
+
+        # ==============================
+        # OUTPUT
+        # ==============================
+        st.success(f"✅ Hasil Prediksi Kelas: **{label}**")
+
+        st.subheader("Probabilitas Kelas (Temperature Scaling)")
+        for i, prob in enumerate(pred[0]):
+            st.write(f"{le.classes_[i]} : {prob:.6f}")
+
+        st.subheader("Visualisasi Time Series Input")
+        fig, ax = plt.subplots()
+        ax.plot(values)
+        ax.set_xlabel("Time Step")
+        ax.set_ylabel("Nilai")
+        ax.set_title("Time Series Input")
+        st.pyplot(fig)
 
     except Exception as e:
-        st.error(f"Terjadi kesalahan: {e}")
-
-# =========================
-# FOOTER
-# =========================
-st.markdown("---")
-st.caption("Deployment CNN 1D – CRISP-DM | TwoPatterns Dataset")
+        st.error("❌ Input tidak valid. Pastikan hanya berisi angka.")
