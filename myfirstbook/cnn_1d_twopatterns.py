@@ -3,16 +3,39 @@ import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
 import joblib
+import os
 from tensorflow.keras.models import load_model
 
-# ==============================
-# Load model & label encoder
-# ==============================
-model = load_model("cnn_twopatterns.h5")
-le = joblib.load("label_encoder.pkl")
+st.write("Model path:", MODEL_PATH)
+st.write("File exists:", os.path.exists(MODEL_PATH))
+
 
 # ==============================
-# UI Streamlit
+# SET BASE DIRECTORY (BENAR)
+# ==============================
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+
+MODEL_PATH = os.path.join(BASE_DIR, "cnn_twopatterns.h5")
+ENCODER_PATH = os.path.join(BASE_DIR, "label_encoder.pkl")
+
+# ==============================
+# LOAD MODEL & ENCODER (AMAN)
+# ==============================
+if not os.path.exists(MODEL_PATH):
+    st.error("❌ File cnn_twopatterns.h5 TIDAK ditemukan!")
+    st.write("📁 Isi folder aplikasi:", os.listdir(BASE_DIR))
+    st.stop()
+
+if not os.path.exists(ENCODER_PATH):
+    st.error("❌ File label_encoder.pkl TIDAK ditemukan!")
+    st.write("📁 Isi folder aplikasi:", os.listdir(BASE_DIR))
+    st.stop()
+
+model = load_model(MODEL_PATH)
+le = joblib.load(ENCODER_PATH)
+
+# ==============================
+# UI STREAMLIT
 # ==============================
 st.title("Klasifikasi Time Series TwoPatterns (CNN 1D)")
 st.write(
@@ -21,7 +44,7 @@ st.write(
 )
 
 # ==============================
-# Upload CSV
+# UPLOAD CSV
 # ==============================
 uploaded_file = st.file_uploader(
     "Upload file CSV",
@@ -29,26 +52,18 @@ uploaded_file = st.file_uploader(
 )
 
 # ==============================
-# Prediksi
+# PREDIKSI
 # ==============================
 if uploaded_file is not None:
     try:
-        # ==============================
-        # BACA CSV
-        # ==============================
         df = pd.read_csv(uploaded_file)
 
         st.write("Preview data CSV:")
         st.dataframe(df.head())
 
-        # Ambil semua nilai numerik (kolom pertama)
-        values = df.iloc[:, 0].values.astype(float)
-
+        values = df.iloc[:, 0].astype(float).values
         st.write("Jumlah data terbaca:", len(values))
 
-        # ==============================
-        # VALIDASI PANJANG DATA
-        # ==============================
         if len(values) < 128:
             st.error("❌ Jumlah data kurang dari 128 nilai!")
             st.stop()
@@ -56,16 +71,9 @@ if uploaded_file is not None:
             st.warning("⚠️ Data lebih dari 128 nilai, diambil 128 pertama.")
             values = values[:128]
 
-        # ==============================
-        # RESHAPE UNTUK CNN
-        # ==============================
         X_input = values.reshape(1, 128, 1)
 
-        # ==============================
-        # PREDIKSI + TEMPERATURE SCALING
-        # ==============================
         logits = model.predict(X_input)
-
         temperature = 2.0
         logits = logits / temperature
 
@@ -75,18 +83,12 @@ if uploaded_file is not None:
         kelas = np.argmax(pred, axis=1)
         label = le.inverse_transform(kelas)[0]
 
-        # ==============================
-        # OUTPUT
-        # ==============================
         st.success(f"✅ Hasil Prediksi Kelas: **{label}**")
 
         st.subheader("Probabilitas Kelas")
         for i, prob in enumerate(pred[0]):
             st.write(f"{le.classes_[i]} : {prob:.6f}")
 
-        # ==============================
-        # VISUALISASI
-        # ==============================
         st.subheader("Visualisasi Time Series Input")
         fig, ax = plt.subplots()
         ax.plot(values)
@@ -97,3 +99,4 @@ if uploaded_file is not None:
 
     except Exception as e:
         st.error("❌ Gagal membaca file CSV. Pastikan hanya berisi angka.")
+        st.write(e)

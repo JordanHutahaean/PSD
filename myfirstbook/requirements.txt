@@ -8,3 +8,5 @@ pandas
 seaborn
 scikit-learn
 tensorflow  
+h5py
+joblib
