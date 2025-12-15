@@ -1,6 +1,7 @@
 import streamlit as st
 import numpy as np
 import matplotlib.pyplot as plt
+import pandas as pd
 import joblib
 from tensorflow.keras.models import load_model
 
@@ -15,43 +16,39 @@ le = joblib.load("label_encoder.pkl")
 # ==============================
 st.title("Klasifikasi Time Series TwoPatterns (CNN 1D)")
 st.write(
-    "Masukkan data time series (bebas format), sistem akan menyesuaikan menjadi 128 titik. "
-    "Probabilitas ditampilkan menggunakan temperature scaling agar lebih seimbang."
+    "Upload file CSV berisi data time series. "
+    "Data akan disesuaikan menjadi 128 titik."
 )
 
-# Input data
-input_data = st.text_area(
-    "Input Time Series:",
-    height=150
+# ==============================
+# Upload CSV
+# ==============================
+uploaded_file = st.file_uploader(
+    "Upload file CSV",
+    type=["csv"]
 )
 
 # ==============================
 # Prediksi
 # ==============================
-if st.button("Prediksi"):
+if uploaded_file is not None:
     try:
         # ==============================
-        # PREPROCESS INPUT (ANTI ERROR)
+        # BACA CSV
         # ==============================
-        cleaned = (
-            input_data
-            .replace("\n", "")
-            .replace(";", ",")
-            .split(",")
-        )
+        df = pd.read_csv(uploaded_file)
 
-        values = []
-        for v in cleaned:
-            v = v.strip()
-            if v != "":
-                values.append(float(v))
+        st.write("Preview data CSV:")
+        st.dataframe(df.head())
 
-        values = np.array(values)
+        # Ambil semua nilai numerik (kolom pertama)
+        values = df.iloc[:, 0].values.astype(float)
 
-        # Debug info
-        st.write("Jumlah nilai terbaca:", len(values))
+        st.write("Jumlah data terbaca:", len(values))
 
-        # Normalisasi panjang data
+        # ==============================
+        # VALIDASI PANJANG DATA
+        # ==============================
         if len(values) < 128:
             st.error("❌ Jumlah data kurang dari 128 nilai!")
             st.stop()
@@ -59,7 +56,9 @@ if st.button("Prediksi"):
             st.warning("⚠️ Data lebih dari 128 nilai, diambil 128 pertama.")
             values = values[:128]
 
-        # Reshape ke format CNN 1D
+        # ==============================
+        # RESHAPE UNTUK CNN
+        # ==============================
         X_input = values.reshape(1, 128, 1)
 
         # ==============================
@@ -67,7 +66,7 @@ if st.button("Prediksi"):
         # ==============================
         logits = model.predict(X_input)
 
-        temperature = 2.0  # semakin besar → probabilitas makin merata
+        temperature = 2.0
         logits = logits / temperature
 
         exp_logits = np.exp(logits)
@@ -81,10 +80,13 @@ if st.button("Prediksi"):
         # ==============================
         st.success(f"✅ Hasil Prediksi Kelas: **{label}**")
 
-        st.subheader("Probabilitas Kelas (Temperature Scaling)")
+        st.subheader("Probabilitas Kelas")
         for i, prob in enumerate(pred[0]):
             st.write(f"{le.classes_[i]} : {prob:.6f}")
 
+        # ==============================
+        # VISUALISASI
+        # ==============================
         st.subheader("Visualisasi Time Series Input")
         fig, ax = plt.subplots()
         ax.plot(values)
@@ -94,4 +96,4 @@ if st.button("Prediksi"):
         st.pyplot(fig)
 
     except Exception as e:
-        st.error("❌ Input tidak valid. Pastikan hanya berisi angka.")
+        st.error("❌ Gagal membaca file CSV. Pastikan hanya berisi angka.")
