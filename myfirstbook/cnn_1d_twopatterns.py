@@ -6,12 +6,8 @@ import joblib
 import os
 from tensorflow.keras.models import load_model
 
-st.write("Model path:", MODEL_PATH)
-st.write("File exists:", os.path.exists(MODEL_PATH))
-
-
 # ==============================
-# SET BASE DIRECTORY (BENAR)
+# SET BASE DIRECTORY
 # ==============================
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
@@ -19,18 +15,19 @@ MODEL_PATH = os.path.join(BASE_DIR, "cnn_twopatterns.h5")
 ENCODER_PATH = os.path.join(BASE_DIR, "label_encoder.pkl")
 
 # ==============================
-# LOAD MODEL & ENCODER (AMAN)
+# CEK FILE MODEL & ENCODER
 # ==============================
 if not os.path.exists(MODEL_PATH):
-    st.error("❌ File cnn_twopatterns.h5 TIDAK ditemukan!")
-    st.write("📁 Isi folder aplikasi:", os.listdir(BASE_DIR))
+    st.error("❌ File cnn_twopatterns.h5 tidak ditemukan")
     st.stop()
 
 if not os.path.exists(ENCODER_PATH):
-    st.error("❌ File label_encoder.pkl TIDAK ditemukan!")
-    st.write("📁 Isi folder aplikasi:", os.listdir(BASE_DIR))
+    st.error("❌ File label_encoder.pkl tidak ditemukan")
     st.stop()
 
+# ==============================
+# LOAD MODEL & ENCODER
+# ==============================
 model = load_model(MODEL_PATH)
 le = joblib.load(ENCODER_PATH)
 
@@ -39,8 +36,8 @@ le = joblib.load(ENCODER_PATH)
 # ==============================
 st.title("Klasifikasi Time Series TwoPatterns (CNN 1D)")
 st.write(
-    "Upload file CSV berisi data time series. "
-    "Data akan disesuaikan menjadi 128 titik."
+    "Upload file CSV berisi **1 kolom data time series**. "
+    "Data akan disesuaikan menjadi **128 titik**."
 )
 
 # ==============================
@@ -58,38 +55,31 @@ if uploaded_file is not None:
     try:
         df = pd.read_csv(uploaded_file)
 
-        st.write("Preview data CSV:")
+        st.subheader("Preview Data CSV")
         st.dataframe(df.head())
 
         values = df.iloc[:, 0].astype(float).values
         st.write("Jumlah data terbaca:", len(values))
 
         if len(values) < 128:
-            st.error("❌ Jumlah data kurang dari 128 nilai!")
+            st.error("❌ Data kurang dari 128 titik")
             st.stop()
         elif len(values) > 128:
-            st.warning("⚠️ Data lebih dari 128 nilai, diambil 128 pertama.")
             values = values[:128]
 
         X_input = values.reshape(1, 128, 1)
 
-        logits = model.predict(X_input)
-        temperature = 2.0
-        logits = logits / temperature
-
-        exp_logits = np.exp(logits)
-        pred = exp_logits / np.sum(exp_logits, axis=1, keepdims=True)
-
+        pred = model.predict(X_input)
         kelas = np.argmax(pred, axis=1)
         label = le.inverse_transform(kelas)[0]
 
-        st.success(f"✅ Hasil Prediksi Kelas: **{label}**")
+        st.success(f"✅ Hasil Prediksi: **{label}**")
 
         st.subheader("Probabilitas Kelas")
         for i, prob in enumerate(pred[0]):
             st.write(f"{le.classes_[i]} : {prob:.6f}")
 
-        st.subheader("Visualisasi Time Series Input")
+        st.subheader("Visualisasi Time Series")
         fig, ax = plt.subplots()
         ax.plot(values)
         ax.set_xlabel("Time Step")
@@ -97,6 +87,7 @@ if uploaded_file is not None:
         ax.set_title("Time Series Input")
         st.pyplot(fig)
 
+    except ValueError:
+        st.error("❌ CSV harus berisi angka saja")
     except Exception as e:
-        st.error("❌ Gagal membaca file CSV. Pastikan hanya berisi angka.")
-        st.write(e)
+        st.error(f"❌ Error: {e}")
