@@ -595,7 +595,47 @@ document.write(`
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Authenticated using refresh token.
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0:00:00 Job &#39;j-2512150307474353a00a6a700a74d544&#39;: send &#39;start&#39;
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0:00:00 Job &#39;j-2512150343054b4ab934294ed63d1801&#39;: send &#39;start&#39;
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0:00:17 Job &#39;j-2512150343054b4ab934294ed63d1801&#39;: created (progress 0%)
+</pre></div>
+</div>
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">KeyboardInterrupt</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">line</span> <span class="mi">49</span>
+<span class="g g-Whitespace">     </span><span class="mi">46</span> <span class="n">daily_mean_aoi</span> <span class="o">=</span> <span class="n">daily_mean</span><span class="o">.</span><span class="n">aggregate_spatial</span><span class="p">(</span><span class="n">geometries</span><span class="o">=</span><span class="n">aoi</span><span class="p">,</span> <span class="n">reducer</span><span class="o">=</span><span class="s2">&quot;mean&quot;</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">48</span> <span class="c1"># 7. Jalankan batch job dan hasilkan file CSV</span>
+<span class="ne">---&gt; </span><span class="mi">49</span> <span class="n">job</span> <span class="o">=</span> <span class="n">daily_mean_aoi</span><span class="o">.</span><span class="n">execute_batch</span><span class="p">(</span><span class="n">out_format</span><span class="o">=</span><span class="s2">&quot;CSV&quot;</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">51</span> <span class="c1"># 8. Unduh hasil job</span>
+<span class="g g-Whitespace">     </span><span class="mi">52</span> <span class="n">results</span> <span class="o">=</span> <span class="n">job</span><span class="o">.</span><span class="n">get_results</span><span class="p">()</span>
+
+<span class="nn">File c:\users\jordan\appdata\local\programs\python\python39\lib\site-packages\openeo\rest\vectorcube.py:391,</span> in <span class="ni">VectorCube.execute_batch</span><span class="nt">(self, outputfile, out_format, title, description, plan, budget, print, max_poll_interval, connection_retry_interval, additional, job_options, validate, auto_add_save_result, show_error_logs, log_level, **format_options)</span>
+<span class="g g-Whitespace">    </span><span class="mi">378</span>     <span class="n">create_kwargs</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;auto_add_save_result&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">}</span>
+<span class="g g-Whitespace">    </span><span class="mi">380</span> <span class="n">job</span> <span class="o">=</span> <span class="n">res</span><span class="o">.</span><span class="n">create_job</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">381</span>     <span class="n">title</span><span class="o">=</span><span class="n">title</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">382</span>     <span class="n">description</span><span class="o">=</span><span class="n">description</span><span class="p">,</span>
+   <span class="p">(</span><span class="o">...</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">389</span>     <span class="o">**</span><span class="n">create_kwargs</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">390</span> <span class="p">)</span>
+<span class="ne">--&gt; </span><span class="mi">391</span> <span class="n">job</span><span class="o">.</span><span class="n">start_and_wait</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">392</span>     <span class="nb">print</span><span class="o">=</span><span class="nb">print</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">393</span>     <span class="n">max_poll_interval</span><span class="o">=</span><span class="n">max_poll_interval</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">394</span>     <span class="n">connection_retry_interval</span><span class="o">=</span><span class="n">connection_retry_interval</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">395</span>     <span class="n">show_error_logs</span><span class="o">=</span><span class="n">show_error_logs</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">396</span> <span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">397</span> <span class="k">if</span> <span class="n">outputfile</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">398</span>     <span class="n">job</span><span class="o">.</span><span class="n">download_result</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="n">outputfile</span><span class="p">)</span>
+
+<span class="nn">File c:\users\jordan\appdata\local\programs\python\python39\lib\site-packages\openeo\rest\job.py:371,</span> in <span class="ni">BatchJob.start_and_wait</span><span class="nt">(self, print, max_poll_interval, connection_retry_interval, soft_error_max, show_error_logs, require_success)</span>
+<span class="g g-Whitespace">    </span><span class="mi">368</span>         <span class="k">break</span>
+<span class="g g-Whitespace">    </span><span class="mi">370</span>     <span class="c1"># Sleep for next poll (and adaptively make polling less frequent)</span>
+<span class="ne">--&gt; </span><span class="mi">371</span>     <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="n">poll_interval</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">372</span>     <span class="n">poll_interval</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="mf">1.25</span> <span class="o">*</span> <span class="n">poll_interval</span><span class="p">,</span> <span class="n">max_poll_interval</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">374</span> <span class="k">if</span> <span class="n">require_success</span> <span class="ow">and</span> <span class="n">status</span> <span class="o">!=</span> <span class="s2">&quot;finished&quot;</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">375</span>     <span class="c1"># TODO: render logs jupyter-aware in a notebook context?</span>
+
+<span class="ne">KeyboardInterrupt</span>: 
 </pre></div>
 </div>
 </div>
